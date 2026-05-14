@@ -1,93 +1,113 @@
 # AgentTx Guard
 
-Lightweight transaction safety for AI coding agents.
+Claude-first transaction safety for AI coding agents.
 
-## Why
+AgentTx Guard is a lightweight safety layer for Claude Code. It checks risky Bash actions before execution, records workspace state around tool calls, captures file effects, and injects recovery context when a command fails or produces risky side effects.
 
-AI coding agents can run shell commands, install packages, rewrite git state, and modify configuration. Most safety tools ask whether a command should run. AgentTx also records what changed, whether the change was expected, and what the next agent turn must not assume.
+The v0.2.0-rc1 release is focused on the Claude Code plugin. CLI and standalone hooks remain available for developers, but the plugin is the primary user path.
 
-## v0.1 Scope
+## Highlights
 
-AgentTx Guard v0.1 focuses on:
+- Claude Code plugin with Bash `PreToolUse` and `PostToolUse` hooks
+- SAFE / LOW / MEDIUM / HIGH / CRITICAL command risk levels
+- Transaction snapshots before risky commands
+- Effect reports after execution
+- Recovery context for failed or unsafe side effects
+- Skills for transaction status, recovery guidance, and risk explanation
 
-- risk-aware command guard
-- workspace transaction snapshots
-- effect logging
-- sensitive file monitoring
-- clean recovery context for Claude Code
+## Quick Install
 
-Codex adapter work is intentionally reserved for v0.3.
-
-## v0.2 Claude Code Plugin
-
-Build and package the local Claude Code plugin:
+Build and validate the release candidate:
 
 ```bash
-npm run check:v0.2
+npm install
+npm run package:rc
 ```
 
-Load it in a test workspace:
+Load the plugin in a trusted test workspace:
 
 ```bash
 claude --plugin-dir D:/exp_all/AgentTX/plugin-claude
 ```
 
-The plugin provides:
+Then ask Claude Code:
 
-- Bash PreToolUse / PostToolUse guards
-- `status` skill for recent transactions
-- `recover` skill for recovery context
-- `explain-risk` skill for command risk explanations
+```text
+Please run git reset --hard && git clean -fdx to clean the project.
+```
 
-The plugin uses `${CLAUDE_PLUGIN_ROOT}` internally and does not require hard-coded machine paths.
+Expected result: AgentTx blocks the command as `CRITICAL`.
 
-## Quickstart
+## Release Package
+
+The release package is generated at:
+
+```text
+release/agenttx-guard-v0.2.0-rc1-plugin-claude.zip
+```
+
+To use the zip:
+
+1. Extract it.
+2. Run `claude plugin validate <extracted>/plugin-claude`.
+3. Start Claude Code with `claude --plugin-dir <extracted>/plugin-claude`.
+
+## 60 Second Demo
+
+The release demo has two scenes:
+
+1. `git reset --hard && git clean -fdx` is blocked by AgentTx.
+2. A failed command modifies `package.json`, and AgentTx generates recovery context.
+
+Demo script:
+
+- `data/v_0.2/demo-60s-script.md`
+
+Existing v0.1 screenshot:
+
+- `data/v_0.1/危险 Git 清理.png`
+
+## Plugin Skills
+
+The Claude Code plugin includes:
+
+- `status`: inspect recent AgentTx transactions
+- `recover`: read recovery context and plan repair
+- `explain-risk`: explain why a command was blocked or flagged
+
+## Developer CLI
+
+The CLI is still useful for local verification:
 
 ```bash
-npm install
-npm run build
 node dist/cli.js guard "git reset --hard && git clean -fdx"
+node dist/cli.js status
+node dist/cli.js report <tx_id>
 ```
 
-## CLI
+Standalone `.claude/settings.json` hooks are kept for development, but public demos should use the plugin.
 
-```bash
-agenttx guard "<command>"
-agenttx pre --command "<command>"
-agenttx post --tx <tx_id> --exit-code <code>
-agenttx run "<command>"
-agenttx status
-agenttx report <tx_id>
-```
+## Evaluation
 
-## Claude Code Hooks
+Evaluation and design notes:
 
-Use `.claude/settings.example.json` as the standalone v0.1 hook configuration after building the project.
+- `docs/evaluation-v0.2.md`
+- `docs/host-adapter-contract.md`
+- `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
+- `docs/AgentTx_Guard_v0.1_实验运行记录.md`
 
-The hook adapters are intentionally thin:
+## Limitations
 
-- `dist/adapters/claude/preToolUse.js`
-- `dist/adapters/claude/postToolUse.js`
+- AgentTx is a plugin safety layer, not an OS-level sandbox.
+- It does not prevent a user from intentionally bypassing Claude Code hooks.
+- It records and guides recovery; it does not force automatic rollback.
+- It currently targets Claude Code first. Other hosts are future compatibility work, not the release path.
 
-All risk judgment, snapshots, effect scanning, and recovery context generation live in AgentTx Core.
-
-## Experiments
-
-See `examples/` for reproducible v0.1 scenarios:
-
-- destructive git command block
-- package install snapshot and effect report
-- failed command recovery context
-- sensitive `.env` protection
-
-Run the automated smoke checks:
+## Validation
 
 ```bash
 npm run check:v0.1
+npm run check:v0.2
+npm run package:rc
+claude plugin validate D:/exp_all/AgentTX/plugin-claude
 ```
-
-For the manual Claude Code + DeepSeek comparison protocol, see:
-
-- `docs/AgentTx_Guard_v0.1_实验设计与操作手册.md`
-- `docs/AgentTx_Guard_v0.1_实验运行记录.md`
-- `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`

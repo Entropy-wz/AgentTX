@@ -75,6 +75,6 @@ AgentTx deny: CRITICAL risk
 ## 注意事项
 
 1. v0.2 不扩展风险规则，只做 Claude 插件封装。
-2. v0.2 不做 Codex adapter，Codex 进入 v0.3。
+2. v0.2 不做 Codex adapter；非 Claude 宿主仅作为 future compatibility，不进入当前发布路线。
 3. 插件 hook 只使用 `${CLAUDE_PLUGIN_ROOT}`，不要写死本机绝对路径。
 4. 如果插件没有加载，用 `claude --debug --plugin-dir D:\exp_all\AgentTX\plugin-claude` 查看加载日志。
