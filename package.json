@@ -13,7 +13,8 @@
     "check:v0.1": "node scripts/run-v0.1-checks.mjs",
     "package:claude": "npm run build && node scripts/package-claude-plugin.mjs",
     "check:v0.2": "npm run package:claude && node scripts/check-v0.2-plugin.mjs",
-    "package:rc": "npm run check:v0.1 && npm run check:v0.2 && node scripts/package-release-rc.mjs"
+    "package:rc": "npm run check:v0.1 && npm run check:v0.2 && node scripts/package-release-rc.mjs",
+    "check:schema": "node scripts/check-gate1-schema.mjs"
   },
   "keywords": [
     "agent",

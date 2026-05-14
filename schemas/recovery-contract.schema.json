@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/recovery-contract.schema.json",
+  "title": "AgentTx Recovery Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "tx_id",
+    "contract_type",
+    "target",
+    "scope",
+    "template",
+    "status"
+  ],
+  "properties": {
+    "contract_id": { "type": "string" },
+    "tx_id": { "type": "string" },
+    "contract_type": {
+      "type": "string",
+      "enum": [
+        "fs_restore",
+        "process_cleanup",
+        "network_restore",
+        "service_restore",
+        "package_restore",
+        "env_restore",
+        "credential_restore",
+        "belief_repair",
+        "manual_review"
+      ]
+    },
+    "target": { "type": "string" },
+    "scope": { "type": "object", "additionalProperties": true },
+    "template": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "verified", "executed", "failed", "not_implemented"]
+    },
+    "verification": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": { "type": "string" }
+  }
+}

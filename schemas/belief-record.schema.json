@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/belief-record.schema.json",
+  "title": "AgentTx Belief Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "belief_record_id",
+    "tx_id",
+    "type",
+    "content",
+    "source",
+    "truth_status",
+    "taint_status"
+  ],
+  "properties": {
+    "belief_record_id": { "type": "string" },
+    "tx_id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "tool_observation",
+        "agent_claim",
+        "task_summary",
+        "recovery_context",
+        "memory_write",
+        "planner_update"
+      ]
+    },
+    "content": { "type": "string" },
+    "source": { "type": "string" },
+    "depends_on_effects": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "truth_status": {
+      "type": "string",
+      "enum": ["verified", "unverified", "contradicted", "invalidated"]
+    },
+    "taint_status": {
+      "type": "string",
+      "enum": ["clean", "tainted", "repaired"]
+    }
+  }
+}

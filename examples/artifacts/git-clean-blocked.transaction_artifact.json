@@ -1,0 +1,99 @@
+{
+  "artifact_version": "0.3-draft",
+  "schema_version": "transaction-artifact.schema.json",
+  "generated_at": "2026-05-14T00:00:00.000Z",
+  "transaction": {
+    "tx_id": "tx_example_git_clean_blocked",
+    "goal": "Clean the project working tree",
+    "assumptions": [],
+    "command": "git reset --hard && git clean -fdx",
+    "cwd": "D:/exp_all/agenttx-exp",
+    "host": "claude-code",
+    "tool_name": "Bash",
+    "risk": {
+      "level": "CRITICAL",
+      "decision": "deny",
+      "reasons": [
+        "destructive_git_operation",
+        "removes_untracked_files",
+        "critical_rule_match"
+      ]
+    },
+    "status": "blocked",
+    "recoverability": "R0"
+  },
+  "declared_scope": {
+    "files": ["*"],
+    "packages": [],
+    "environment": [],
+    "services": [],
+    "external_network": "deny"
+  },
+  "snapshots": {
+    "before": null,
+    "after": null
+  },
+  "typed_effects": [
+    {
+      "effect_id": "e_git_clean_blocked_001",
+      "tx_id": "tx_example_git_clean_blocked",
+      "cmd_id": null,
+      "type": "command.blocked",
+      "target": "git reset --hard && git clean -fdx",
+      "recoverability": "R0",
+      "status": "blocked",
+      "sensitive": false,
+      "expected": false,
+      "pre_state": null,
+      "post_state": null,
+      "evidence": {
+        "source": "risk_report.json",
+        "path": ".agenttx/transactions/tx_example_git_clean_blocked/risk_report.json",
+        "legacy_file_effect": null
+      },
+      "observed_at": "2026-05-14T00:00:00.000Z"
+    }
+  ],
+  "recovery_contracts": [],
+  "belief_records": [
+    {
+      "belief_record_id": "b_git_clean_blocked_001",
+      "tx_id": "tx_example_git_clean_blocked",
+      "type": "recovery_context",
+      "content": "The destructive Git cleanup was blocked before execution.",
+      "source": "AgentTx PreToolUse",
+      "depends_on_effects": ["e_git_clean_blocked_001"],
+      "truth_status": "verified",
+      "taint_status": "clean"
+    }
+  ],
+  "verifier_report": {
+    "verifier_report_id": "v_git_clean_blocked_001",
+    "tx_id": "tx_example_git_clean_blocked",
+    "result": "not_run",
+    "state_verification": {},
+    "effect_verification": {
+      "blocked_before_execution": true
+    },
+    "belief_verification": {
+      "clean_summary_installed": false
+    },
+    "residual_risks": [],
+    "generated_at": "2026-05-14T00:00:00.000Z"
+  },
+  "invariants": [
+    "blocked command must not execute",
+    "workspace must not be mutated by denied transaction"
+  ],
+  "commit_policy": {
+    "decision": "deny"
+  },
+  "legacy_refs": {
+    "transaction_json": "transaction.json",
+    "risk_report_json": "risk_report.json",
+    "snapshot_before_json": null,
+    "snapshot_after_json": null,
+    "effect_report_json": null,
+    "recovery_md": null
+  }
+}

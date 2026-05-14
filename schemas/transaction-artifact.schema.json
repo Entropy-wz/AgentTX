@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/transaction-artifact.schema.json",
+  "title": "AgentTx Transaction Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_version",
+    "schema_version",
+    "generated_at",
+    "transaction",
+    "declared_scope",
+    "snapshots",
+    "typed_effects",
+    "recovery_contracts",
+    "belief_records",
+    "verifier_report",
+    "legacy_refs"
+  ],
+  "properties": {
+    "artifact_version": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tx_id",
+        "goal",
+        "command",
+        "cwd",
+        "host",
+        "risk",
+        "status",
+        "recoverability"
+      ],
+      "properties": {
+        "tx_id": { "type": "string" },
+        "goal": { "type": ["string", "null"] },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "command": { "type": "string" },
+        "cwd": { "type": "string" },
+        "host": { "type": "string" },
+        "tool_name": { "type": "string" },
+        "risk": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["level", "decision"],
+          "properties": {
+            "level": {
+              "type": "string",
+              "enum": ["SAFE", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+            },
+            "decision": {
+              "type": "string",
+              "enum": ["allow", "ask", "deny"]
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["blocked", "pending", "completed", "failed", "recovered"]
+        },
+        "recoverability": {
+          "type": "string",
+          "enum": ["R0", "R1", "R2", "R3", "R4", "unknown"]
+        }
+      }
+    },
+    "declared_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "packages", "environment", "services", "external_network"],
+      "properties": {
+        "files": { "type": "array", "items": { "type": "string" } },
+        "packages": { "type": "array", "items": { "type": "string" } },
+        "environment": { "type": "array", "items": { "type": "string" } },
+        "services": { "type": "array", "items": { "type": "string" } },
+        "external_network": { "type": "string", "enum": ["allow", "deny", "unknown"] }
+      }
+    },
+    "snapshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["before", "after"],
+      "properties": {
+        "before": { "type": ["object", "null"], "additionalProperties": true },
+        "after": { "type": ["object", "null"], "additionalProperties": true }
+      }
+    },
+    "typed_effects": {
+      "type": "array",
+      "items": { "$ref": "./typed-effect.schema.json" }
+    },
+    "recovery_contracts": {
+      "type": "array",
+      "items": { "$ref": "./recovery-contract.schema.json" }
+    },
+    "belief_records": {
+      "type": "array",
+      "items": { "$ref": "./belief-record.schema.json" }
+    },
+    "verifier_report": { "$ref": "./verifier-report.schema.json" },
+    "invariants": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "commit_policy": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "legacy_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_json": { "type": ["string", "null"] },
+        "risk_report_json": { "type": ["string", "null"] },
+        "snapshot_before_json": { "type": ["string", "null"] },
+        "snapshot_after_json": { "type": ["string", "null"] },
+        "effect_report_json": { "type": ["string", "null"] },
+        "recovery_md": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

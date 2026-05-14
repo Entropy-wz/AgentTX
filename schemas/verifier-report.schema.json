@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/verifier-report.schema.json",
+  "title": "AgentTx Verifier Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verifier_report_id",
+    "tx_id",
+    "result",
+    "state_verification",
+    "effect_verification",
+    "belief_verification"
+  ],
+  "properties": {
+    "verifier_report_id": { "type": "string" },
+    "tx_id": { "type": "string" },
+    "result": {
+      "type": "string",
+      "enum": ["pass", "fail", "partial", "not_run"]
+    },
+    "state_verification": { "type": "object", "additionalProperties": true },
+    "effect_verification": { "type": "object", "additionalProperties": true },
+    "belief_verification": { "type": "object", "additionalProperties": true },
+    "residual_risks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "generated_at": { "type": "string" }
+  }
+}

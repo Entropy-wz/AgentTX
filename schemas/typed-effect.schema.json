@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/typed-effect.schema.json",
+  "title": "AgentTx Typed Effect",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "effect_id",
+    "tx_id",
+    "type",
+    "target",
+    "recoverability",
+    "status",
+    "observed_at"
+  ],
+  "properties": {
+    "effect_id": { "type": "string" },
+    "tx_id": { "type": "string" },
+    "cmd_id": { "type": ["string", "null"] },
+    "type": {
+      "type": "string",
+      "enum": [
+        "filesystem.create",
+        "filesystem.modify",
+        "filesystem.delete",
+        "package.modify",
+        "config.modify",
+        "process.spawn",
+        "network.listen",
+        "service.reload",
+        "credential.touch",
+        "belief.write",
+        "command.blocked",
+        "command.failed"
+      ]
+    },
+    "target": { "type": "string" },
+    "recoverability": {
+      "type": "string",
+      "enum": ["R0", "R1", "R2", "R3", "R4", "unknown"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["observed", "blocked", "committed", "recovered", "residual", "mocked"]
+    },
+    "sensitive": { "type": "boolean" },
+    "expected": { "type": "boolean" },
+    "pre_state": { "type": ["object", "null"], "additionalProperties": true },
+    "post_state": { "type": ["object", "null"], "additionalProperties": true },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "source": { "type": "string" },
+        "path": { "type": "string" },
+        "legacy_file_effect": { "type": ["object", "null"], "additionalProperties": true }
+      }
+    },
+    "observed_at": { "type": "string" }
+  }
+}

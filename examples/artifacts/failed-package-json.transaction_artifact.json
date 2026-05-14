@@ -1,0 +1,145 @@
+{
+  "artifact_version": "0.3-draft",
+  "schema_version": "transaction-artifact.schema.json",
+  "generated_at": "2026-05-14T00:00:00.000Z",
+  "transaction": {
+    "tx_id": "tx_example_failed_package_json",
+    "goal": "Run a command that writes package.json and fails",
+    "assumptions": [],
+    "command": "node -e \"require('fs').writeFileSync('package.json', '{ broken json'); process.exit(1)\"",
+    "cwd": "D:/exp_all/agenttx-exp",
+    "host": "claude-code",
+    "tool_name": "Bash",
+    "risk": {
+      "level": "MEDIUM",
+      "decision": "ask",
+      "reasons": ["sensitive_path_write"]
+    },
+    "status": "completed",
+    "recoverability": "R1"
+  },
+  "declared_scope": {
+    "files": ["package.json"],
+    "packages": [],
+    "environment": [],
+    "services": [],
+    "external_network": "deny"
+  },
+  "snapshots": {
+    "before": {
+      "ref": "snapshot_before.json"
+    },
+    "after": {
+      "ref": "snapshot_after.json"
+    }
+  },
+  "typed_effects": [
+    {
+      "effect_id": "e_failed_package_json_001",
+      "tx_id": "tx_example_failed_package_json",
+      "cmd_id": null,
+      "type": "filesystem.modify",
+      "target": "package.json",
+      "recoverability": "R1",
+      "status": "observed",
+      "sensitive": true,
+      "expected": false,
+      "pre_state": {
+        "hash": "sha256:before"
+      },
+      "post_state": {
+        "hash": "sha256:after",
+        "parse_status": "invalid_json"
+      },
+      "evidence": {
+        "source": "effect_report.json",
+        "path": ".agenttx/transactions/tx_example_failed_package_json/effect_report.json",
+        "legacy_file_effect": {
+          "type": "modified",
+          "path": "package.json",
+          "sensitive": true
+        }
+      },
+      "observed_at": "2026-05-14T00:00:00.000Z"
+    },
+    {
+      "effect_id": "e_failed_package_json_002",
+      "tx_id": "tx_example_failed_package_json",
+      "cmd_id": null,
+      "type": "command.failed",
+      "target": "node -e write package.json",
+      "recoverability": "R1",
+      "status": "observed",
+      "sensitive": false,
+      "expected": false,
+      "pre_state": null,
+      "post_state": {
+        "exit_code": 1
+      },
+      "evidence": {
+        "source": "effect_report.json",
+        "path": ".agenttx/transactions/tx_example_failed_package_json/effect_report.json",
+        "legacy_file_effect": null
+      },
+      "observed_at": "2026-05-14T00:00:00.000Z"
+    }
+  ],
+  "recovery_contracts": [
+    {
+      "contract_id": "c_failed_package_json_001",
+      "tx_id": "tx_example_failed_package_json",
+      "contract_type": "fs_restore",
+      "target": "package.json",
+      "scope": {
+        "files": ["package.json"]
+      },
+      "template": "restore_file_from_snapshot",
+      "status": "not_implemented",
+      "verification": ["hash_equals_snapshot_before"],
+      "notes": "Gate 1 defines the contract shape only. Execution starts in a later gate."
+    }
+  ],
+  "belief_records": [
+    {
+      "belief_record_id": "b_failed_package_json_001",
+      "tx_id": "tx_example_failed_package_json",
+      "type": "recovery_context",
+      "content": "The command failed and package.json was modified. Do not assume the command succeeded.",
+      "source": "recovery.md",
+      "depends_on_effects": ["e_failed_package_json_001", "e_failed_package_json_002"],
+      "truth_status": "verified",
+      "taint_status": "clean"
+    }
+  ],
+  "verifier_report": {
+    "verifier_report_id": "v_failed_package_json_001",
+    "tx_id": "tx_example_failed_package_json",
+    "result": "not_run",
+    "state_verification": {
+      "package_json_restored": false
+    },
+    "effect_verification": {
+      "residual_effect": true
+    },
+    "belief_verification": {
+      "clean_summary_installed": true
+    },
+    "residual_risks": ["package.json remains invalid until restored"],
+    "generated_at": "2026-05-14T00:00:00.000Z"
+  },
+  "invariants": [
+    "failed command must not be treated as success",
+    "package.json must be valid before unrelated continuation"
+  ],
+  "commit_policy": {
+    "decision": "manual_recovery_required"
+  },
+  "legacy_refs": {
+    "transaction_json": "transaction.json",
+    "risk_report_json": "risk_report.json",
+    "snapshot_before_json": "snapshot_before.json",
+    "snapshot_after_json": "snapshot_after.json",
+    "effect_report_json": "effect_report.json",
+    "recovery_md": "recovery.md"
+  }
+}

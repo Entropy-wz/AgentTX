@@ -91,8 +91,11 @@ Standalone `.claude/settings.json` hooks are kept for development, but public de
 
 Evaluation and design notes:
 
+- `docs/baseline-v0.2.md`
 - `docs/evaluation-v0.2.md`
 - `docs/host-adapter-contract.md`
+- `docs/transaction-artifact-schema-v0.3.md`
+- `docs/AgentTx_v2_architecture.md`
 - `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
 - `docs/AgentTx_Guard_v0.1_实验运行记录.md`
 
@@ -108,6 +111,7 @@ Evaluation and design notes:
 ```bash
 npm run check:v0.1
 npm run check:v0.2
+npm run check:schema
 npm run package:rc
 claude plugin validate D:/exp_all/AgentTX/plugin-claude
 ```
