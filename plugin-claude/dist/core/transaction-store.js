@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { buildEffectGraph } from "../effects/effectGraphBuilder.js";
 export class StandardTransactionStore {
     legacyStore;
     constructor(legacyStore) {
@@ -27,11 +28,15 @@ export class StandardTransactionStore {
     appendEffect(effect) {
         const file = path.join(this.txDir(effect.tx_id), "effects.jsonl");
         fs.appendFileSync(file, `${JSON.stringify(effect)}\n`, "utf8");
-        this.updateEffectGraph(effect.tx_id, effect);
+        this.rebuildEffectGraph(effect.tx_id);
     }
     appendEffects(effects) {
         for (const effect of effects) {
-            this.appendEffect(effect);
+            const file = path.join(this.txDir(effect.tx_id), "effects.jsonl");
+            fs.appendFileSync(file, `${JSON.stringify(effect)}\n`, "utf8");
+        }
+        if (effects[0]) {
+            this.rebuildEffectGraph(effects[0].tx_id);
         }
     }
     writeRecovery(txId, recoveryContext) {
@@ -64,6 +69,7 @@ export class StandardTransactionStore {
             };
             this.writeJson(txId, "belief_report.json", belief);
         }
+        this.rebuildEffectGraph(txId);
     }
     ensureJsonl(txId) {
         const file = path.join(this.txDir(txId), "effects.jsonl");
@@ -76,16 +82,8 @@ export class StandardTransactionStore {
         fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(path.join(dir, name), `${JSON.stringify(value, null, 2)}\n`, "utf8");
     }
-    updateEffectGraph(txId, effect) {
-        const file = path.join(this.txDir(txId), "effect_graph.json");
-        const graph = fs.existsSync(file)
-            ? JSON.parse(fs.readFileSync(file, "utf8"))
-            : emptyEffectGraph(txId);
-        if (!graph.nodes.some((node) => node.effect_id === effect.effect_id)) {
-            graph.nodes.push(effect);
-        }
-        graph.updated_at = new Date().toISOString();
-        this.writeJson(txId, "effect_graph.json", graph);
+    rebuildEffectGraph(txId) {
+        this.writeJson(txId, "effect_graph.json", buildEffectGraph(this.txDir(txId), txId));
     }
     readEffectIds(txId) {
         const file = path.join(this.txDir(txId), "effects.jsonl");
@@ -101,11 +99,11 @@ export class StandardTransactionStore {
 }
 function emptyEffectGraph(txId) {
     return {
-        schema_version: "gate1.effect_graph.v0.3",
+        schema_version: "gate3.effect_graph.v0.3",
         tx_id: txId,
         nodes: [],
         edges: [],
-        note: "Gate 1 records typed effect nodes only. Causal edges are introduced in Gate 3.",
+        note: "Gate 3 graph is rebuilt from request.json, effects.jsonl, and recovery_report.json.",
         updated_at: new Date().toISOString()
     };
 }

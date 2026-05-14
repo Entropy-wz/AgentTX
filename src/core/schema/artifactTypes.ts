@@ -37,15 +37,34 @@ export interface Gate1TypedEffect {
   observed_at: string;
 }
 
+export type EffectGraphRelation =
+  | "caused"
+  | "dependency"
+  | "may_taint"
+  | "requires_recovery"
+  | "derived_from";
+
+export interface EffectGraphNode {
+  id: string;
+  type: string;
+  target?: string;
+  status?: string;
+  content?: string;
+  evidence?: Record<string, unknown>;
+}
+
+export interface EffectGraphEdge {
+  from: string;
+  to: string;
+  relation: EffectGraphRelation;
+  evidence?: Record<string, unknown>;
+}
+
 export interface Gate1EffectGraph {
-  schema_version: "gate1.effect_graph.v0.3";
+  schema_version: "gate1.effect_graph.v0.3" | "gate3.effect_graph.v0.3";
   tx_id: string;
-  nodes: Gate1TypedEffect[];
-  edges: Array<{
-    from: string;
-    to: string;
-    relation: string;
-  }>;
+  nodes: EffectGraphNode[];
+  edges: EffectGraphEdge[];
   note: string;
   updated_at: string;
 }

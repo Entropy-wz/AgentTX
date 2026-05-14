@@ -36,7 +36,7 @@ recovery.md
 | `request.json` | Agent command, intent placeholder, cwd, host, tool, session/tool ids |
 | `risk.json` | Risk level, score, reasons, decision, policy mode |
 | `effects.jsonl` | Typed effect stream |
-| `effect_graph.json` | Gate 1 placeholder graph with typed effect nodes and no causal edges |
+| `effect_graph.json` | Gate 3 graph with command, effect, dependency, belief-taint, and recovery-requirement edges |
 | `recovery_contracts.json` | Placeholder contract list |
 | `recovery_report.json` | Structured recovery context when needed |
 | `belief_report.json` | Recovery context recorded as belief evidence when needed |
@@ -97,7 +97,7 @@ config.modify
 
 ## effect_graph.json
 
-Gate 1 only mirrors typed effect nodes:
+Gate 3 rebuilds a graph from `effects.jsonl`:
 
 ```json
 {
@@ -106,7 +106,7 @@ Gate 1 only mirrors typed effect nodes:
 }
 ```
 
-Causal edges are introduced in Gate 3.
+Every typed effect has a node. The graph also records command-to-effect causal edges, package manifest-to-lockfile dependency edges, failed-command belief-taint edges, and high-risk recovery requirements.
 
 ## recovery_report.json
 

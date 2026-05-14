@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const schemaFiles = [
   "schemas/transaction-artifact.schema.json",
   "schemas/typed-effect.schema.json",
+  "schemas/effect-graph.schema.json",
   "schemas/recovery-contract.schema.json",
   "schemas/belief-record.schema.json",
   "schemas/verifier-report.schema.json"

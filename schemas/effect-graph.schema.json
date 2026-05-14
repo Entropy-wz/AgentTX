@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/effect-graph.schema.json",
+  "title": "AgentTx Effect Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tx_id", "nodes", "edges", "note", "updated_at"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["gate3.effect_graph.v0.3"]
+    },
+    "tx_id": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "target": { "type": "string" },
+          "status": { "type": "string" },
+          "content": { "type": "string" },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "relation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": {
+            "type": "string",
+            "enum": ["caused", "dependency", "may_taint", "requires_recovery", "derived_from"]
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "note": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

@@ -40,4 +40,4 @@ observed_at
 
 ## Non-goals
 
-Gate 1 does not capture process, network, service, package, credential, or belief effects beyond placeholders. Those are introduced in later gates.
+Gate 3 consumes this stream to build `effect_graph.json`. It adds graph-level package dependency, belief-taint, and recovery-requirement nodes or edges, but it does not add new effect rows to `effects.jsonl`.

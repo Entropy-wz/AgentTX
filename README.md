@@ -12,6 +12,7 @@ The v0.2.0-rc1 release is focused on the Claude Code plugin. CLI and standalone 
 - SAFE / LOW / MEDIUM / HIGH / CRITICAL command risk levels
 - Transaction snapshots before risky commands
 - Effect reports after execution
+- Effect graph linking commands, file changes, package dependencies, failed-command belief taint, and recovery requirements
 - Recovery context for failed or unsafe side effects
 - Skills for transaction status, recovery guidance, and risk explanation
 
@@ -97,6 +98,7 @@ Evaluation and design notes:
 - `docs/transaction-artifact-schema-v0.3.md`
 - `docs/transaction-schema-v0.3.md`
 - `docs/effect-types-v0.3.md`
+- `docs/effect-graph-v0.3.md`
 - `docs/AgentTx_v2_architecture.md`
 - `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
 - `docs/AgentTx_Guard_v0.1_实验运行记录.md`
@@ -115,6 +117,7 @@ npm run check:v0.1
 npm run check:v0.2
 npm run check:schema
 npm run check:gate1
+npm run check:gate3
 npm run package:rc
 claude plugin validate D:/exp_all/AgentTX/plugin-claude
 ```

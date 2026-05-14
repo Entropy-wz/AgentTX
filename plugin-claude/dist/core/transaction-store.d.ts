@@ -12,6 +12,6 @@ export declare class StandardTransactionStore {
     writeRecovery(txId: string, recoveryContext: string | null): void;
     private ensureJsonl;
     private writeJson;
-    private updateEffectGraph;
+    private rebuildEffectGraph;
     private readEffectIds;
 }

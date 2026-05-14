@@ -1,6 +1,6 @@
 # Transaction Artifact Schema v0.3
 
-Gate 1 defines the paper-core transaction artifact. It does not implement effect graph, recovery contracts, verifier execution, or belief repair yet. It defines the stable artifact shape that later gates will fill.
+Gate 1 defines the paper-core transaction artifact. Gate 3 fills the first runtime `effect_graph.json` from typed effects. Recovery contracts, verifier execution, and full belief repair remain later gates.
 
 The schema is derived from the v2 transaction abstraction:
 
@@ -27,6 +27,7 @@ Where:
 |---|---|
 | `schemas/transaction-artifact.schema.json` | Top-level artifact |
 | `schemas/typed-effect.schema.json` | Typed side effect record |
+| `schemas/effect-graph.schema.json` | Effect graph generated from typed effects |
 | `schemas/recovery-contract.schema.json` | Verified recovery contract placeholder |
 | `schemas/belief-record.schema.json` | Externalized belief record |
 | `schemas/verifier-report.schema.json` | State/effect/belief verifier result |
@@ -35,6 +36,7 @@ Runtime Gate 1 files are described in:
 
 - `docs/transaction-schema-v0.3.md`
 - `docs/effect-types-v0.3.md`
+- `docs/effect-graph-v0.3.md`
 
 ## Compatibility with v0.2
 
@@ -64,15 +66,17 @@ transaction
 declared_scope
 snapshots
 typed_effects
+effect_graph
 recovery_contracts
 belief_records
 verifier_report
 legacy_refs
 ```
 
-## Gate 1 non-goals
+`effect_graph` is optional in old Gate 1 example exports and present in Gate 3 runtime transaction directories as `effect_graph.json`.
 
-- Do not build effect graph yet.
+## Current non-goals
+
 - Do not execute recovery contracts.
 - Do not claim automatic rollback.
 - Do not claim belief repair is implemented.

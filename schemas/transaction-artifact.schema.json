@@ -95,6 +95,7 @@
       "type": "array",
       "items": { "$ref": "./typed-effect.schema.json" }
     },
+    "effect_graph": { "$ref": "./effect-graph.schema.json" },
     "recovery_contracts": {
       "type": "array",
       "items": { "$ref": "./recovery-contract.schema.json" }
