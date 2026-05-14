@@ -2,7 +2,7 @@ export type AgentName = "cli" | "claude-code" | "codex" | "unknown";
 
 export type ToolName = "Bash" | "Edit" | "Write" | string;
 
-export type RiskLevel = "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+export type RiskLevel = "SAFE" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
 
 export type PolicyDecision = "allow" | "ask" | "deny";
 

@@ -37,6 +37,18 @@ function parseJson(stdout) {
 
 const demo = setupDemo();
 
+const safeGitStatus = run("node", [cli, "guard", "git status"], demo);
+const safeGitStatusJson = parseJson(safeGitStatus.stdout);
+assert(safeGitStatus.status === 0, "git status should be allowed");
+assert(safeGitStatusJson.level === "SAFE", "git status should be classified as SAFE");
+assert(safeGitStatusJson.decision === "allow", "git status should be allowed");
+
+const safeAgentTxStatus = run("node", [cli, "guard", "status --limit 10"], demo);
+const safeAgentTxStatusJson = parseJson(safeAgentTxStatus.stdout);
+assert(safeAgentTxStatus.status === 0, "agenttx status should be allowed");
+assert(safeAgentTxStatusJson.level === "SAFE", "agenttx status should be classified as SAFE");
+assert(safeAgentTxStatusJson.decision === "allow", "agenttx status should be allowed");
+
 const blocked = run("node", [cli, "guard", "git reset --hard && git clean -fdx"], demo);
 const blockedJson = parseJson(blocked.stdout);
 assert(blocked.status === 2, "dangerous git command should return blocked status");

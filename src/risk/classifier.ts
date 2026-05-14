@@ -137,6 +137,9 @@ function escapesRoot(target: string, cwd: string, gitRoot: string): boolean {
 }
 
 function toRiskLevel(score: number, critical: boolean): RiskLevel {
+  if (!critical && score === 0) {
+    return "SAFE";
+  }
   if (critical || score >= 90) {
     return "CRITICAL";
   }

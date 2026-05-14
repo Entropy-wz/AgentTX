@@ -102,6 +102,9 @@ function escapesRoot(target, cwd, gitRoot) {
     return relative.startsWith("..") || path.isAbsolute(relative);
 }
 function toRiskLevel(score, critical) {
+    if (!critical && score === 0) {
+        return "SAFE";
+    }
     if (critical || score >= 90) {
         return "CRITICAL";
     }
