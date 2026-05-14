@@ -6,6 +6,14 @@ import { writeRecoveryReport } from "../recovery/cleanContext.js";
 import { findGitRoot, normalizeHostPath } from "../utils/paths.js";
 import { PostToolRequest, PreToolRequest, Transaction } from "../types.js";
 import { TransactionStore } from "../store/transactionStore.js";
+import { StandardTransactionStore } from "./transaction-store.js";
+import {
+  blockedCommandEffect,
+  failedCommandEffect,
+  fileEffectToTypedEffect,
+  toRequestArtifact,
+  toRiskArtifact
+} from "./schema/artifactTypes.js";
 
 export class AgentTxCore {
   evaluate(command: string, cwd: string, policyMode = "normal" as const) {
@@ -38,6 +46,14 @@ export class AgentTxCore {
     };
 
     store.create(tx);
+    const standardStore = new StandardTransactionStore(store);
+    standardStore.initialize(tx.tx_id);
+    standardStore.writeRequest(tx.tx_id, toRequestArtifact(tx, request));
+    standardStore.writeRisk(tx.tx_id, toRiskArtifact(risk));
+
+    if (risk.decision === "deny") {
+      standardStore.appendEffect(blockedCommandEffect(tx));
+    }
 
     if (risk.decision !== "deny" && shouldSnapshot(risk.score, request.command)) {
       createSnapshot(store, tx, "before");
@@ -57,6 +73,7 @@ export class AgentTxCore {
     const cwd = path.resolve(normalizeHostPath(request.cwd));
     const gitRoot = findGitRoot(cwd);
     const store = new TransactionStore(gitRoot);
+    const standardStore = new StandardTransactionStore(store);
     let tx = request.tx_id ? store.load(request.tx_id) : null;
     if (!tx && request.tool_use_id) {
       tx = store.findByToolUseId(request.tool_use_id);
@@ -86,6 +103,11 @@ export class AgentTxCore {
       stdout: request.stdout,
       stderr: request.stderr
     });
+    standardStore.initialize(tx.tx_id);
+    standardStore.appendEffects(report.file_effects.flatMap((effect, index) => fileEffectToTypedEffect(tx, effect, index)));
+    if (report.command_exit.code !== null && report.command_exit.code !== 0) {
+      standardStore.appendEffect(failedCommandEffect(tx, request, report));
+    }
 
     tx.snapshot_after = "snapshot_after.json";
     tx.effect_report = "effect_report.json";
@@ -97,6 +119,7 @@ export class AgentTxCore {
       reportContext = writeRecoveryReport(store, tx, report);
       tx.recovery_report = "recovery.md";
     }
+    standardStore.writeRecovery(tx.tx_id, reportContext);
 
     store.save(tx);
     return { tx, reportContext };

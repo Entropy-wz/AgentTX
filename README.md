@@ -95,6 +95,8 @@ Evaluation and design notes:
 - `docs/evaluation-v0.2.md`
 - `docs/host-adapter-contract.md`
 - `docs/transaction-artifact-schema-v0.3.md`
+- `docs/transaction-schema-v0.3.md`
+- `docs/effect-types-v0.3.md`
 - `docs/AgentTx_v2_architecture.md`
 - `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
 - `docs/AgentTx_Guard_v0.1_实验运行记录.md`
@@ -112,6 +114,7 @@ Evaluation and design notes:
 npm run check:v0.1
 npm run check:v0.2
 npm run check:schema
+npm run check:gate1
 npm run package:rc
 claude plugin validate D:/exp_all/AgentTX/plugin-claude
 ```

@@ -31,6 +31,11 @@ Where:
 | `schemas/belief-record.schema.json` | Externalized belief record |
 | `schemas/verifier-report.schema.json` | State/effect/belief verifier result |
 
+Runtime Gate 1 files are described in:
+
+- `docs/transaction-schema-v0.3.md`
+- `docs/effect-types-v0.3.md`
+
 ## Compatibility with v0.2
 
 Gate 1 does not replace existing transaction files. It defines a new unified export:
