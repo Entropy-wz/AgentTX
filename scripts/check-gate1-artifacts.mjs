@@ -99,7 +99,10 @@ assertBaseFiles(failedDir);
 const failedEffects = readJsonl(path.join(failedDir, "effects.jsonl"));
 assert(failedEffects.some((effect) => effect.type === "filesystem.modify" && effect.target === "package.json"), "failed tx should include package.json filesystem.modify");
 assert(failedEffects.some((effect) => effect.type === "command.failed"), "failed tx should include command.failed");
-assert(readJson(path.join(failedDir, "recovery_report.json")).status === "required", "failed tx should require recovery");
+assert(
+  ["required", "recovered", "partially_recovered", "unrecoverable"].includes(readJson(path.join(failedDir, "recovery_report.json")).status),
+  "failed tx should require or perform recovery"
+);
 
 run("git", ["restore", "package.json"], demo);
 const deleteRun = run("node", [cli, "run", "del temp.txt"], demo);

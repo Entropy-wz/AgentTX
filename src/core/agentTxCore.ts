@@ -120,6 +120,7 @@ export class AgentTxCore {
       tx.recovery_report = "recovery.md";
     }
     standardStore.writeRecovery(tx.tx_id, reportContext);
+    standardStore.runRecovery(tx.tx_id, tx.git_root);
 
     store.save(tx);
     return { tx, reportContext };

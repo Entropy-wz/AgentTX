@@ -5,6 +5,7 @@ export type TypedEffectType =
   | "filesystem.modify"
   | "filesystem.delete"
   | "config.modify"
+  | "external.network"
   | "command.blocked"
   | "command.failed";
 
@@ -70,11 +71,54 @@ export interface Gate1EffectGraph {
 }
 
 export interface Gate1RecoveryReport {
-  schema_version: "gate1.recovery_report.v0.3";
+  schema_version: "gate1.recovery_report.v0.3" | "gate4.recovery_report.v0.3";
   tx_id: string;
-  status: "not_required" | "required";
-  recovery_context: string | null;
-  legacy_recovery_md: string | null;
+  status: "not_required" | "required" | "recovered" | "partially_recovered" | "unrecoverable";
+  recovery_context?: string | null;
+  legacy_recovery_md?: string | null;
+  contracts_total?: number;
+  executed_contracts?: string[];
+  failed_contracts?: string[];
+  manual_contracts?: string[];
+  residual_warnings?: string[];
+  updated_at: string;
+}
+
+export type RecoveryAction = "restore_file" | "delete_created_file" | "manual_review" | "residual_warning";
+
+export type RecoveryVerificationType = "hash_match" | "file_absent" | "manual_required" | "unrecoverable_external";
+
+export interface Gate4RecoveryContract {
+  contract_id: string;
+  tx_id: string;
+  effect_id: string;
+  required_action: RecoveryAction;
+  target: string;
+  blocking: boolean;
+  reversible: boolean;
+  verification: {
+    type: RecoveryVerificationType;
+    expected_hash?: string | null;
+  };
+  status: "planned" | "executed" | "verified" | "failed" | "manual_required" | "residual";
+  residual_warning: string | null;
+  updated_at: string;
+}
+
+export interface Gate4VerifierReport {
+  schema_version: "gate4.verifier_report.v0.3";
+  tx_id: string;
+  status: "recovered" | "partially_recovered" | "unrecoverable" | "not_needed";
+  checks: Array<{
+    contract_id: string;
+    effect_id: string;
+    target: string;
+    verification_type: RecoveryVerificationType;
+    passed: boolean;
+    reason?: string;
+  }>;
+  residual_effects: number;
+  residual_warnings: string[];
   updated_at: string;
 }
 

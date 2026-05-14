@@ -25,6 +25,7 @@
         "filesystem.delete",
         "package.modify",
         "config.modify",
+        "external.network",
         "process.spawn",
         "network.listen",
         "service.reload",

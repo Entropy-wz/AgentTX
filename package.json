@@ -10,13 +10,14 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "check:v0.1": "node scripts/run-v0.1-checks.mjs",
+    "check:v0.1": "npm run build && node scripts/run-v0.1-checks.mjs",
     "package:claude": "npm run build && node scripts/package-claude-plugin.mjs",
     "check:v0.2": "npm run package:claude && node scripts/check-v0.2-plugin.mjs",
-    "package:rc": "npm run check:v0.1 && npm run check:v0.2 && npm run check:schema && npm run check:gate1 && npm run check:gate3 && node scripts/package-release-rc.mjs",
+    "package:rc": "npm run check:v0.1 && npm run check:v0.2 && npm run check:schema && npm run check:gate1 && npm run check:gate3 && npm run check:gate4 && node scripts/package-release-rc.mjs",
     "check:schema": "node scripts/check-gate1-schema.mjs",
     "check:gate1": "npm run build && node scripts/check-gate1-artifacts.mjs",
-    "check:gate3": "npm run build && node scripts/check-gate3-effect-graph.mjs"
+    "check:gate3": "npm run build && node scripts/check-gate3-effect-graph.mjs",
+    "check:gate4": "npm run build && node scripts/check-gate4-recovery.mjs"
   },
   "keywords": [
     "agent",

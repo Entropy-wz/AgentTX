@@ -5,27 +5,48 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "verifier_report_id",
+    "schema_version",
     "tx_id",
-    "result",
-    "state_verification",
-    "effect_verification",
-    "belief_verification"
+    "status",
+    "checks",
+    "residual_effects",
+    "residual_warnings",
+    "updated_at"
   ],
   "properties": {
-    "verifier_report_id": { "type": "string" },
-    "tx_id": { "type": "string" },
-    "result": {
+    "schema_version": {
       "type": "string",
-      "enum": ["pass", "fail", "partial", "not_run"]
+      "enum": ["gate4.verifier_report.v0.3"]
     },
-    "state_verification": { "type": "object", "additionalProperties": true },
-    "effect_verification": { "type": "object", "additionalProperties": true },
-    "belief_verification": { "type": "object", "additionalProperties": true },
-    "residual_risks": {
+    "tx_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["recovered", "partially_recovered", "unrecoverable", "not_needed"]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["contract_id", "effect_id", "target", "verification_type", "passed"],
+        "properties": {
+          "contract_id": { "type": "string" },
+          "effect_id": { "type": "string" },
+          "target": { "type": "string" },
+          "verification_type": {
+            "type": "string",
+            "enum": ["hash_match", "file_absent", "manual_required", "unrecoverable_external"]
+          },
+          "passed": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "residual_effects": { "type": "number" },
+    "residual_warnings": {
       "type": "array",
       "items": { "type": "string" }
     },
-    "generated_at": { "type": "string" }
+    "updated_at": { "type": "string" }
   }
 }

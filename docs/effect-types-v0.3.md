@@ -29,6 +29,7 @@ observed_at
 | `filesystem.modify` | file effect | A tracked or important file changed |
 | `filesystem.delete` | file effect | A file was removed |
 | `config.modify` | derived file effect | Sensitive or agent configuration changed |
+| `external.network` | mock/future external effect | External network-side effect that AgentTx cannot automatically revert |
 
 ## Recoverability
 
@@ -40,4 +41,4 @@ observed_at
 
 ## Non-goals
 
-Gate 3 consumes this stream to build `effect_graph.json`. It adds graph-level package dependency, belief-taint, and recovery-requirement nodes or edges, but it does not add new effect rows to `effects.jsonl`.
+Gate 3 consumes this stream to build `effect_graph.json`. Gate 4 consumes it to build recovery contracts and verifier reports. External effects are represented as residual warnings rather than fake rollbacks.

@@ -7,40 +7,44 @@
   "required": [
     "contract_id",
     "tx_id",
-    "contract_type",
+    "effect_id",
+    "required_action",
     "target",
-    "scope",
-    "template",
-    "status"
+    "blocking",
+    "reversible",
+    "verification",
+    "status",
+    "residual_warning",
+    "updated_at"
   ],
   "properties": {
     "contract_id": { "type": "string" },
     "tx_id": { "type": "string" },
-    "contract_type": {
+    "effect_id": { "type": "string" },
+    "required_action": {
       "type": "string",
-      "enum": [
-        "fs_restore",
-        "process_cleanup",
-        "network_restore",
-        "service_restore",
-        "package_restore",
-        "env_restore",
-        "credential_restore",
-        "belief_repair",
-        "manual_review"
-      ]
+      "enum": ["restore_file", "delete_created_file", "manual_review", "residual_warning"]
     },
     "target": { "type": "string" },
-    "scope": { "type": "object", "additionalProperties": true },
-    "template": { "type": "string" },
+    "blocking": { "type": "boolean" },
+    "reversible": { "type": "boolean" },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["hash_match", "file_absent", "manual_required", "unrecoverable_external"]
+        },
+        "expected_hash": { "type": ["string", "null"] }
+      }
+    },
     "status": {
       "type": "string",
-      "enum": ["planned", "verified", "executed", "failed", "not_implemented"]
+      "enum": ["planned", "executed", "verified", "failed", "manual_required", "residual"]
     },
-    "verification": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-    "notes": { "type": "string" }
+    "residual_warning": { "type": ["string", "null"] },
+    "updated_at": { "type": "string" }
   }
 }

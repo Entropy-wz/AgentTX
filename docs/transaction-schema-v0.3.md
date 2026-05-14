@@ -37,10 +37,10 @@ recovery.md
 | `risk.json` | Risk level, score, reasons, decision, policy mode |
 | `effects.jsonl` | Typed effect stream |
 | `effect_graph.json` | Gate 3 graph with command, effect, dependency, belief-taint, and recovery-requirement edges |
-| `recovery_contracts.json` | Placeholder contract list |
-| `recovery_report.json` | Structured recovery context when needed |
+| `recovery_contracts.json` | Gate 4 recovery contracts for file restore, created-file deletion, manual review, or residual warning |
+| `recovery_report.json` | Gate 4 recovery execution summary plus legacy recovery context reference when present |
 | `belief_report.json` | Recovery context recorded as belief evidence when needed |
-| `verifier_report.json` | Placeholder verifier report |
+| `verifier_report.json` | Gate 4 verification result for each recovery contract |
 
 ## request.json
 
@@ -91,9 +91,11 @@ filesystem.create
 filesystem.modify
 filesystem.delete
 config.modify
+external.network
 ```
 
 `config.modify` is derived from sensitive configuration file changes and can coexist with `filesystem.modify`.
+`external.network` is used for mock or future external effects and is never treated as automatically reversible.
 
 ## effect_graph.json
 
@@ -108,17 +110,37 @@ Gate 3 rebuilds a graph from `effects.jsonl`:
 
 Every typed effect has a node. The graph also records command-to-effect causal edges, package manifest-to-lockfile dependency edges, failed-command belief-taint edges, and high-risk recovery requirements.
 
-## recovery_report.json
+## recovery_contracts.json
 
-Gate 1 writes:
+Gate 4 writes contracts with:
 
 ```text
-status: not_required | required
-recovery_context
-legacy_recovery_md
+contract_id
+effect_id
+required_action
+target
+blocking
+reversible
+verification
+status
+residual_warning
 ```
 
-Recovery execution is not implemented in Gate 1.
+Supported actions are `restore_file`, `delete_created_file`, `manual_review`, and `residual_warning`.
+
+## recovery_report.json
+
+Gate 4 writes:
+
+```text
+status: not_required | recovered | partially_recovered | unrecoverable
+contracts_total
+executed_contracts
+failed_contracts
+manual_contracts
+residual_warnings
+legacy_recovery_md
+```
 
 ## belief_report.json
 
@@ -126,10 +148,13 @@ When recovery context exists, Gate 1 records it as a verified `recovery_context`
 
 ## verifier_report.json
 
-Gate 1 initializes a valid report with:
+Gate 4 writes:
 
 ```text
-result: not_run
+status: recovered | partially_recovered | unrecoverable | not_needed
+checks
+residual_effects
+residual_warnings
 ```
 
-Actual state/effect/belief verification starts in later gates.
+Verification is limited to file hash matching, created-file absence, manual-required checks, and unrecoverable external warnings.

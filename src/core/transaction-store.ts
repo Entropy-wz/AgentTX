@@ -5,10 +5,13 @@ import {
   Gate1EffectGraph,
   Gate1RecoveryReport,
   Gate1TypedEffect,
+  Gate4RecoveryContract,
+  Gate4VerifierReport,
   Gate1VerifierReport
 } from "./schema/artifactTypes.js";
 import { TransactionStore as LegacyTransactionStore } from "../store/transactionStore.js";
 import { buildEffectGraph } from "../effects/effectGraphBuilder.js";
+import { runRecoveryContracts } from "../recovery/recoveryContracts.js";
 
 export class StandardTransactionStore {
   constructor(private readonly legacyStore: LegacyTransactionStore) {}
@@ -86,6 +89,19 @@ export class StandardTransactionStore {
     this.rebuildEffectGraph(txId);
   }
 
+  runRecovery(txId: string, gitRoot: string): Gate4VerifierReport {
+    const { contracts, verifier, execution } = runRecoveryContracts({
+      txDir: this.txDir(txId),
+      txId,
+      gitRoot
+    });
+    this.writeJson(txId, "recovery_contracts.json", contracts);
+    this.writeJson(txId, "verifier_report.json", verifier);
+    this.writeJson(txId, "recovery_report.json", recoveryReportFrom(txId, this.txDir(txId), contracts, verifier, execution));
+    this.rebuildEffectGraph(txId);
+    return verifier;
+  }
+
   private ensureJsonl(txId: string): void {
     const file = path.join(this.txDir(txId), "effects.jsonl");
     if (!fs.existsSync(file)) {
@@ -136,6 +152,42 @@ function emptyRecoveryReport(txId: string): Gate1RecoveryReport {
     legacy_recovery_md: null,
     updated_at: new Date().toISOString()
   };
+}
+
+function recoveryReportFrom(
+  txId: string,
+  txDir: string,
+  contracts: Gate4RecoveryContract[],
+  verifier: Gate4VerifierReport,
+  execution: {
+    executed: string[];
+    failed: string[];
+    manual: string[];
+    residualWarnings: string[];
+  }
+): Gate1RecoveryReport {
+  return {
+    schema_version: "gate4.recovery_report.v0.3",
+    tx_id: txId,
+    status: recoveryStatusFrom(contracts, verifier),
+    legacy_recovery_md: fs.existsSync(path.join(txDir, "recovery.md")) ? "recovery.md" : null,
+    contracts_total: contracts.length,
+    executed_contracts: execution.executed,
+    failed_contracts: execution.failed,
+    manual_contracts: execution.manual,
+    residual_warnings: verifier.residual_warnings,
+    updated_at: new Date().toISOString()
+  };
+}
+
+function recoveryStatusFrom(
+  contracts: Gate4RecoveryContract[],
+  verifier: Gate4VerifierReport
+): Gate1RecoveryReport["status"] {
+  if (contracts.length === 0 || verifier.status === "not_needed") {
+    return "not_required";
+  }
+  return verifier.status;
 }
 
 function emptyBeliefReport(txId: string): Gate1BeliefReport {
