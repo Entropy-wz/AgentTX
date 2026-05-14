@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { buildEffectGraph } from "../effects/effectGraphBuilder.js";
 import { runRecoveryContracts } from "../recovery/recoveryContracts.js";
+import { buildBeliefRepairReport } from "../belief/beliefRepair.js";
 export class StandardTransactionStore {
     legacyStore;
     constructor(legacyStore) {
@@ -83,6 +84,11 @@ export class StandardTransactionStore {
         this.writeJson(txId, "recovery_report.json", recoveryReportFrom(txId, this.txDir(txId), contracts, verifier, execution));
         this.rebuildEffectGraph(txId);
         return verifier;
+    }
+    writeBeliefRepair(txId) {
+        const report = buildBeliefRepairReport(this.txDir(txId), txId);
+        this.writeJson(txId, "belief_report.json", report);
+        return report.clean_summary || null;
     }
     ensureJsonl(txId) {
         const file = path.join(this.txDir(txId), "effects.jsonl");

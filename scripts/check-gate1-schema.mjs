@@ -10,6 +10,7 @@ const schemaFiles = [
   "schemas/effect-graph.schema.json",
   "schemas/recovery-contract.schema.json",
   "schemas/belief-record.schema.json",
+  "schemas/belief-report.schema.json",
   "schemas/verifier-report.schema.json"
 ];
 

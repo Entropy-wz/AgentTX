@@ -11,6 +11,7 @@ export declare class StandardTransactionStore {
     appendEffects(effects: Gate1TypedEffect[]): void;
     writeRecovery(txId: string, recoveryContext: string | null): void;
     runRecovery(txId: string, gitRoot: string): Gate4VerifierReport;
+    writeBeliefRepair(txId: string): string | null;
     private ensureJsonl;
     private writeJson;
     private rebuildEffectGraph;

@@ -98,9 +98,9 @@ export interface Gate4VerifierReport {
     updated_at: string;
 }
 export interface Gate1BeliefReport {
-    schema_version: "gate1.belief_report.v0.3";
+    schema_version: "gate1.belief_report.v0.3" | "gate5.belief_report.v0.3";
     tx_id: string;
-    records: Array<{
+    records?: Array<{
         belief_record_id: string;
         type: "recovery_context";
         content: string;
@@ -109,7 +109,28 @@ export interface Gate1BeliefReport {
         taint_status: "clean";
         depends_on_effects: string[];
     }>;
-    note: string;
+    tainted_claims?: Array<{
+        claim: string;
+        source: "failed_command" | "effect_graph";
+        status: "invalidated";
+        evidence: string[];
+    }>;
+    verified_state?: {
+        command_exit: "failed" | "succeeded" | "unknown";
+        recovery_status: "recovered" | "partially_recovered" | "unrecoverable" | "not_needed" | "unknown";
+        changed_files: string[];
+        restored_files: string[];
+        residual_warnings: string[];
+    };
+    repair_actions?: Array<"invalidate_success_claim" | "inject_verified_state" | "require_replan_before_continuation">;
+    clean_summary?: string;
+    metrics?: {
+        tcr_claim_detected: boolean;
+        tcr_claim_invalidated: boolean;
+        asr_clean_summary_generated: boolean;
+        asr_requires_replan: boolean;
+    };
+    note?: string;
     updated_at: string;
 }
 export interface Gate1VerifierReport {

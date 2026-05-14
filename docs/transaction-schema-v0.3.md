@@ -39,7 +39,7 @@ recovery.md
 | `effect_graph.json` | Gate 3 graph with command, effect, dependency, belief-taint, and recovery-requirement edges |
 | `recovery_contracts.json` | Gate 4 recovery contracts for file restore, created-file deletion, manual review, or residual warning |
 | `recovery_report.json` | Gate 4 recovery execution summary plus legacy recovery context reference when present |
-| `belief_report.json` | Recovery context recorded as belief evidence when needed |
+| `belief_report.json` | Gate 5 belief repair report with invalidated claims, verified state, clean summary, and benchmark fields |
 | `verifier_report.json` | Gate 4 verification result for each recovery contract |
 
 ## request.json
@@ -144,7 +144,17 @@ legacy_recovery_md
 
 ## belief_report.json
 
-When recovery context exists, Gate 1 records it as a verified `recovery_context` belief record. This is not full belief repair.
+Gate 5 writes:
+
+```text
+tainted_claims
+verified_state
+repair_actions
+clean_summary
+metrics
+```
+
+For failed commands, success claims are invalidated and Claude receives `clean_summary` as `additionalContext`.
 
 ## verifier_report.json
 

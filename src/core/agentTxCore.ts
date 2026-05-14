@@ -121,6 +121,7 @@ export class AgentTxCore {
     }
     standardStore.writeRecovery(tx.tx_id, reportContext);
     standardStore.runRecovery(tx.tx_id, tx.git_root);
+    reportContext = standardStore.writeBeliefRepair(tx.tx_id) ?? reportContext;
 
     store.save(tx);
     return { tx, reportContext };
