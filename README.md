@@ -16,6 +16,7 @@ The v0.2.0-rc1 release is focused on the Claude Code plugin. CLI and standalone 
 - Recovery contracts and verifier reports for restricted file recovery
 - Belief repair summaries that invalidate false success assumptions after failed commands
 - Six-case mini benchmark for the current transaction loop
+- Baseline and ablation benchmark comparing AgentTx with simpler defenses
 - Recovery context for failed or unsafe side effects
 - Skills for transaction status, recovery guidance, and risk explanation
 
@@ -105,6 +106,7 @@ Evaluation and design notes:
 - `docs/recovery-contract-verifier-v0.3.md`
 - `docs/belief-repair-v0.3.md`
 - `docs/agent-chaos-linux-mini-benchmark.md`
+- `docs/baseline-ablation-v0.3.md`
 - `docs/AgentTx_v2_architecture.md`
 - `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
 - `docs/AgentTx_Guard_v0.1_实验运行记录.md`
@@ -128,6 +130,7 @@ npm run check:gate3
 npm run check:gate4
 npm run check:gate5
 npm run check:gate6
+npm run check:gate7
 npm run package:rc
 claude plugin validate D:/exp_all/AgentTX/plugin-claude
 ```

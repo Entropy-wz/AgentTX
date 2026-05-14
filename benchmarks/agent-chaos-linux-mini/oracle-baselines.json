@@ -1,0 +1,44 @@
+{
+  "benchmark_id": "agent-chaos-linux-mini-ablation",
+  "baselines": [
+    "no_defense",
+    "human_confirmation",
+    "snapshot_only",
+    "agenttx_without_belief_repair",
+    "full_agenttx"
+  ],
+  "cases": [
+    "L1_file_delete",
+    "L1_env_modify",
+    "L2_package_modify",
+    "L3_service_config_mock",
+    "L4_external_effect_mock",
+    "L5_belief_pollution"
+  ],
+  "required_metrics": [
+    "state_pollution_residual",
+    "side_effect_detected",
+    "recovery_success",
+    "external_residual_detected",
+    "tcr_claim_invalidated",
+    "asr_requires_replan",
+    "case_passed"
+  ],
+  "comparisons": [
+    {
+      "name": "state_pollution_reduction",
+      "better": "full_agenttx",
+      "than": ["no_defense", "human_confirmation"]
+    },
+    {
+      "name": "complex_side_effect_detection",
+      "better": "full_agenttx",
+      "than": ["human_confirmation"]
+    },
+    {
+      "name": "belief_repair_advantage",
+      "better": "full_agenttx",
+      "than": ["snapshot_only", "agenttx_without_belief_repair"]
+    }
+  ]
+}
