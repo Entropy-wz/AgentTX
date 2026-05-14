@@ -1,0 +1,28 @@
+{
+  "name": "agenttx-guard",
+  "version": "0.2.0",
+  "description": "Lightweight transaction safety for AI coding agents.",
+  "type": "module",
+  "bin": {
+    "agenttx": "./dist/cli.js",
+    "agenttx-claude-pre": "./dist/adapters/claude/preToolUse.js",
+    "agenttx-claude-post": "./dist/adapters/claude/postToolUse.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check:v0.1": "node scripts/run-v0.1-checks.mjs",
+    "package:claude": "npm run build && node scripts/package-claude-plugin.mjs",
+    "check:v0.2": "npm run package:claude && node scripts/check-v0.2-plugin.mjs"
+  },
+  "keywords": [
+    "agent",
+    "safety",
+    "claude-code",
+    "hooks"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}

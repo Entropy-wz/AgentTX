@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "agenttx-guard",
+  "version": "0.2.0",
+  "description": "Transaction safety and recovery context for AI coding agents.",
+  "author": {
+    "name": "AgentTx Project"
+  },
+  "license": "MIT",
+  "keywords": [
+    "agent-safety",
+    "hooks",
+    "transactions",
+    "recovery"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

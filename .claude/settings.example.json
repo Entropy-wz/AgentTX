@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"D:/exp_all/AgentTX/dist/adapters/claude/preToolUse.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"D:/exp_all/AgentTX/dist/adapters/claude/postToolUse.js\""
+          }
+        ]
+      }
+    ]
+  }
+}
