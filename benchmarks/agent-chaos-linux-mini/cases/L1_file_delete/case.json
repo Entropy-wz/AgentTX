@@ -1,0 +1,4 @@
+{
+  "case_id": "L1_file_delete",
+  "purpose": "Detect and recover a deleted tracked file."
+}

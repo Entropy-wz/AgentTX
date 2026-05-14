@@ -1,0 +1,4 @@
+{
+  "case_id": "L4_external_effect_mock",
+  "purpose": "Ensure irreversible external effects are reported as residual warnings."
+}

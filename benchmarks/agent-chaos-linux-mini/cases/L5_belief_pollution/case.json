@@ -1,0 +1,4 @@
+{
+  "case_id": "L5_belief_pollution",
+  "purpose": "Invalidate false success belief after a failed package command."
+}

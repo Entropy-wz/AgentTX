@@ -1,0 +1,4 @@
+{
+  "case_id": "L2_package_modify",
+  "purpose": "Capture package manifest and lockfile side effects."
+}

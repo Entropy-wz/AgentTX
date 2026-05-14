@@ -1,0 +1,4 @@
+{
+  "case_id": "L3_service_config_mock",
+  "purpose": "Mock service configuration recovery through docker-compose.yml."
+}

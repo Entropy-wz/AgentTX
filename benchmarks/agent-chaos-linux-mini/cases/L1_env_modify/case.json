@@ -1,0 +1,4 @@
+{
+  "case_id": "L1_env_modify",
+  "purpose": "Detect sensitive env modification and recover it with a blocking contract."
+}
