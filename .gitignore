@@ -8,3 +8,4 @@ examples/*/package-lock.json
 release/
 dist-benchmark/
 benchmarks/**/runs/
+benchmarks/results/
