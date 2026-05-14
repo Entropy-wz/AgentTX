@@ -7,5 +7,6 @@ examples/*/node_modules/
 examples/*/package-lock.json
 release/
 dist-benchmark/
-benchmarks/**/runs/
+benchmarks/**/runs/*
+!benchmarks/**/runs/README.md
 benchmarks/results/

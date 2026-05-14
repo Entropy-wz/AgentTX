@@ -24,7 +24,8 @@
     "benchmark:ablation": "npm run build && tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/agent-chaos-linux-mini/ablation-runner.js",
     "check:gate7": "npm run benchmark:ablation",
     "benchmark:metrics": "npm run benchmark:ablation && node dist-benchmark/benchmarks/agent-chaos-linux-mini/experiment-metrics.js",
-    "check:gate8": "npm run benchmark:metrics"
+    "check:gate8": "npm run benchmark:metrics",
+    "check:v0.3-alpha": "node scripts/check-v0.3-alpha.mjs"
   },
   "keywords": [
     "agent",
