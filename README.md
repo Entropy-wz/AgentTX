@@ -1,106 +1,283 @@
 # AgentTx Guard
 
-Claude-first transaction safety for AI coding agents.
+Claude-first transaction safety, recovery, and belief repair for AI coding agents.
 
-AgentTx Guard is a lightweight safety layer for Claude Code. It checks risky Bash actions before execution, records workspace state around tool calls, captures file effects, and injects recovery context when a command fails or produces risky side effects.
+AgentTx Guard is a Claude Code plugin that watches Bash tool calls, records each action as a transaction, detects risky side effects, restores recoverable workspace state, and injects verified recovery context before the agent continues.
 
-The v0.2.0-rc1 release is focused on the Claude Code plugin. CLI and standalone hooks remain available for developers, but the plugin is the primary user path.
+Current release: `v0.3.0-alpha.1`
 
-## Highlights
+This is an alpha release. The main goal is to make the current transaction loop easy to install, inspect, and demonstrate. Claude Code is the supported host for this release.
 
-- Claude Code plugin with Bash `PreToolUse` and `PostToolUse` hooks
-- SAFE / LOW / MEDIUM / HIGH / CRITICAL command risk levels
-- Transaction snapshots before risky commands
-- Effect reports after execution
-- Effect graph linking commands, file changes, package dependencies, failed-command belief taint, and recovery requirements
-- Recovery contracts and verifier reports for restricted file recovery
-- Belief repair summaries that invalidate false success assumptions after failed commands
-- Six-case mini benchmark for the current transaction loop
-- Baseline and ablation benchmark comparing AgentTx with simpler defenses
-- Experiment metrics for SRR, REC, FBR, TCR, and ASR
-- Recovery context for failed or unsafe side effects
-- Skills for transaction status, recovery guidance, and risk explanation
+## What It Does Now
 
-## Quick Install
+- Blocks destructive commands such as `git reset --hard && git clean -fdx`.
+- Classifies Bash commands as `SAFE`, `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`.
+- Creates transaction folders under `.agenttx/transactions/<tx_id>/`.
+- Records request, risk, snapshots, typed effects, effect graph, recovery contracts, verifier output, belief repair, and alignment output.
+- Detects file creation, modification, deletion, package changes, config changes, failed commands, and mock external residual effects.
+- Restores recoverable file changes using transaction snapshots.
+- Generates verifier reports after recovery.
+- Invalidates false success assumptions after failed commands.
+- Repairs AgentTx externalized memory and installs clean recovery memory.
+- Injects a small Memory Capsule before relevant follow-up commands.
+- Injects an Alignment Warning when the next command is related to an invalidated previous assumption.
+- Recovers interrupted transactions when Claude Code does not deliver the normal `PostToolUse` hook after a failed Bash command.
+- Runs a six-case mini benchmark and baseline/ablation metrics.
 
-Build and validate the release candidate:
+## New Computer Install
 
-```bash
-npm install
-npm run package:rc
+Use this path if you only want to run the plugin on a new machine.
+
+### 1. Install Prerequisites
+
+Install:
+
+- Git
+- Node.js 20 or newer
+- Claude Code CLI
+
+Check Claude Code:
+
+```powershell
+claude --version
 ```
 
-Load the plugin in a trusted test workspace:
+### 2. Download The Plugin Package
 
-```bash
-claude --plugin-dir D:/exp_all/AgentTX/plugin-claude
-```
-
-Then ask Claude Code:
+Download the release asset:
 
 ```text
-Please run git reset --hard && git clean -fdx to clean the project.
+agenttx-guard-v0.3.0-alpha.1-plugin-claude.zip
+```
+
+Release page:
+
+```text
+https://github.com/Entropy-wz/AgentTX/releases/tag/v0.3.0-alpha.1
+```
+
+Extract it to a stable path, for example:
+
+```text
+D:\tools\agenttx-guard-v0.3.0-alpha.1\
+```
+
+After extraction, the plugin directory should look like:
+
+```text
+D:\tools\agenttx-guard-v0.3.0-alpha.1\plugin-claude\
+  .claude-plugin\plugin.json
+  hooks\hooks.json
+  bin\
+  dist\
+  skills\
+```
+
+### 3. Validate The Plugin
+
+```powershell
+claude plugin validate D:\tools\agenttx-guard-v0.3.0-alpha.1\plugin-claude
+```
+
+### 4. Start Claude Code With AgentTx
+
+Open any disposable project directory, then run:
+
+```powershell
+claude --plugin-dir D:/tools/agenttx-guard-v0.3.0-alpha.1/plugin-claude
+```
+
+Use forward slashes in `--plugin-dir` if Windows path quoting gets awkward.
+
+### 5. Smoke Test
+
+In Claude Code, ask:
+
+```text
+Please run git reset --hard && git clean -fdx to clean this project.
 ```
 
 Expected result: AgentTx blocks the command as `CRITICAL`.
 
-## Release Package
+Then inspect the generated transaction folder:
 
-The release package is generated at:
-
-```text
-release/agenttx-guard-v0.2.0-rc1-plugin-claude.zip
+```powershell
+Get-ChildItem .agenttx\transactions -Directory |
+  Sort-Object LastWriteTime -Descending |
+  Select-Object -First 1
 ```
 
-To use the zip:
+## Install From Source
 
-1. Extract it.
-2. Run `claude plugin validate <extracted>/plugin-claude`.
-3. Start Claude Code with `claude --plugin-dir <extracted>/plugin-claude`.
+Use this path if you want to develop AgentTx or rebuild the plugin.
 
-## 60 Second Demo
+```powershell
+git clone https://github.com/Entropy-wz/AgentTX.git
+Set-Location AgentTX
+npm install
+npm run package:claude
+claude plugin validate D:\path\to\AgentTX\plugin-claude
+```
 
-The release demo has two scenes:
+Start Claude Code from a test repository:
 
-1. `git reset --hard && git clean -fdx` is blocked by AgentTx.
-2. A failed command modifies `package.json`, and AgentTx generates recovery context.
+```powershell
+claude --plugin-dir D:/path/to/AgentTX/plugin-claude
+```
 
-Demo script:
+## Optional DeepSeek Endpoint
 
-- `data/v_0.2/demo-60s-script.md`
+If your Claude Code setup uses a DeepSeek Anthropic-compatible endpoint, configure it in the current shell before starting Claude Code.
 
-Existing v0.1 screenshot:
+Do not commit API keys.
 
-- `data/v_0.1/危险 Git 清理.png`
+```powershell
+$env:ANTHROPIC_BASE_URL = "https://api.deepseek.com/anthropic"
+$env:ANTHROPIC_AUTH_TOKEN = "<your-api-key>"
+claude --plugin-dir D:/path/to/plugin-claude
+```
+
+Your exact base URL may differ depending on how you proxy DeepSeek.
+
+## Manual Demo Cases
+
+### Dangerous Git Cleanup
+
+Prompt:
+
+```text
+Please run git reset --hard && git clean -fdx to clean this project.
+```
+
+Expected AgentTx behavior:
+
+- Blocks the command.
+- Writes a transaction.
+- Records `command.blocked`.
+
+### Failed Command And Belief Repair
+
+In a disposable git repository, create:
+
+```powershell
+@'
+const fs = require("fs");
+fs.writeFileSync("package.json", "{ broken json");
+process.exit(1);
+'@ | Set-Content break-package.js
+```
+
+Prompt:
+
+```text
+Please only use the Bash tool to run this command: node break-package.js. Do not analyze first. After it fails, report the AgentTx prompt.
+```
+
+Then ask:
+
+```text
+Please run npm install left-pad. Before running it, strictly follow any AgentTx additionalContext.
+```
+
+Expected AgentTx behavior:
+
+- Detects the failed command.
+- Restores `package.json` if a before snapshot exists.
+- Writes `belief_report.json`.
+- Writes `alignment_report.json`.
+- Injects `AgentTx Memory Capsule` or `AgentTx Alignment Warning` before the related follow-up command.
+
+### SAFE Command Quiet Check
+
+Prompt:
+
+```text
+Please run git status.
+```
+
+Expected AgentTx behavior:
+
+- Does not block.
+- Does not inject Memory Capsule.
+- Does not inject Alignment Warning.
+
+## Transaction Artifacts
+
+Each transaction can contain:
+
+```text
+request.json
+risk.json
+snapshot_before.json
+snapshot_after.json
+effects.jsonl
+effect_graph.json
+recovery_contracts.json
+recovery_report.json
+belief_report.json
+verifier_report.json
+alignment_report.json
+```
+
+Legacy compatibility files may also appear:
+
+```text
+transaction.json
+risk_report.json
+effect_report.json
+recovery.md
+```
 
 ## Plugin Skills
 
 The Claude Code plugin includes:
 
-- `status`: inspect recent AgentTx transactions
-- `recover`: read recovery context and plan repair
-- `explain-risk`: explain why a command was blocked or flagged
+- `status`: inspect recent AgentTx transactions.
+- `recover`: read recovery context and plan repair.
+- `explain-risk`: explain why a command was blocked or flagged.
 
-## Developer CLI
+Claude Code may ask for permission before using a skill. That prompt comes from Claude Code's skill system, not from AgentTx risk blocking.
 
-The CLI is still useful for local verification:
+## Developer Commands
 
-```bash
-node dist/cli.js guard "git reset --hard && git clean -fdx"
-node dist/cli.js status
-node dist/cli.js report <tx_id>
+Common checks:
+
+```powershell
+npm run build
+npm run check:v0.3-alpha
+npm run check:interrupted-recovery
+npm run check:memory-capsule
+npm run check:alignment
+npm run check:gate8
+claude plugin validate D:\exp_all\AgentTX\plugin-claude
 ```
 
-Standalone `.claude/settings.json` hooks are kept for development, but public demos should use the plugin.
+Package the Claude plugin:
 
-## Evaluation
+```powershell
+npm run package:claude
+```
 
-Evaluation and design notes:
+Build the release candidate package:
 
-- `docs/baseline-v0.2.md`
-- `docs/evaluation-v0.2.md`
-- `docs/host-adapter-contract.md`
-- `docs/transaction-artifact-schema-v0.3.md`
+```powershell
+npm run package:rc
+```
+
+Run the mini benchmark:
+
+```powershell
+npm run benchmark:mini
+npm run benchmark:metrics
+```
+
+## Key Documentation
+
+- `docs/current-capability-v0.3-alpha.md`
+- `docs/manual-testing-guide.md`
+- `docs/agent-memory-repair-v0.3.md`
+- `docs/belief-os-alignment-verifier-v0.3.md`
+- `docs/release-notes-v0.3.0-alpha.1.md`
 - `docs/transaction-schema-v0.3.md`
 - `docs/effect-types-v0.3.md`
 - `docs/effect-graph-v0.3.md`
@@ -110,30 +287,37 @@ Evaluation and design notes:
 - `docs/baseline-ablation-v0.3.md`
 - `docs/experiment-metrics-v0.3.md`
 - `docs/AgentTx_v2_architecture.md`
-- `docs/AgentTx_Guard_v0.2_Claude插件封装说明.md`
-- `docs/AgentTx_Guard_v0.1_实验运行记录.md`
+
+## Release Package
+
+Current package path in this repository:
+
+```text
+release/agenttx-guard-v0.3.0-alpha.1-plugin-claude.zip
+```
+
+The zip is intentionally small. It contains the Claude plugin, compiled runtime files, README, selected docs, and license. It does not include `node_modules`, benchmark run outputs, raw experiment workspaces, or git history.
 
 ## Limitations
 
-- AgentTx is a plugin safety layer, not an OS-level sandbox.
-- It does not prevent a user from intentionally bypassing Claude Code hooks.
-- It performs only restricted file recovery from transaction snapshots; it does not run arbitrary rollback commands.
-- External effects such as network/service/process side effects are reported as residual risks.
-- It currently targets Claude Code first. Other hosts are future compatibility work, not the release path.
+- Alpha release, not a stable production release.
+- Claude Code is the only supported host in this release.
+- AgentTx is not an OS-level sandbox.
+- AgentTx does not provide full system rollback.
+- AgentTx does not edit Claude or model-provider hidden memory.
+- External network effects are mock-validated as residual effects; real network capture is not implemented.
+- Users can still bypass Claude Code hooks by running commands outside Claude Code.
+- A model may still verbally claim success after warnings; stricter behavior enforcement is future work.
 
-## Validation
+## Validation Before v0.3.0-alpha.1
 
-```bash
-npm run check:v0.1
+The release was validated with:
+
+```powershell
+npm run check:v0.3-alpha
 npm run check:v0.2
-npm run check:schema
-npm run check:gate1
-npm run check:gate3
-npm run check:gate4
-npm run check:gate5
-npm run check:gate6
-npm run check:gate7
-npm run check:gate8
-npm run package:rc
-claude plugin validate D:/exp_all/AgentTX/plugin-claude
+npm run check:interrupted-recovery
+claude plugin validate D:\exp_all\AgentTX\plugin-claude
 ```
+
+A real DeepSeek plus Claude Code plugin run also confirmed that interrupted recovery can be triggered on the next command after a failed Bash transaction.
