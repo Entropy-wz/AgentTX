@@ -6,6 +6,9 @@ import { writeRecoveryReport } from "../recovery/cleanContext.js";
 import { findGitRoot, normalizeHostPath } from "../utils/paths.js";
 import { TransactionStore } from "../store/transactionStore.js";
 import { StandardTransactionStore } from "./transaction-store.js";
+import { AgentMemoryStore } from "../belief/memoryStore.js";
+import { buildContinuationWarning } from "../alignment/continuationGuard.js";
+import { recoverInterruptedTransactions } from "./interruptedTransactionRecovery.js";
 import { blockedCommandEffect, failedCommandEffect, fileEffectToTypedEffect, toRequestArtifact, toRiskArtifact } from "./schema/artifactTypes.js";
 export class AgentTxCore {
     evaluate(command, cwd, policyMode = "normal") {
@@ -15,6 +18,7 @@ export class AgentTxCore {
         const cwd = path.resolve(normalizeHostPath(request.cwd));
         const gitRoot = findGitRoot(cwd);
         const store = new TransactionStore(gitRoot);
+        const interruptedRecoveries = recoverInterruptedTransactions(store);
         const risk = classifyCommand(request.command, { cwd, gitRoot, policyMode: request.policyMode });
         const now = new Date().toISOString();
         const tx = {
@@ -43,16 +47,23 @@ export class AgentTxCore {
         if (risk.decision === "deny") {
             standardStore.appendEffect(blockedCommandEffect(tx));
         }
-        if (risk.decision !== "deny" && shouldSnapshot(risk.score, request.command)) {
+        if (risk.decision !== "deny" && shouldCreateSnapshot(request.tool_name, risk.score, request.command)) {
             createSnapshot(store, tx, "before");
             tx.snapshot_before = "snapshot_before.json";
             tx.updated_at = new Date().toISOString();
             store.save(tx);
         }
+        const snapshotContext = tx.snapshot_before && shouldMentionSnapshot(risk.score, request.command)
+            ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/`
+            : null;
+        const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, risk);
+        const alignmentWarning = buildContinuationWarning(gitRoot, request.command, risk);
+        const interruptedContext = risk.decision === "deny" ? null : interruptedRecoveries.map((item) => item.context).join("\n\n");
+        const additionalContext = [interruptedContext, snapshotContext, capsule?.text, alignmentWarning].filter((item) => Boolean(item)).join("\n\n") || undefined;
         return {
             tx,
             store,
-            additionalContext: tx.snapshot_before ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/` : undefined
+            additionalContext
         };
     }
     postToolUse(request) {
@@ -104,6 +115,7 @@ export class AgentTxCore {
         standardStore.writeRecovery(tx.tx_id, reportContext);
         standardStore.runRecovery(tx.tx_id, tx.git_root);
         reportContext = standardStore.writeBeliefRepair(tx.tx_id) ?? reportContext;
+        standardStore.writeAlignment(tx.tx_id);
         store.save(tx);
         return { tx, reportContext };
     }
@@ -111,7 +123,10 @@ export class AgentTxCore {
         return new TransactionStore(findGitRoot(path.resolve(normalizeHostPath(cwd))));
     }
 }
-function shouldSnapshot(score, command) {
+function shouldCreateSnapshot(toolName, score, command) {
+    return toolName === "Bash" || score >= 25 || /\b(npm|pnpm|yarn|pip|poetry|cargo|go)\b/i.test(command);
+}
+function shouldMentionSnapshot(score, command) {
     return score >= 25 || /\b(npm|pnpm|yarn|pip|poetry|cargo|go)\b/i.test(command);
 }
 function createTxId() {

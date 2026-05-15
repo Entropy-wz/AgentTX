@@ -9,6 +9,7 @@ import { TransactionStore } from "../store/transactionStore.js";
 import { StandardTransactionStore } from "./transaction-store.js";
 import { AgentMemoryStore } from "../belief/memoryStore.js";
 import { buildContinuationWarning } from "../alignment/continuationGuard.js";
+import { recoverInterruptedTransactions } from "./interruptedTransactionRecovery.js";
 import {
   blockedCommandEffect,
   failedCommandEffect,
@@ -26,6 +27,7 @@ export class AgentTxCore {
     const cwd = path.resolve(normalizeHostPath(request.cwd));
     const gitRoot = findGitRoot(cwd);
     const store = new TransactionStore(gitRoot);
+    const interruptedRecoveries = recoverInterruptedTransactions(store);
     const risk = classifyCommand(request.command, { cwd, gitRoot, policyMode: request.policyMode });
     const now = new Date().toISOString();
     const tx: Transaction = {
@@ -57,16 +59,19 @@ export class AgentTxCore {
       standardStore.appendEffect(blockedCommandEffect(tx));
     }
 
-    if (risk.decision !== "deny" && shouldSnapshot(risk.score, request.command)) {
+    if (risk.decision !== "deny" && shouldCreateSnapshot(request.tool_name, risk.score, request.command)) {
       createSnapshot(store, tx, "before");
       tx.snapshot_before = "snapshot_before.json";
       tx.updated_at = new Date().toISOString();
       store.save(tx);
     }
-    const snapshotContext = tx.snapshot_before ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/` : null;
+    const snapshotContext = tx.snapshot_before && shouldMentionSnapshot(risk.score, request.command)
+      ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/`
+      : null;
     const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, risk);
     const alignmentWarning = buildContinuationWarning(gitRoot, request.command, risk);
-    const additionalContext = [snapshotContext, capsule?.text, alignmentWarning].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
+    const interruptedContext = risk.decision === "deny" ? null : interruptedRecoveries.map((item) => item.context).join("\n\n");
+    const additionalContext = [interruptedContext, snapshotContext, capsule?.text, alignmentWarning].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
 
     return {
       tx,
@@ -139,7 +144,11 @@ export class AgentTxCore {
   }
 }
 
-function shouldSnapshot(score: number, command: string): boolean {
+function shouldCreateSnapshot(toolName: string, score: number, command: string): boolean {
+  return toolName === "Bash" || score >= 25 || /\b(npm|pnpm|yarn|pip|poetry|cargo|go)\b/i.test(command);
+}
+
+function shouldMentionSnapshot(score: number, command: string): boolean {
   return score >= 25 || /\b(npm|pnpm|yarn|pip|poetry|cargo|go)\b/i.test(command);
 }
 

@@ -3,6 +3,7 @@ import path from "node:path";
 import { buildEffectGraph } from "../effects/effectGraphBuilder.js";
 import { runRecoveryContracts } from "../recovery/recoveryContracts.js";
 import { buildBeliefRepairReport } from "../belief/beliefRepair.js";
+import { buildAlignmentReport } from "../alignment/alignmentVerifier.js";
 export class StandardTransactionStore {
     legacyStore;
     constructor(legacyStore) {
@@ -20,6 +21,7 @@ export class StandardTransactionStore {
         this.writeJson(txId, "recovery_report.json", emptyRecoveryReport(txId));
         this.writeJson(txId, "belief_report.json", emptyBeliefReport(txId));
         this.writeJson(txId, "verifier_report.json", emptyVerifierReport(txId));
+        this.writeJson(txId, "alignment_report.json", emptyAlignmentReport(txId));
     }
     writeRequest(txId, request) {
         this.writeJson(txId, "request.json", request);
@@ -89,6 +91,11 @@ export class StandardTransactionStore {
         const report = buildBeliefRepairReport(this.txDir(txId), txId);
         this.writeJson(txId, "belief_report.json", report);
         return report.clean_summary || null;
+    }
+    writeAlignment(txId) {
+        const report = buildAlignmentReport(this.txDir(txId), txId);
+        this.writeJson(txId, "alignment_report.json", report);
+        return report;
     }
     ensureJsonl(txId) {
         const file = path.join(this.txDir(txId), "effects.jsonl");
@@ -175,6 +182,47 @@ function emptyVerifierReport(txId) {
         belief_verification: {},
         residual_risks: [],
         note: "Gate 1 defines verifier report shape. Verifier execution starts in a later gate.",
+        updated_at: new Date().toISOString()
+    };
+}
+function emptyAlignmentReport(txId) {
+    return {
+        schema_version: "agenttx.alignment_report.v0.3",
+        tx_id: txId,
+        status: "unknown",
+        os_state: {
+            verifier_status: "not_run",
+            residual_effects: 0,
+            residual_warnings: [],
+            failed_checks: []
+        },
+        memory_state: {
+            memory_store_present: false,
+            retrievable_tainted_memory_ids: [],
+            invalidated_claim_present: false,
+            clean_memory_installed: false,
+            memory_clean: true
+        },
+        summary_consistency: {
+            checked: false,
+            consistent: true,
+            issues: []
+        },
+        continuation_risk: {
+            invalidated_claims: [],
+            source_command: null,
+            related_effect_targets: [],
+            warning_required: false,
+            warning: null
+        },
+        metrics: {
+            aos_aligned: false,
+            aos_score: 0,
+            memory_clean: true,
+            summary_consistent: true,
+            residual_count: 0
+        },
+        note: "Alignment verifier has not run yet.",
         updated_at: new Date().toISOString()
     };
 }

@@ -29,7 +29,7 @@ export function scanEffects(store: TransactionStore, input: ScanInput): { after:
     git_changed: gitChanged(input.before, after),
     file_effects: fileEffects,
     unexpected_effects: unexpectedEffects,
-    needs_recovery_context: commandExit.code !== 0 || unexpectedEffects.length > 0,
+    needs_recovery_context: (commandExit.code !== null && commandExit.code !== 0) || unexpectedEffects.length > 0,
     created_at: new Date().toISOString()
   };
 

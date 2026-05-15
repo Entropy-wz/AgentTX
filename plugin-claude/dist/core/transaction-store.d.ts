@@ -1,4 +1,4 @@
-import { Gate1TypedEffect, Gate4VerifierReport } from "./schema/artifactTypes.js";
+import { Gate1TypedEffect, Gate4VerifierReport, AlignmentReport } from "./schema/artifactTypes.js";
 import { TransactionStore as LegacyTransactionStore } from "../store/transactionStore.js";
 export declare class StandardTransactionStore {
     private readonly legacyStore;
@@ -12,6 +12,7 @@ export declare class StandardTransactionStore {
     writeRecovery(txId: string, recoveryContext: string | null): void;
     runRecovery(txId: string, gitRoot: string): Gate4VerifierReport;
     writeBeliefRepair(txId: string): string | null;
+    writeAlignment(txId: string): AlignmentReport;
     private ensureJsonl;
     private writeJson;
     private rebuildEffectGraph;

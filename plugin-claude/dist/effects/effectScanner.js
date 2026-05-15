@@ -18,7 +18,7 @@ export function scanEffects(store, input) {
         git_changed: gitChanged(input.before, after),
         file_effects: fileEffects,
         unexpected_effects: unexpectedEffects,
-        needs_recovery_context: commandExit.code !== 0 || unexpectedEffects.length > 0,
+        needs_recovery_context: (commandExit.code !== null && commandExit.code !== 0) || unexpectedEffects.length > 0,
         created_at: new Date().toISOString()
     };
     fs.writeFileSync(path.join(store.txDir(input.tx.tx_id), "effect_report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8");

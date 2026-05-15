@@ -124,11 +124,31 @@ export interface Gate1BeliefReport {
     };
     repair_actions?: Array<"invalidate_success_claim" | "inject_verified_state" | "require_replan_before_continuation">;
     clean_summary?: string;
+    memory_repair?: {
+        schema_version: "agenttx.memory_repair.v0.3";
+        store_path: string;
+        tainted_memory_ids: string[];
+        invalidated_memory_ids: string[];
+        clean_memory_ids: string[];
+        retrievable_tainted_memory_ids: string[];
+        memory_clean: boolean;
+        events: Array<{
+            event_id: string;
+            action: "record" | "invalidate" | "install_clean_summary" | "verify";
+            memory_id?: string;
+            target_memory_id?: string;
+            result: "ok" | "failed";
+            detail: string;
+            created_at: string;
+        }>;
+    };
     metrics?: {
         tcr_claim_detected: boolean;
         tcr_claim_invalidated: boolean;
         asr_clean_summary_generated: boolean;
         asr_requires_replan: boolean;
+        memory_clean?: boolean;
+        tainted_memory_retrievable?: boolean;
     };
     note?: string;
     updated_at: string;
@@ -141,6 +161,50 @@ export interface Gate1VerifierReport {
     effect_verification: Record<string, unknown>;
     belief_verification: Record<string, unknown>;
     residual_risks: string[];
+    note: string;
+    updated_at: string;
+}
+export interface AlignmentReport {
+    schema_version: "agenttx.alignment_report.v0.3";
+    tx_id: string;
+    status: "aligned" | "aligned_with_warnings" | "misaligned" | "unknown";
+    os_state: {
+        verifier_status: Gate4VerifierReport["status"] | "not_run" | "missing";
+        residual_effects: number;
+        residual_warnings: string[];
+        failed_checks: Array<{
+            contract_id: string;
+            effect_id: string;
+            target: string;
+            reason?: string;
+        }>;
+    };
+    memory_state: {
+        memory_store_present: boolean;
+        retrievable_tainted_memory_ids: string[];
+        invalidated_claim_present: boolean;
+        clean_memory_installed: boolean;
+        memory_clean: boolean;
+    };
+    summary_consistency: {
+        checked: boolean;
+        consistent: boolean;
+        issues: string[];
+    };
+    continuation_risk: {
+        invalidated_claims: string[];
+        source_command: string | null;
+        related_effect_targets: string[];
+        warning_required: boolean;
+        warning: string | null;
+    };
+    metrics: {
+        aos_aligned: boolean;
+        aos_score: number;
+        memory_clean: boolean;
+        summary_consistent: boolean;
+        residual_count: number;
+    };
     note: string;
     updated_at: string;
 }

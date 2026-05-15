@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { AgentMemoryStore } from "./memoryStore.js";
 export function buildBeliefRepairReport(txDir, txId) {
     const request = readJsonIfExists(path.join(txDir, "request.json"));
     const effectReport = readJsonIfExists(path.join(txDir, "effect_report.json"));
@@ -40,20 +41,47 @@ export function buildBeliefRepairReport(txDir, txId) {
     const cleanSummary = repairActions.length > 0
         ? buildCleanSummary(txId, request?.command ?? "<unknown>", taintedClaims[0].claim, verifiedState)
         : "";
+    const memoryRepair = cleanSummary
+        ? new AgentMemoryStore(txDir).repairFailedTransaction({
+            txId,
+            command: request?.command ?? "<unknown>",
+            invalidatedClaim: taintedClaims[0].claim,
+            cleanSummary,
+            effectIds: effects.map((effect) => effect.effect_id),
+            evidence: taintedClaims[0].evidence
+        })
+        : null;
+    const finalCleanSummary = memoryRepair
+        ? appendMemoryRepairSummary(cleanSummary, memoryRepair)
+        : cleanSummary;
     return {
         schema_version: "gate5.belief_report.v0.3",
         tx_id: txId,
         tainted_claims: taintedClaims,
         verified_state: verifiedState,
         repair_actions: repairActions,
-        clean_summary: cleanSummary,
+        clean_summary: finalCleanSummary,
+        memory_repair: memoryRepair
+            ? {
+                schema_version: memoryRepair.schema_version,
+                store_path: memoryRepair.store_path,
+                tainted_memory_ids: memoryRepair.tainted_memory_ids,
+                invalidated_memory_ids: memoryRepair.invalidated_memory_ids,
+                clean_memory_ids: memoryRepair.clean_memory_ids,
+                retrievable_tainted_memory_ids: memoryRepair.retrievable_tainted_memory_ids,
+                memory_clean: memoryRepair.memory_clean,
+                events: memoryRepair.events
+            }
+            : undefined,
         metrics: {
             tcr_claim_detected: taintedClaims.length > 0,
             tcr_claim_invalidated: taintedClaims.some((claim) => claim.status === "invalidated"),
-            asr_clean_summary_generated: cleanSummary.length > 0,
-            asr_requires_replan: repairActions.includes("require_replan_before_continuation")
+            asr_clean_summary_generated: finalCleanSummary.length > 0,
+            asr_requires_replan: repairActions.includes("require_replan_before_continuation"),
+            memory_clean: memoryRepair?.memory_clean ?? true,
+            tainted_memory_retrievable: (memoryRepair?.retrievable_tainted_memory_ids.length ?? 0) > 0
         },
-        note: "Gate 5 repairs only the current transaction context. It does not update long-term memory.",
+        note: "AgentTx repairs its own externalized memory store. It cannot edit opaque model-provider memory.",
         updated_at: new Date().toISOString()
     };
 }
@@ -87,6 +115,17 @@ function buildCleanSummary(txId, command, invalidatedClaim, verifiedState) {
         "- Do not assume the previous command succeeded.",
         "- Use the verified state above as the source of truth.",
         "- Replan before continuing."
+    ].join("\n");
+}
+function appendMemoryRepairSummary(cleanSummary, memoryRepair) {
+    return [
+        cleanSummary,
+        "",
+        "Memory repair:",
+        `- invalidated_memory_records: ${memoryRepair.invalidated_memory_ids.length}`,
+        `- clean_memory_records: ${memoryRepair.clean_memory_ids.length}`,
+        `- retrievable_tainted_memory_records: ${memoryRepair.retrievable_tainted_memory_ids.length}`,
+        "- Do not retrieve or reuse invalidated memory records from this transaction."
     ].join("\n");
 }
 function inferSuccessClaim(command) {

@@ -26,8 +26,8 @@ for (const relative of requiredFiles) {
 
 const manifest = readJson(path.join(pluginRoot, ".claude-plugin", "plugin.json"));
 assert(manifest.name === "agenttx-guard", "plugin.json name must be agenttx-guard");
-assert(manifest.hooks === "./hooks/hooks.json", "plugin.json must reference hooks/hooks.json");
 assert(manifest.skills === "./skills/", "plugin.json must reference skills/");
+assert(!("hooks" in manifest), "plugin.json should not duplicate standard hooks/hooks.json auto-loading");
 
 const hooks = readJson(path.join(pluginRoot, "hooks", "hooks.json"));
 const preCommand = hooks.hooks?.PreToolUse?.[0]?.hooks?.[0]?.command;
