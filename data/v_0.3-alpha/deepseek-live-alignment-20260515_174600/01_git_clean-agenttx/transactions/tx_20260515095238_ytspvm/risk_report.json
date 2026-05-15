@@ -1,0 +1,11 @@
+{
+  "score": 95,
+  "level": "CRITICAL",
+  "reasons": [
+    "destructive_git_operation",
+    "removes_untracked_files",
+    "critical_rule_match"
+  ],
+  "decision": "deny",
+  "policyMode": "normal"
+}

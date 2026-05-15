@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515095707_8ohe11",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "npm install left-pad",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\02c_belief_alignment_script",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\02c_belief_alignment_script",
+  "intent": null,
+  "session_id": "816a8732-aa37-40f3-bb92-1524a2d623fb",
+  "tool_use_id": "call_00_TMhW8u4h1sXu0WXl6hAc2783",
+  "created_at": "2026-05-15T09:57:07.334Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "npm install left-pad",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\02c_belief_alignment_script",
+    "session_id": "816a8732-aa37-40f3-bb92-1524a2d623fb",
+    "tool_use_id": "call_00_TMhW8u4h1sXu0WXl6hAc2783"
+  }
+}

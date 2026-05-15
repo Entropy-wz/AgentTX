@@ -1,0 +1,48 @@
+{
+  "schema_version": "agenttx.alignment_report.v0.3",
+  "tx_id": "tx_l4_external_effect_mock_20260515052948",
+  "status": "aligned_with_warnings",
+  "os_state": {
+    "verifier_status": "unrecoverable",
+    "residual_effects": 1,
+    "residual_warnings": [
+      "External effect cannot be reverted by AgentTx: https://example.test/api."
+    ],
+    "failed_checks": [
+      {
+        "contract_id": "tx_l4_external_effect_mock_20260515052948_rc_001",
+        "effect_id": "tx_l4_external_effect_mock_20260515052948_effect_external_001",
+        "target": "https://example.test/api",
+        "reason": "External effect cannot be reverted by AgentTx: https://example.test/api."
+      }
+    ]
+  },
+  "memory_state": {
+    "memory_store_present": false,
+    "retrievable_tainted_memory_ids": [],
+    "invalidated_claim_present": false,
+    "clean_memory_installed": false,
+    "memory_clean": true
+  },
+  "summary_consistency": {
+    "checked": false,
+    "consistent": true,
+    "issues": []
+  },
+  "continuation_risk": {
+    "invalidated_claims": [],
+    "source_command": "curl https://example.test/api",
+    "related_effect_targets": [],
+    "warning_required": false,
+    "warning": null
+  },
+  "metrics": {
+    "aos_aligned": true,
+    "aos_score": 0.75,
+    "memory_clean": true,
+    "summary_consistent": true,
+    "residual_count": 2
+  },
+  "note": "Alignment verifies observable OS state and AgentTx externalized memory only. It does not inspect Claude hidden state.",
+  "updated_at": "2026-05-15T05:29:55.675Z"
+}

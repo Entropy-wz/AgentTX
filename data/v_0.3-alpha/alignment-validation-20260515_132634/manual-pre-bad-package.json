@@ -1,0 +1,8 @@
+﻿{
+    "hookSpecificOutput":  {
+                               "hookEventName":  "PreToolUse",
+                               "permissionDecision":  "ask",
+                               "permissionDecisionReason":  "AgentTx ask: MEDIUM risk (sensitive_path_write). Transaction: tx_20260515053101_ngqvph",
+                               "additionalContext":  "AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515053101_ngqvph/"
+                           }
+}

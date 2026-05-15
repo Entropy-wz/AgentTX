@@ -1,0 +1,8 @@
+﻿{
+    "hookSpecificOutput":  {
+                               "hookEventName":  "PreToolUse",
+                               "permissionDecision":  "ask",
+                               "permissionDecisionReason":  "AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515053102_dai0f9",
+                               "additionalContext":  "AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515053102_dai0f9/\n\nAgentTx Memory Capsule:\n- Previous node -e \"require(\u0027fs\u0027).writeFileSync(\u0027package.json\u0027, \u0027{ broken json\u0027); process.exit(1)\" failed. Do not assume the package is installed. Restored: package.json. Re-check verified state before continuing.\n- Previous node -e \"require(\u0027fs\u0027).writeFileSync(\u0027package.json\u0027, \u0027{ broken json\u0027); process.exit(1)\" failed. Do not assume the package is installed. Re-check verified state before continuing.\n\nAgentTx Alignment Warning:\n- Previous command: node -e \"require(\u0027fs\u0027).writeFileSync(\u0027package.json\u0027, \u0027{ broken json\u0027); process.exit(1)\"\n- Invalidated claim: previous command completed successfully\n- Related state: package.json"
+                           }
+}

@@ -1,0 +1,272 @@
+2026-05-15T09:47:32.343Z [DEBUG] MDM settings load completed in 13ms
+2026-05-15T09:47:32.366Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-05-15T09:47:32.368Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\.claude\settings.json
+2026-05-15T09:47:32.369Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\.claude\settings.local.json
+2026-05-15T09:47:32.370Z [DEBUG] CA certs: Config fallback - globalEnv keys: , settingsEnv keys: none
+2026-05-15T09:47:32.372Z [DEBUG] [init] configureGlobalMTLS starting
+2026-05-15T09:47:32.374Z [DEBUG] [init] configureGlobalMTLS complete
+2026-05-15T09:47:32.374Z [DEBUG] [init] configureGlobalAgents starting
+2026-05-15T09:47:32.375Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:47:32.377Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:47:32.405Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:47:32.406Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:47:32.407Z [DEBUG] [init] configureGlobalAgents complete
+2026-05-15T09:47:32.411Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-05-15T09:47:32.413Z [DEBUG] Error log sink initialized
+2026-05-15T09:47:32.413Z [DEBUG] clearPluginCache: invalidating loadAllPlugins cache (preAction: --plugin-dir inline plugins)
+2026-05-15T09:47:32.471Z [DEBUG] [claudeai-mcp] Disabled: API-key auth precedence active
+2026-05-15T09:47:32.471Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-05-15T09:47:32.506Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-05-15T09:47:32.514Z [DEBUG] [STARTUP] Running setup()...
+2026-05-15T09:47:32.521Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\lenovo\.claude\skills, project=[]
+2026-05-15T09:47:32.522Z [DEBUG] Error log sink initialized
+2026-05-15T09:47:32.530Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-05-15T09:47:32.531Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\commands: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\commands'
+2026-05-15T09:47:32.532Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-05-15T09:47:32.533Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\agents: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\agents'
+2026-05-15T09:47:32.538Z [DEBUG] [STARTUP] setup() completed in 23ms
+2026-05-15T09:47:32.539Z [DEBUG] Cleared CA certificates cache
+2026-05-15T09:47:32.540Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T09:47:32.541Z [DEBUG] Cleared proxy agent cache
+2026-05-15T09:47:32.542Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:47:32.543Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:47:32.544Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:47:32.545Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:47:32.589Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-05-15T09:47:32.591Z [DEBUG] [ToolSearch:optimistic] disabled: ANTHROPIC_BASE_URL=https://cc-vibe.com is not a first-party Anthropic host. Set ENABLE_TOOL_SEARCH=true (or auto / auto:N) if your proxy forwards tool_reference blocks.
+2026-05-15T09:47:32.593Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\agents: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\agents'
+2026-05-15T09:47:32.596Z [DEBUG] Git remote URL: https://github.com/Entropy-wz/AgentTX.git
+2026-05-15T09:47:32.597Z [DEBUG] Parsed repository: github.com/Entropy-wz/AgentTX from URL: https://github.com/Entropy-wz/AgentTX.git
+2026-05-15T09:47:32.610Z [DEBUG] Loaded hooks from standard location for plugin agenttx-guard: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json
+2026-05-15T09:47:32.612Z [DEBUG] Skipping duplicate hooks file for plugin agenttx-guard: ./hooks/hooks.json (resolves to already-loaded file: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json)
+2026-05-15T09:47:32.612Z [ERROR] Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:47:32.614Z [DEBUG] Loaded inline plugin from path: agenttx-guard
+2026-05-15T09:47:32.615Z [DEBUG] Loaded 1 session-only plugins from --plugin-dir
+2026-05-15T09:47:32.616Z [DEBUG] Found 1 plugins (1 enabled, 0 disabled)
+2026-05-15T09:47:32.617Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T09:47:32.618Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:47:32.618Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-05-15T09:47:32.619Z [DEBUG] Checking plugin agenttx-guard: skillsPath=exists, skillsPaths=0 paths
+2026-05-15T09:47:32.620Z [DEBUG] Attempting to load skills from plugin agenttx-guard default skillsPath: D:\exp_all\AgentTX\plugin-claude\skills
+2026-05-15T09:47:32.621Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:47:32.622Z [DEBUG] Loading hooks from plugin: agenttx-guard
+2026-05-15T09:47:32.623Z [DEBUG] Registered 2 hooks from 1 plugins
+2026-05-15T09:47:32.624Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:47:32.625Z [DEBUG] Total plugin commands loaded: 0
+2026-05-15T09:47:32.626Z [DEBUG] Total plugin agents loaded: 0
+2026-05-15T09:47:32.637Z [DEBUG] Loaded 3 skills from plugin agenttx-guard default directory
+2026-05-15T09:47:32.638Z [DEBUG] Total plugin skills loaded: 3
+2026-05-15T09:47:32.638Z [DEBUG] getSkills returning: 0 skill dir commands, 3 plugin skills, 11 bundled skills, 0 builtin plugin skills
+2026-05-15T09:47:32.641Z [DEBUG] [STARTUP] Commands and agents loaded in 51ms
+2026-05-15T09:47:32.642Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-05-15T09:47:32.642Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-05-15T09:47:32.643Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-05-15T09:47:32.644Z [DEBUG] Starting background startup prefetches
+2026-05-15T09:47:32.645Z [DEBUG] [Bootstrap] Skipped: no usable OAuth or API key
+2026-05-15T09:47:32.646Z [DEBUG] [STARTUP] MCP configs resolved in 156ms (awaited at +174ms)
+2026-05-15T09:47:32.649Z [DEBUG] Cleared CA certificates cache
+2026-05-15T09:47:32.650Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T09:47:32.651Z [DEBUG] Cleared proxy agent cache
+2026-05-15T09:47:32.651Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:47:32.652Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:47:32.652Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:47:32.653Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:47:32.653Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-05-15T09:47:32.657Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:32.660Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-05-15T09:47:32.661Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-05-15T09:47:32.700Z [DEBUG] [auto-mode] hasAutoModeOptIn=false skipAutoPermissionPrompt: user=undefined local=undefined flag=undefined policy=undefined
+2026-05-15T09:47:32.701Z [DEBUG] [auto-mode] verifyAutoModeGateAccess: enabledState=opt-in disabledBySettings=false model=claude-opus-4-7[1m] modelSupported=true disableFastModeBreakerFires=false carouselAvailable=false canEnterAuto=true
+2026-05-15T09:47:32.701Z [DEBUG] [auto-mode] verifyAutoModeGateAccess setAvailable: true -> false
+2026-05-15T09:47:32.703Z [DEBUG] Total LSP servers loaded: 0
+2026-05-15T09:47:32.704Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-05-15T09:47:32.704Z [DEBUG] LSP manager initialized with 0 servers
+2026-05-15T09:47:32.705Z [DEBUG] LSP server manager initialized successfully
+2026-05-15T09:47:32.706Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-05-15T09:47:32.770Z [DEBUG] [ScheduledTasks] scheduler start() — enabled=false, hasTasks=false
+2026-05-15T09:47:32.775Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T09:47:32.783Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:47:32.786Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.bd9; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:47:32.787Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:32.789Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:32.790Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:32.791Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:33.040Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\skills: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\skills'
+2026-05-15T09:47:33.040Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\skills: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\skills'
+2026-05-15T09:47:33.041Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\output-styles'
+2026-05-15T09:47:33.042Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\output-styles'
+2026-05-15T09:47:33.043Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:47:33.043Z [DEBUG] Total plugin output styles loaded: 0
+2026-05-15T09:47:33.045Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:33.046Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:33.049Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:33.068Z [DEBUG] installPluginsForHeadless: starting
+2026-05-15T09:47:33.069Z [DEBUG] installPluginsForHeadless: no marketplaces declared
+2026-05-15T09:47:33.069Z [WARN] [3P telemetry] Event dropped (no event logger initialized): plugin_loaded
+2026-05-15T09:47:33.074Z [DEBUG] Ripgrep first use test: PASSED (mode=embedded, path=C:\Users\lenovo\.local\bin\claude.exe)
+2026-05-15T09:47:33.075Z [DEBUG] "rg error (signal=undefined, code=2, stderr: rg: C:\\Users\\lenovo\\.claude\\plugins\\cache: IO error for operation on C:\\Users\\lenovo\\.claude\\plugins\\cache: 系统找不到指定的文件。 (os error 2)\n), 0 results"
+2026-05-15T09:47:33.097Z [DEBUG] Watching for changes in setting files C:\Users\lenovo\.claude\settings.json, D:\exp_all\AgentTX\.claude\settings.json, D:\exp_all\AgentTX\.claude\settings.local.json...
+2026-05-15T09:47:33.201Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T09:47:33.202Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T09:47:33.202Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T09:47:33.203Z [DEBUG] Sending 12 skills via attachment (initial, 12 total sent)
+2026-05-15T09:47:33.204Z [DEBUG] Skill prompt: showing "agenttx-guard:recover" (userFacingName="recover")
+2026-05-15T09:47:33.204Z [DEBUG] Skill prompt: showing "agenttx-guard:explain-risk" (userFacingName="explain-risk")
+2026-05-15T09:47:33.205Z [DEBUG] Skill prompt: showing "agenttx-guard:status" (userFacingName="status")
+2026-05-15T09:47:33.205Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T09:47:33.213Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:33.215Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T09:47:33.216Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:47:33.219Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.bd9; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:47:33.220Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:33.221Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:33.221Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:33.222Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:33.223Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:33.223Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:33.225Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:33.339Z [ERROR] Failed to fetch MCP registry: Request failed with status code 403
+2026-05-15T09:47:33.552Z [ERROR] API error (attempt 1/11): 401 401 Invalid API key
+2026-05-15T09:47:34.109Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:34.109Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:34.110Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:34.111Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:34.112Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:34.207Z [ERROR] API error (attempt 1/11): 401 401 Invalid API key
+2026-05-15T09:47:34.293Z [ERROR] API error (attempt 2/11): 401 401 Invalid API key
+2026-05-15T09:47:34.741Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:34.742Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:34.743Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:34.744Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:34.746Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:34.943Z [ERROR] API error (attempt 2/11): 401 401 Invalid API key
+2026-05-15T09:47:35.344Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:35.344Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:35.345Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:35.346Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:35.347Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:35.586Z [ERROR] API error (attempt 3/11): 401 401 Invalid API key
+2026-05-15T09:47:36.068Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:36.069Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:36.070Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:36.070Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:36.071Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:36.245Z [ERROR] API error (attempt 3/11): 401 401 Invalid API key
+2026-05-15T09:47:37.617Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:37.618Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:37.619Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:37.620Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:37.621Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:37.792Z [ERROR] API error (attempt 4/11): 401 401 Invalid API key
+2026-05-15T09:47:38.639Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:38.640Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:38.641Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:38.641Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:38.643Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:38.811Z [ERROR] API error (attempt 4/11): 401 401 Invalid API key
+2026-05-15T09:47:42.531Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:42.532Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:42.534Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:42.535Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:42.537Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:42.718Z [ERROR] API error (attempt 5/11): 401 401 Invalid API key
+2026-05-15T09:47:43.446Z [ERROR] 1P event logging: 88 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:47:43.447Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 88 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 88 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:47:43.581Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:43.583Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:43.588Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:43.589Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:43.592Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:43.760Z [ERROR] API error (attempt 5/11): 401 401 Invalid API key
+2026-05-15T09:47:51.976Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:51.977Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:51.980Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:51.981Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:51.983Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:47:52.161Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:47:52.162Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:47:52.168Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:47:52.169Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:47:52.171Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:47:52.172Z [ERROR] API error (attempt 6/11): 401 401 Invalid API key
+2026-05-15T09:47:52.347Z [ERROR] API error (attempt 6/11): 401 401 Invalid API key
+2026-05-15T09:47:53.681Z [ERROR] 1P event logging: 7 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:47:53.683Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 7 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 7 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:48:09.946Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:48:09.947Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:48:09.948Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:48:09.949Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:48:09.952Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:48:10.115Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:48:10.116Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:48:10.118Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:48:10.119Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:48:10.121Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:48:10.150Z [ERROR] API error (attempt 7/11): 401 401 Invalid API key
+2026-05-15T09:48:10.303Z [ERROR] API error (attempt 7/11): 401 401 Invalid API key
+2026-05-15T09:48:20.156Z [ERROR] 1P event logging: 4 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:48:20.156Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 4 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 4 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:48:42.813Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:48:42.814Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:48:42.816Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:48:42.817Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:48:42.820Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:48:43.005Z [ERROR] API error (attempt 8/11): 401 401 Invalid API key
+2026-05-15T09:48:47.608Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:48:47.609Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:48:47.611Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:48:47.612Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:48:47.614Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:48:47.796Z [ERROR] API error (attempt 8/11): 401 401 Invalid API key
+2026-05-15T09:48:53.034Z [ERROR] 1P event logging: 4 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:48:53.036Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 4 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 4 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:49:19.049Z [WARN] Official marketplace GCS fetch failed: timeout of 10000ms exceeded
+2026-05-15T09:49:19.050Z [WARN] Official marketplace GCS failed; falling back to git
+2026-05-15T09:49:19.106Z [DEBUG] SSH config check: code=127 configured=false
+2026-05-15T09:49:19.168Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:49:19.169Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:49:19.173Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:49:19.175Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:49:19.178Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:49:19.217Z [DEBUG] git pull: cwd=C:\Users\lenovo\.claude\plugins\marketplaces\claude-plugins-official ref=default
+2026-05-15T09:49:19.352Z [ERROR] API error (attempt 9/11): 401 401 Invalid API key
+2026-05-15T09:49:20.530Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:49:20.531Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:49:20.533Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:49:20.536Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:49:20.538Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:49:20.699Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-05-15T09:49:20.701Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-05-15T09:49:20.705Z [ERROR] API error (attempt 9/11): 401 401 Invalid API key
+2026-05-15T09:49:29.339Z [ERROR] 1P event logging: 6 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:49:29.340Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 6 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 6 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:49:56.754Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:49:56.756Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:49:56.759Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:49:56.761Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:49:56.763Z [DEBUG] [API REQUEST] /v1/messages source=generate_session_title
+2026-05-15T09:49:56.830Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:49:56.831Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:49:56.833Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:49:56.834Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:49:56.836Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:49:56.944Z [ERROR] API error (attempt 10/11): 401 401 Invalid API key
+2026-05-15T09:49:58.012Z [ERROR] API error (attempt 10/11): 401 401 Invalid API key
+2026-05-15T09:50:06.772Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Dropped 4 events: max attempts (8) reached","originalLine":"445","originalColumn":"1421","line":"445","column":"1421","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Dropped 4 events: max attempts (8) reached\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1421)\n    at export (B:/~BUN/root/src/entrypoints/cli.js:445:930)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117652)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117592)\n    at new Promise (native:1:11)\n    at PE9 (B:/~BUN/root/src/entrypoints/cli.js:440:117569)\n    at q (B:/~BUN/root/src/entrypoints/cli.js:441:19022)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:441:18295)\n    at new Promise (native:1:11)\n    at _flushOneBatch (B:/~BUN/root/src/entrypoints/cli.js:441:18255)","name":"Error"}
+2026-05-15T09:50:33.677Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:50:33.678Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:50:33.680Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:50:33.682Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:50:33.684Z [DEBUG] [API REQUEST] /v1/messages source=sdk
+2026-05-15T09:50:33.856Z [ERROR] API error (attempt 11/11): 401 401 Invalid API key
+2026-05-15T09:50:33.860Z [ERROR] Error in API request: 401 Invalid API key
+2026-05-15T09:50:33.862Z [ERROR] "Error: Error: 401 Invalid API key\n    at generate (B:/~BUN/root/src/entrypoints/cli.js:11:59749)\n    at makeRequest (B:/~BUN/root/src/entrypoints/cli.js:51:7694)\n    at processTicksAndRejections (native:7:39)"
+2026-05-15T09:50:33.865Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:50:33.870Z [DEBUG] LSP server manager shut down successfully
+2026-05-15T09:50:33.872Z [ERROR] Failed to check metrics opt-out status: Auth error: No API key available
+2026-05-15T09:50:33.873Z [DEBUG] Metrics export disabled by organization setting
+2026-05-15T09:50:33.874Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T09:50:33.875Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T09:50:33.876Z [DEBUG] BigQuery metrics exporter shutdown complete
+2026-05-15T09:50:34.075Z [ERROR] 1P event logging: 10 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:50:34.075Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 10 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 10 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}

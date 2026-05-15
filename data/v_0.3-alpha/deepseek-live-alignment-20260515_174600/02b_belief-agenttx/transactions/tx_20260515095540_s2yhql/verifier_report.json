@@ -1,0 +1,11 @@
+{
+  "schema_version": "gate1.verifier_report.v0.3",
+  "tx_id": "tx_20260515095540_s2yhql",
+  "result": "not_run",
+  "state_verification": {},
+  "effect_verification": {},
+  "belief_verification": {},
+  "residual_risks": [],
+  "note": "Gate 1 defines verifier report shape. Verifier execution starts in a later gate.",
+  "updated_at": "2026-05-15T09:55:40.186Z"
+}

@@ -1,0 +1,7 @@
+﻿{
+    "hookSpecificOutput":  {
+                               "hookEventName":  "PreToolUse",
+                               "permissionDecision":  "allow",
+                               "permissionDecisionReason":  "AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515053102_ipn45j"
+                           }
+}

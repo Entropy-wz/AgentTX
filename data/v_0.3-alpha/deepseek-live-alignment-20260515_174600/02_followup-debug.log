@@ -1,0 +1,215 @@
+2026-05-15T09:53:40.392Z [DEBUG] MDM settings load completed in 16ms
+2026-05-15T09:53:40.412Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-05-15T09:53:40.414Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-live-alignment-20260515_174600\workspaces\02_belief_alignment\.claude\settings.json
+2026-05-15T09:53:40.415Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-live-alignment-20260515_174600\workspaces\02_belief_alignment\.claude\settings.local.json
+2026-05-15T09:53:40.416Z [DEBUG] CA certs: Config fallback - globalEnv keys: , settingsEnv keys: none
+2026-05-15T09:53:40.418Z [DEBUG] [init] configureGlobalMTLS starting
+2026-05-15T09:53:40.419Z [DEBUG] [init] configureGlobalMTLS complete
+2026-05-15T09:53:40.420Z [DEBUG] [init] configureGlobalAgents starting
+2026-05-15T09:53:40.420Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:53:40.421Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:53:40.444Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:53:40.445Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:53:40.446Z [DEBUG] [init] configureGlobalAgents complete
+2026-05-15T09:53:40.449Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-05-15T09:53:40.451Z [DEBUG] Error log sink initialized
+2026-05-15T09:53:40.451Z [DEBUG] clearPluginCache: invalidating loadAllPlugins cache (preAction: --plugin-dir inline plugins)
+2026-05-15T09:53:40.496Z [DEBUG] [claudeai-mcp] Disabled: API-key auth precedence active
+2026-05-15T09:53:40.497Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-05-15T09:53:40.527Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-05-15T09:53:40.533Z [DEBUG] [STARTUP] Running setup()...
+2026-05-15T09:53:40.538Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\lenovo\.claude\skills, project=[]
+2026-05-15T09:53:40.539Z [DEBUG] Error log sink initialized
+2026-05-15T09:53:40.545Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-05-15T09:53:40.545Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\commands: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\commands'
+2026-05-15T09:53:40.546Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-05-15T09:53:40.546Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\agents: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\agents'
+2026-05-15T09:53:40.547Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\agents: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\agents'
+2026-05-15T09:53:40.550Z [DEBUG] [STARTUP] setup() completed in 16ms
+2026-05-15T09:53:40.550Z [DEBUG] Cleared CA certificates cache
+2026-05-15T09:53:40.550Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T09:53:40.551Z [DEBUG] Cleared proxy agent cache
+2026-05-15T09:53:40.551Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:53:40.551Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:53:40.552Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:53:40.552Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:53:40.581Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-05-15T09:53:40.582Z [DEBUG] [ToolSearch:optimistic] disabled: ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic is not a first-party Anthropic host. Set ENABLE_TOOL_SEARCH=true (or auto / auto:N) if your proxy forwards tool_reference blocks.
+2026-05-15T09:53:40.598Z [DEBUG] Loaded hooks from standard location for plugin agenttx-guard: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json
+2026-05-15T09:53:40.601Z [DEBUG] Skipping duplicate hooks file for plugin agenttx-guard: ./hooks/hooks.json (resolves to already-loaded file: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json)
+2026-05-15T09:53:40.601Z [ERROR] Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:53:40.603Z [DEBUG] Loaded inline plugin from path: agenttx-guard
+2026-05-15T09:53:40.604Z [DEBUG] Loaded 1 session-only plugins from --plugin-dir
+2026-05-15T09:53:40.605Z [DEBUG] Found 1 plugins (1 enabled, 0 disabled)
+2026-05-15T09:53:40.606Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T09:53:40.606Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:53:40.607Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-05-15T09:53:40.607Z [DEBUG] Checking plugin agenttx-guard: skillsPath=exists, skillsPaths=0 paths
+2026-05-15T09:53:40.608Z [DEBUG] Attempting to load skills from plugin agenttx-guard default skillsPath: D:\exp_all\AgentTX\plugin-claude\skills
+2026-05-15T09:53:40.608Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:53:40.609Z [DEBUG] Loading hooks from plugin: agenttx-guard
+2026-05-15T09:53:40.609Z [DEBUG] Registered 2 hooks from 1 plugins
+2026-05-15T09:53:40.610Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:53:40.610Z [DEBUG] Total plugin commands loaded: 0
+2026-05-15T09:53:40.611Z [DEBUG] Total plugin agents loaded: 0
+2026-05-15T09:53:40.617Z [DEBUG] Loaded 3 skills from plugin agenttx-guard default directory
+2026-05-15T09:53:40.617Z [DEBUG] Total plugin skills loaded: 3
+2026-05-15T09:53:40.618Z [DEBUG] getSkills returning: 0 skill dir commands, 3 plugin skills, 11 bundled skills, 0 builtin plugin skills
+2026-05-15T09:53:40.620Z [DEBUG] [STARTUP] Commands and agents loaded in 38ms
+2026-05-15T09:53:40.621Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-05-15T09:53:40.621Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-05-15T09:53:40.622Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-05-15T09:53:40.622Z [DEBUG] Starting background startup prefetches
+2026-05-15T09:53:40.623Z [DEBUG] [Bootstrap] Skipped: no usable OAuth or API key
+2026-05-15T09:53:40.623Z [DEBUG] [STARTUP] MCP configs resolved in 114ms (awaited at +125ms)
+2026-05-15T09:53:40.626Z [DEBUG] Cleared CA certificates cache
+2026-05-15T09:53:40.627Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T09:53:40.627Z [DEBUG] Cleared proxy agent cache
+2026-05-15T09:53:40.628Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T09:53:40.628Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T09:53:40.629Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T09:53:40.629Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T09:53:40.630Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-05-15T09:53:40.633Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:40.635Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-05-15T09:53:40.636Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-05-15T09:53:40.665Z [DEBUG] [auto-mode] hasAutoModeOptIn=false skipAutoPermissionPrompt: user=undefined local=undefined flag=undefined policy=undefined
+2026-05-15T09:53:40.666Z [DEBUG] [auto-mode] verifyAutoModeGateAccess: enabledState=opt-in disabledBySettings=false model=claude-opus-4-7[1m] modelSupported=true disableFastModeBreakerFires=false carouselAvailable=false canEnterAuto=true
+2026-05-15T09:53:40.667Z [DEBUG] [auto-mode] verifyAutoModeGateAccess setAvailable: true -> false
+2026-05-15T09:53:40.668Z [DEBUG] Total LSP servers loaded: 0
+2026-05-15T09:53:40.668Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-05-15T09:53:40.669Z [DEBUG] LSP manager initialized with 0 servers
+2026-05-15T09:53:40.669Z [DEBUG] LSP server manager initialized successfully
+2026-05-15T09:53:40.670Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-05-15T09:53:40.714Z [DEBUG] [ScheduledTasks] scheduler start() — enabled=false, hasTasks=false
+2026-05-15T09:53:40.717Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T09:53:40.725Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:53:40.727Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.4d0; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:53:40.729Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:40.730Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:40.731Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:53:40.731Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:53:40.895Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\skills: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\skills'
+2026-05-15T09:53:40.896Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\skills: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\skills'
+2026-05-15T09:53:40.897Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\output-styles'
+2026-05-15T09:53:40.898Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\output-styles'
+2026-05-15T09:53:40.898Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T09:53:40.899Z [DEBUG] Total plugin output styles loaded: 0
+2026-05-15T09:53:40.901Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:53:40.903Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:40.905Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=generate_session_title
+2026-05-15T09:53:40.926Z [WARN] [3P telemetry] Event dropped (no event logger initialized): plugin_loaded
+2026-05-15T09:53:40.927Z [DEBUG] installPluginsForHeadless: starting
+2026-05-15T09:53:40.927Z [DEBUG] installPluginsForHeadless: no marketplaces declared
+2026-05-15T09:53:40.931Z [DEBUG] Git remote URL: null
+2026-05-15T09:53:40.931Z [DEBUG] No git remote URL found
+2026-05-15T09:53:40.933Z [DEBUG] Ripgrep first use test: PASSED (mode=embedded, path=C:\Users\lenovo\.local\bin\claude.exe)
+2026-05-15T09:53:40.934Z [DEBUG] "rg error (signal=undefined, code=2, stderr: rg: C:\\Users\\lenovo\\.claude\\plugins\\cache: IO error for operation on C:\\Users\\lenovo\\.claude\\plugins\\cache: 系统找不到指定的文件。 (os error 2)\n), 0 results"
+2026-05-15T09:53:40.954Z [DEBUG] Watching for changes in setting files C:\Users\lenovo\.claude\settings.json...
+2026-05-15T09:53:40.990Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T09:53:40.991Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T09:53:40.991Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T09:53:40.992Z [DEBUG] Sending 12 skills via attachment (initial, 12 total sent)
+2026-05-15T09:53:40.993Z [DEBUG] Skill prompt: showing "agenttx-guard:explain-risk" (userFacingName="explain-risk")
+2026-05-15T09:53:40.994Z [DEBUG] Skill prompt: showing "agenttx-guard:status" (userFacingName="status")
+2026-05-15T09:53:40.994Z [DEBUG] Skill prompt: showing "agenttx-guard:recover" (userFacingName="recover")
+2026-05-15T09:53:40.995Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T09:53:41.004Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:41.006Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T09:53:41.007Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:53:41.010Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.4d0; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:53:41.010Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:41.011Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:41.011Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:53:41.012Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:53:41.013Z [DEBUG] Stream started - received first chunk
+2026-05-15T09:53:41.014Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:53:41.015Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:41.016Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T09:53:41.265Z [ERROR] Failed to fetch MCP registry: Request failed with status code 403
+2026-05-15T09:53:41.316Z [DEBUG] Stream started - received first chunk
+2026-05-15T09:53:47.272Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095346_9huli3","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095346_9huli3/"}}
+2026-05-15T09:53:47.273Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095346_9huli3","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095346_9huli3/"}}
+2026-05-15T09:53:47.273Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T09:53:47.306Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T09:53:47.307Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095346_9huli3\",\"additionalContext\":\"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095346_9huli3/\"}}\n"
+2026-05-15T09:53:47.307Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") provided additionalContext (87 chars)
+2026-05-15T09:53:47.308Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: ask (reason: AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095346_9huli3)
+2026-05-15T09:53:47.308Z [DEBUG] Hook result has permissionBehavior=ask
+2026-05-15T09:53:47.313Z [DEBUG] Bash tool permission denied
+2026-05-15T09:53:47.315Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T09:53:47.316Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T09:53:47.316Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T09:53:47.317Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T09:53:47.318Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T09:53:47.319Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:53:47.320Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.4d0; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:53:47.321Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:47.321Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:47.322Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:53:47.322Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:53:47.327Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:53:47.328Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:47.329Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T09:53:47.489Z [DEBUG] Stream started - received first chunk
+2026-05-15T09:53:51.344Z [ERROR] 1P event logging: 94 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:53:51.345Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 94 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 94 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:53:51.896Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095351_t38o42","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095351_t38o42/"}}
+2026-05-15T09:53:51.897Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095351_t38o42","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095351_t38o42/"}}
+2026-05-15T09:53:51.898Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T09:53:51.924Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T09:53:51.924Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095351_t38o42\",\"additionalContext\":\"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095351_t38o42/\"}}\n"
+2026-05-15T09:53:51.925Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") provided additionalContext (87 chars)
+2026-05-15T09:53:51.926Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: ask (reason: AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095351_t38o42)
+2026-05-15T09:53:51.926Z [DEBUG] Hook result has permissionBehavior=ask
+2026-05-15T09:53:51.930Z [DEBUG] Bash tool permission denied
+2026-05-15T09:53:51.933Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T09:53:51.934Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T09:53:51.935Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T09:53:51.936Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T09:53:51.938Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T09:53:51.939Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:53:51.941Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.4d0; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:53:51.942Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:51.943Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:51.944Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:53:51.944Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:53:51.951Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:53:51.952Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:51.955Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T09:53:52.160Z [DEBUG] Stream started - received first chunk
+2026-05-15T09:53:56.781Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095356_2iglx6","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095356_2iglx6/"}}
+2026-05-15T09:53:56.782Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095356_2iglx6","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095356_2iglx6/"}}
+2026-05-15T09:53:56.783Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T09:53:56.825Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T09:53:56.826Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095356_2iglx6\",\"additionalContext\":\"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515095356_2iglx6/\"}}\n"
+2026-05-15T09:53:56.826Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") provided additionalContext (87 chars)
+2026-05-15T09:53:56.827Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: ask (reason: AgentTx ask: MEDIUM risk (package_manager_mutation). Transaction: tx_20260515095356_2iglx6)
+2026-05-15T09:53:56.828Z [DEBUG] Hook result has permissionBehavior=ask
+2026-05-15T09:53:56.831Z [DEBUG] Bash tool permission denied
+2026-05-15T09:53:56.835Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T09:53:56.836Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T09:53:56.836Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T09:53:56.837Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T09:53:56.839Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T09:53:56.840Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T09:53:56.842Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.4d0; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T09:53:56.844Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:56.845Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:56.846Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T09:53:56.847Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T09:53:56.849Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T09:53:56.856Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:53:56.859Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T09:53:57.064Z [DEBUG] Stream started - received first chunk
+2026-05-15T09:54:01.563Z [ERROR] 1P event logging: 42 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:54:01.563Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 42 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 42 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T09:54:06.651Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T09:54:06.657Z [DEBUG] LSP server manager shut down successfully
+2026-05-15T09:54:06.659Z [ERROR] Failed to check metrics opt-out status: Auth error: No API key available
+2026-05-15T09:54:06.659Z [DEBUG] Metrics export disabled by organization setting
+2026-05-15T09:54:06.660Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T09:54:06.661Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T09:54:06.662Z [DEBUG] BigQuery metrics exporter shutdown complete
+2026-05-15T09:54:06.876Z [ERROR] 1P event logging: 10 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T09:54:06.877Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 10 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 10 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}

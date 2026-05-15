@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515095238_ytspvm",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "git reset --hard && git clean -fdx",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\01_git_clean_block",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\01_git_clean_block",
+  "intent": null,
+  "session_id": "8175a8b1-cf25-4565-a81a-237fb7024166",
+  "tool_use_id": "call_00_O0BoQRA1Bsweg5XIT24T2566",
+  "created_at": "2026-05-15T09:52:38.600Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "git reset --hard && git clean -fdx",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-live-alignment-20260515_174600\\workspaces\\01_git_clean_block",
+    "session_id": "8175a8b1-cf25-4565-a81a-237fb7024166",
+    "tool_use_id": "call_00_O0BoQRA1Bsweg5XIT24T2566"
+  }
+}

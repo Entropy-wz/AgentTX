@@ -1,0 +1,9 @@
+{
+  "score": 25,
+  "level": "MEDIUM",
+  "reasons": [
+    "package_manager_mutation"
+  ],
+  "decision": "ask",
+  "policyMode": "normal"
+}

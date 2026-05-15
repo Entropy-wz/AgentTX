@@ -1,0 +1,43 @@
+{
+  "schema_version": "agenttx.alignment_report.v0.3",
+  "tx_id": "tx_20260515053101_ngqvph",
+  "status": "aligned",
+  "os_state": {
+    "verifier_status": "recovered",
+    "residual_effects": 0,
+    "residual_warnings": [],
+    "failed_checks": []
+  },
+  "memory_state": {
+    "memory_store_present": true,
+    "retrievable_tainted_memory_ids": [],
+    "invalidated_claim_present": true,
+    "clean_memory_installed": true,
+    "memory_clean": true
+  },
+  "summary_consistency": {
+    "checked": true,
+    "consistent": true,
+    "issues": []
+  },
+  "continuation_risk": {
+    "invalidated_claims": [
+      "previous command completed successfully"
+    ],
+    "source_command": "node -e \"require('fs').writeFileSync('package.json', '{ broken json'); process.exit(1)\"",
+    "related_effect_targets": [
+      "package.json"
+    ],
+    "warning_required": true,
+    "warning": "AgentTx Alignment Warning:\n- Previous command: node -e \"require('fs').writeFileSync('package.json', '{ broken json'); process.exit(1)\"\n- Invalidated claim: previous command completed successfully\n- Related state: package.json"
+  },
+  "metrics": {
+    "aos_aligned": true,
+    "aos_score": 1,
+    "memory_clean": true,
+    "summary_consistent": true,
+    "residual_count": 0
+  },
+  "note": "Alignment verifies observable OS state and AgentTx externalized memory only. It does not inspect Claude hidden state.",
+  "updated_at": "2026-05-15T05:31:01.858Z"
+}

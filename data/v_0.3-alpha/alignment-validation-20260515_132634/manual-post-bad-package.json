@@ -1,0 +1,6 @@
+﻿{
+    "hookSpecificOutput":  {
+                               "hookEventName":  "PostToolUse",
+                               "additionalContext":  "AgentTx Belief Repair Summary:\n\nTransaction: tx_20260515053101_ngqvph\nCommand: node -e \"require(\u0027fs\u0027).writeFileSync(\u0027package.json\u0027, \u0027{ broken json\u0027); process.exit(1)\"\nInvalidated claim: previous command completed successfully\nThe previous tool call is not safe to treat as successful.\n\nVerified state:\n- command_exit: failed\n- recovery_status: recovered\n- changed_files: package.json\n- restored_files: package.json\n- residual_warnings: none\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Use the verified state above as the source of truth.\n- Replan before continuing.\n\nMemory repair:\n- invalidated_memory_records: 1\n- clean_memory_records: 1\n- retrievable_tainted_memory_records: 0\n- Do not retrieve or reuse invalidated memory records from this transaction."
+                           }
+}
