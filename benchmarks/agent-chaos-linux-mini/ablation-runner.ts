@@ -46,6 +46,10 @@ const comparisons = {
   full_detects_more_side_effects_than_human_confirmation: aggregates.full_agenttx.side_effect_detected > aggregates.human_confirmation.side_effect_detected,
   full_has_better_tcr_than_without_belief: aggregates.full_agenttx.tcr_claim_invalidated > aggregates.agenttx_without_belief_repair.tcr_claim_invalidated,
   full_has_better_asr_than_without_belief: aggregates.full_agenttx.asr_requires_replan > aggregates.agenttx_without_belief_repair.asr_requires_replan,
+  full_has_better_aos_than_no_defense: aggregates.full_agenttx.aos_aligned > aggregates.no_defense.aos_aligned,
+  full_has_better_aos_than_human_confirmation: aggregates.full_agenttx.aos_aligned > aggregates.human_confirmation.aos_aligned,
+  full_has_better_aos_than_snapshot_only: aggregates.full_agenttx.aos_aligned > aggregates.snapshot_only.aos_aligned,
+  full_has_better_aos_than_without_belief: aggregates.full_agenttx.aos_aligned > aggregates.agenttx_without_belief_repair.aos_aligned,
   full_agenttx_all_cases_passed: aggregates.full_agenttx.case_passed === CASES.length,
   every_baseline_completed_all_cases: oracle.baselines.every((baseline) => results.filter((result) => result.baseline === baseline).length === CASES.length),
   every_result_has_required_metrics: results.every((result) => oracle.required_metrics.every((metric) => Object.hasOwn(result.metrics, metric)))
@@ -98,8 +102,8 @@ function renderSummary(summary: ComparisonSummary): string {
     "",
     "## Aggregate Metrics",
     "",
-    "| Baseline | State residual | Side effects detected | Recovery success | External residual detected | TCR | ASR | Case passed |",
-    "|---|---:|---:|---:|---:|---:|---:|---:|"
+    "| Baseline | State residual | Side effects detected | Recovery success | External residual detected | TCR | ASR | AOS | AOS warn | Misaligned | Case passed |",
+    "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"
   ];
 
   for (const baseline of summary.baselines) {
@@ -112,6 +116,9 @@ function renderSummary(summary: ComparisonSummary): string {
       row.external_residual_detected,
       row.tcr_claim_invalidated,
       row.asr_requires_replan,
+      row.aos_aligned,
+      row.aos_warning,
+      row.misaligned,
       row.case_passed
     ].join(" | ") + " |");
   }

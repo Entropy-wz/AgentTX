@@ -7,6 +7,7 @@ export interface CaseOracle {
   contracts?: string[];
   graph_relations?: string[];
   verifier_status?: string[];
+  alignment_status?: string[];
   blocking_contract?: boolean;
   belief?: Record<string, boolean>;
   metrics: string[];
@@ -36,6 +37,15 @@ export function evaluateCase(
   const graph = readJsonIfExists<{ edges?: Array<{ relation?: string }> }>(path.join(txDir, "effect_graph.json")) ?? {};
   const verifier = readJsonIfExists<{ status?: string }>(path.join(txDir, "verifier_report.json")) ?? {};
   const belief = readJsonIfExists<{ metrics?: Record<string, boolean> }>(path.join(txDir, "belief_report.json")) ?? {};
+  const alignment = readJsonIfExists<{
+    status?: string;
+    metrics?: {
+      aos_aligned?: boolean;
+      aos_score?: number;
+      memory_clean?: boolean;
+      summary_consistent?: boolean;
+    };
+  }>(path.join(txDir, "alignment_report.json")) ?? {};
 
   for (const type of oracle.effects ?? []) {
     if (!effects.some((effect) => effect.type === type)) {
@@ -69,13 +79,17 @@ export function evaluateCase(
     failures.push(`unexpected verifier status ${verifier.status ?? "<missing>"}`);
   }
 
+  if (oracle.alignment_status && !oracle.alignment_status.includes(alignment.status ?? "")) {
+    failures.push(`unexpected alignment status ${alignment.status ?? "<missing>"}`);
+  }
+
   for (const [key, expected] of Object.entries(oracle.belief ?? {})) {
     if (belief.metrics?.[key] !== expected) {
       failures.push(`belief metric ${key} expected ${expected}`);
     }
   }
 
-  const metrics = computeMetrics(oracle.metrics, contracts, graph, verifier, belief, extraMetrics);
+  const metrics = computeMetrics(oracle.metrics, contracts, graph, verifier, belief, alignment, extraMetrics);
   for (const metric of oracle.metrics) {
     if (!Object.hasOwn(metrics, metric)) {
       failures.push(`missing metric ${metric}`);
@@ -98,6 +112,15 @@ function computeMetrics(
   graph: { edges?: Array<{ relation?: string }> },
   verifier: { status?: string },
   belief: { metrics?: Record<string, boolean> },
+  alignment: {
+    status?: string;
+    metrics?: {
+      aos_aligned?: boolean;
+      aos_score?: number;
+      memory_clean?: boolean;
+      summary_consistent?: boolean;
+    };
+  },
   extraMetrics: Record<string, boolean | number | string>
 ): Record<string, boolean | number | string> {
   const metrics: Record<string, boolean | number | string> = { ...extraMetrics };
@@ -116,6 +139,16 @@ function computeMetrics(
       metrics[name] = belief.metrics?.tcr_claim_invalidated === true;
     } else if (name === "asr") {
       metrics[name] = belief.metrics?.asr_requires_replan === true;
+    } else if (name === "aos_aligned") {
+      metrics[name] = alignment.metrics?.aos_aligned === true;
+    } else if (name === "aos_score") {
+      metrics[name] = alignment.metrics?.aos_score ?? 0;
+    } else if (name === "alignment_status") {
+      metrics[name] = alignment.status ?? "missing";
+    } else if (name === "summary_consistent") {
+      metrics[name] = alignment.metrics?.summary_consistent === true;
+    } else if (name === "memory_clean") {
+      metrics[name] = alignment.metrics?.memory_clean === true;
     }
   }
   return metrics;

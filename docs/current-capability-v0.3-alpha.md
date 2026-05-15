@@ -25,6 +25,7 @@ v0.3-alpha is a functionality validation phase. It is not a paper-writing phase 
 - Externalized AgentTx memory repair for failed-command belief pollution.
 - Memory Capsule injection before relevant future Claude Code Bash commands.
 - Belief-OS alignment report over observable workspace state and AgentTx externalized memory.
+- AOS metric for alignment-aware benchmark comparison.
 - Six-case mini benchmark.
 - Baseline, ablation, and metric calculation for the mini benchmark.
 
@@ -123,6 +124,13 @@ Alignment behavior:
 - `aligned_with_warnings` preserves residual effects and partial recovery warnings.
 - `misaligned` means memory pollution or verifier/summary contradiction remains.
 - `unknown` means required evidence is missing.
+
+AOS metric:
+
+- `AOS` is the fraction of benchmark cases with observable Agent-OS consistency.
+- `AOS_WARN` tracks aligned cases that still carry residual warnings.
+- `MISALIGN` tracks cases with missing or inconsistent alignment.
+- AOS is a v0.3 engineering metric, not the final paper metric.
 
 ## Mini Benchmark Coverage
 

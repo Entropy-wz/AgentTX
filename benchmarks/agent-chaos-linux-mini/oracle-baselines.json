@@ -22,6 +22,9 @@
     "external_residual_detected",
     "tcr_claim_invalidated",
     "asr_requires_replan",
+    "aos_aligned",
+    "aos_warning",
+    "misaligned",
     "case_passed"
   ],
   "comparisons": [

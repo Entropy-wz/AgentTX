@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 import { buildEffectGraph } from "../../src/effects/effectGraphBuilder.js";
 import { buildBeliefRepairReport } from "../../src/belief/beliefRepair.js";
 import { runRecoveryContracts } from "../../src/recovery/recoveryContracts.js";
+import { buildAlignmentReport } from "../../src/alignment/alignmentVerifier.js";
 import { CaseOracle, evaluateCase } from "./metrics.js";
 
 interface OracleFile {
@@ -174,6 +175,7 @@ function runExternalMockCase() {
     updated_at: now
   });
   writeJson(path.join(txDir, "belief_report.json"), buildBeliefRepairReport(txDir, txId));
+  writeJson(path.join(txDir, "alignment_report.json"), buildAlignmentReport(txDir, txId));
   copyTransaction(caseId, txDir);
   const result = evaluateCase(caseId, txId, txDir, oracle.required_artifacts, oracle.cases[caseId]);
   fs.writeFileSync(path.join(runDir, caseId, "result.json"), `${JSON.stringify(result, null, 2)}\n`, "utf8");

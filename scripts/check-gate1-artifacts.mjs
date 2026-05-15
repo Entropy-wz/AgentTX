@@ -61,7 +61,8 @@ function assertBaseFiles(dir) {
     "recovery_contracts.json",
     "recovery_report.json",
     "belief_report.json",
-    "verifier_report.json"
+    "verifier_report.json",
+    "alignment_report.json"
   ]) {
     assert(fs.existsSync(path.join(dir, name)), `${name} should exist in ${dir}`);
   }
@@ -72,6 +73,7 @@ function assertBaseFiles(dir) {
   readJson(path.join(dir, "recovery_report.json"));
   readJson(path.join(dir, "belief_report.json"));
   readJson(path.join(dir, "verifier_report.json"));
+  readJson(path.join(dir, "alignment_report.json"));
   readJsonl(path.join(dir, "effects.jsonl"));
 }
 

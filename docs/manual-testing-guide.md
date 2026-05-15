@@ -238,6 +238,21 @@ Expected result:
 - conflicting summary/verifier data reports `misaligned`;
 - related follow-up command receives `AgentTx Alignment Warning`.
 
+## AOS Metrics
+
+Run:
+
+```bash
+npm run check:gate8
+npm run check:aos-metrics
+```
+
+Expected result:
+
+- `benchmarks/results/run_<timestamp>/metrics.json` includes `AOS`, `AOS_WARN`, and `MISALIGN`.
+- Full AgentTx has higher AOS than no defense, human confirmation, snapshot-only, and AgentTx without belief repair.
+- The external mock case is not counted as fully `aligned`.
+
 ## Automated v0.3-alpha Check
 
 Run:
@@ -253,4 +268,5 @@ Expected result:
 - Gate 1, Gate 3, Gate 4, Gate 5, and Gate 6 checks pass.
 - Memory Capsule checks pass.
 - Alignment checks pass.
+- Gate 8 and AOS metric checks pass.
 - Mini benchmark runs successfully.

@@ -10,7 +10,9 @@ const commands = [
   "npm run check:memory-capsule",
   "npm run check:alignment",
   "npm run check:gate6",
-  "npm run benchmark:mini"
+  "npm run benchmark:mini",
+  "npm run check:gate8",
+  "npm run check:aos-metrics"
 ];
 
 for (const command of commands) {

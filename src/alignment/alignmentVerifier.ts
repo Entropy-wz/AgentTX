@@ -19,6 +19,7 @@ export function buildAlignmentReport(txDir: string, txId: string): AlignmentRepo
   const belief = readJsonIfExists<Gate1BeliefReport>(path.join(txDir, "belief_report.json"));
   const effects = readEffects(path.join(txDir, "effects.jsonl"));
   const memory = readMemory(txDir);
+  const hasFailedCommand = effects.some((effect) => effect.type === "command.failed");
 
   const gate4Verifier = isGate4Verifier(verifier) ? verifier : null;
   const failedChecks = gate4Verifier?.checks
@@ -66,7 +67,7 @@ export function buildAlignmentReport(txDir: string, txId: string): AlignmentRepo
     memory_clean: memoryClean
   };
 
-  const summaryConsistency = checkSummaryConsistency(belief, gate4Verifier, residualWarnings);
+  const summaryConsistency = checkSummaryConsistency(belief, gate4Verifier, residualWarnings, hasFailedCommand);
   const continuationRisk = buildContinuationRisk(request, effects, invalidatedClaims, belief);
   const status = alignmentStatus({
     verifierPresent: gate4Verifier !== null,
@@ -124,18 +125,31 @@ function alignmentStatus(input: {
 function checkSummaryConsistency(
   belief: Gate1BeliefReport | null,
   verifier: Gate4VerifierReport | null,
-  residualWarnings: string[]
+  residualWarnings: string[],
+  hasFailedCommand: boolean
 ): AlignmentReport["summary_consistency"] {
+  const issues: string[] = [];
+  if (hasFailedCommand) {
+    if (!belief?.tainted_claims?.some((claim) => claim.status === "invalidated")) {
+      issues.push("failed command has no invalidated claim in belief report");
+    }
+    if (!belief?.repair_actions?.includes("require_replan_before_continuation")) {
+      issues.push("failed command does not require replanning before continuation");
+    }
+    if (!belief?.clean_summary) {
+      issues.push("failed command has no clean summary");
+    }
+  }
+
   if (!belief?.clean_summary) {
     return {
-      checked: false,
-      consistent: true,
-      issues: []
+      checked: hasFailedCommand,
+      consistent: issues.length === 0,
+      issues
     };
   }
 
   const summary = belief.clean_summary.toLowerCase();
-  const issues: string[] = [];
   const beliefRecovery = belief.verified_state?.recovery_status;
   if (verifier && beliefRecovery && beliefRecovery !== "unknown" && beliefRecovery !== verifier.status) {
     issues.push(`belief recovery_status ${beliefRecovery} does not match verifier status ${verifier.status}`);
