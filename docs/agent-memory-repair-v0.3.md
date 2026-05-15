@@ -50,6 +50,28 @@ AgentTx verifies:
 - invalidated memory ids are recorded in `belief_report.json`;
 - the Claude context says not to reuse invalidated memory.
 
+## Memory Capsule Injection
+
+AgentTx can reuse repaired memory through a small pre-action capsule instead of replaying the full memory stream.
+
+Before Claude Code runs a Bash command, AgentTx may inject:
+
+```text
+AgentTx Memory Capsule:
+- Previous npm install left-pad failed. Do not assume the package is installed. Restored: package.json. Re-check verified state before continuing.
+```
+
+The capsule is intentionally small and filtered:
+
+- only `retrievable=true`, `truth_status=verified`, and `taint_status=clean` records are eligible;
+- invalidated, tainted, repaired-but-not-clean, or non-retrievable memory is never injected;
+- `agent_claim` records are not injected, even if repaired;
+- SAFE commands such as `pwd`, `git status`, and `git diff --stat` do not receive capsules;
+- each capsule selects at most 3 memory records;
+- the default capsule budget is 800 characters.
+
+Capsules are meant to reduce repeated false assumptions. They are not a full long-term memory replay.
+
 ## Artifacts
 
 For a repaired failed transaction, inspect:
@@ -66,9 +88,10 @@ Run:
 
 ```bash
 npm run check:gate5
+npm run check:memory-capsule
 ```
 
-The check creates a failed package command, verifies the belief report, verifies the memory store, and confirms that tainted memory is no longer retrievable.
+The checks create a failed package command, verify the belief report, verify the memory store, confirm that tainted memory is no longer retrievable, and confirm that only clean relevant memory is injected before similar future commands.
 
 ## Limitations
 
@@ -76,3 +99,4 @@ The check creates a failed package command, verifies the belief report, verifies
 - AgentTx does not call a model judge for memory truth.
 - AgentTx does not repair arbitrary third-party memory stores.
 - AgentTx repairs externalized transaction memory and injects verified state back into Claude Code.
+- Memory Capsule is controlled context injection, not full memory synchronization.

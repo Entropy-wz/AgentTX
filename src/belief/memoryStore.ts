@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { RiskReport } from "../types.js";
 
 export type MemoryRecordType =
   | "tool_observation"
@@ -54,6 +55,17 @@ export interface MemoryRepairSummary {
   updated_at: string;
 }
 
+export interface MemoryCapsuleResult {
+  text: string;
+  selected_memory_ids: string[];
+  total_chars: number;
+}
+
+export interface MemoryCapsuleOptions {
+  maxRecords?: number;
+  maxChars?: number;
+}
+
 export class AgentMemoryStore {
   readonly memoryDir: string;
   readonly memoryFile: string;
@@ -73,6 +85,54 @@ export class AgentMemoryStore {
       .split(/\r?\n/)
       .filter(Boolean)
       .map((line) => JSON.parse(line) as AgentMemoryRecord);
+  }
+
+  queryCapsule(
+    command: string,
+    risk: RiskReport,
+    options: MemoryCapsuleOptions = {}
+  ): MemoryCapsuleResult | null {
+    const maxRecords = options.maxRecords ?? 3;
+    const maxChars = options.maxChars ?? 800;
+    if (!shouldConsiderCapsule(command, risk)) {
+      return null;
+    }
+
+    const candidates = this.load()
+      .filter(isCleanRetrievableCapsuleRecord)
+      .map((record) => ({
+        record,
+        score: relevanceScore(record, command)
+      }))
+      .filter((candidate) => candidate.score > 0)
+      .sort((left, right) => right.score - left.score || Date.parse(right.record.updated_at) - Date.parse(left.record.updated_at))
+      .slice(0, maxRecords);
+
+    const lines: string[] = ["AgentTx Memory Capsule:"];
+    const selected: string[] = [];
+    for (const candidate of candidates) {
+      const line = capsuleLineFor(candidate.record, command);
+      if (!line) {
+        continue;
+      }
+      const next = [...lines, line].join("\n");
+      if (next.length > maxChars) {
+        break;
+      }
+      lines.push(line);
+      selected.push(candidate.record.memory_id);
+    }
+
+    if (selected.length === 0) {
+      return null;
+    }
+
+    const text = lines.join("\n");
+    return {
+      text,
+      selected_memory_ids: selected,
+      total_chars: text.length
+    };
   }
 
   repairFailedTransaction(input: {
@@ -251,4 +311,108 @@ function stableId(input: string): string {
     .replace(/[^a-zA-Z0-9]+/g, "_")
     .replace(/^_+|_+$/g, "")
     .slice(0, 72) || "record";
+}
+
+function shouldConsiderCapsule(command: string, risk: RiskReport): boolean {
+  if (risk.decision === "deny" || risk.level === "SAFE") {
+    return false;
+  }
+  return risk.level === "MEDIUM"
+    || risk.level === "HIGH"
+    || risk.level === "CRITICAL"
+    || isPackageCommand(command)
+    || isConfigCommand(command);
+}
+
+function isCleanRetrievableCapsuleRecord(record: AgentMemoryRecord): boolean {
+  return record.retrievable === true
+    && record.truth_status === "verified"
+    && record.taint_status === "clean"
+    && ["task_summary", "tool_observation", "recovery_context"].includes(record.type);
+}
+
+function relevanceScore(record: AgentMemoryRecord, command: string): number {
+  const commandTokens = tokens(command);
+  const contentTokens = tokens(record.content);
+  const overlap = [...commandTokens].filter((token) => contentTokens.has(token)).length;
+  let score = overlap * 10;
+
+  if (record.type === "task_summary" && record.source === "belief_report.clean_summary") {
+    score += 80;
+  }
+  if (record.content.toLowerCase().includes("residual_warnings:")
+    && !record.content.toLowerCase().includes("residual_warnings: none")) {
+    score += 35;
+  }
+  if (isPackageCommand(command) && hasAny(contentTokens, ["npm", "pnpm", "yarn", "package", "packagejson", "lockfile", "left", "pad"])) {
+    score += 40;
+  }
+  if (isConfigCommand(command) && hasAny(contentTokens, ["env", "claude", "settings", "docker", "compose", "config"])) {
+    score += 40;
+  }
+  if (/failed|invalidated|restored|replan/i.test(record.content)) {
+    score += 20;
+  }
+
+  return score;
+}
+
+function capsuleLineFor(record: AgentMemoryRecord, command: string): string | null {
+  const content = record.content;
+  const previousCommand = matchLine(content, /^Command:\s+(.+)$/m) ?? matchLine(content, /^Command failed:\s+(.+)$/m);
+  const invalidatedClaim = matchLine(content, /^Invalidated claim:\s+(.+)$/m);
+  const recoveryStatus = matchLine(content, /^- recovery_status:\s+(.+)$/m);
+  const restoredFiles = matchLine(content, /^- restored_files:\s+(.+)$/m);
+  const residual = matchLine(content, /^- residual_warnings:\s+(.+)$/m);
+
+  if (invalidatedClaim || previousCommand) {
+    const commandText = previousCommand ?? "a previous command";
+    const warning = packageInstallClaim(invalidatedClaim, command)
+      ? "Do not assume the package is installed."
+      : "Do not assume it succeeded.";
+    const state = restoredFiles && restoredFiles !== "none"
+      ? ` Restored: ${restoredFiles}.`
+      : recoveryStatus
+        ? ` Recovery status: ${recoveryStatus}.`
+        : "";
+    const residualText = residual && residual !== "none" ? ` Residual warning: ${residual}.` : "";
+    return `- Previous ${commandText} failed. ${warning}${state}${residualText} Re-check verified state before continuing.`;
+  }
+
+  const singleLine = content.replace(/\s+/g, " ").trim();
+  if (!singleLine) {
+    return null;
+  }
+  return `- ${singleLine.slice(0, 240)}`;
+}
+
+function packageInstallClaim(claim: string | null, command: string): boolean {
+  return /\b(npm|pnpm|yarn)\b/i.test(command)
+    || (claim !== null && /\b(package|npm|dependency|installed)\b/i.test(claim));
+}
+
+function matchLine(content: string, pattern: RegExp): string | null {
+  const match = content.match(pattern);
+  return match?.[1]?.trim() ?? null;
+}
+
+function isPackageCommand(command: string): boolean {
+  return /\b(npm|pnpm|yarn)\b/i.test(command);
+}
+
+function isConfigCommand(command: string): boolean {
+  return /(\.env|\.claude[\\/]settings\.json|docker-compose\.ya?ml|CLAUDE\.md|\.npmrc)/i.test(command);
+}
+
+function tokens(value: string): Set<string> {
+  return new Set(value
+    .toLowerCase()
+    .replace(/package\.json/g, "packagejson")
+    .replace(/left-pad/g, "left pad")
+    .split(/[^a-z0-9]+/)
+    .filter((token) => token.length >= 3));
+}
+
+function hasAny(values: Set<string>, candidates: string[]): boolean {
+  return candidates.some((candidate) => values.has(candidate));
 }

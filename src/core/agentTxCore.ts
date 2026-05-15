@@ -7,6 +7,7 @@ import { findGitRoot, normalizeHostPath } from "../utils/paths.js";
 import { PostToolRequest, PreToolRequest, Transaction } from "../types.js";
 import { TransactionStore } from "../store/transactionStore.js";
 import { StandardTransactionStore } from "./transaction-store.js";
+import { AgentMemoryStore } from "../belief/memoryStore.js";
 import {
   blockedCommandEffect,
   failedCommandEffect,
@@ -61,11 +62,14 @@ export class AgentTxCore {
       tx.updated_at = new Date().toISOString();
       store.save(tx);
     }
+    const snapshotContext = tx.snapshot_before ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/` : null;
+    const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, risk);
+    const additionalContext = [snapshotContext, capsule?.text].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
 
     return {
       tx,
       store,
-      additionalContext: tx.snapshot_before ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/` : undefined
+      additionalContext
     };
   }
 

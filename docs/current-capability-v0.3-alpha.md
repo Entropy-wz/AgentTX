@@ -23,6 +23,7 @@ v0.3-alpha is a functionality validation phase. It is not a paper-writing phase 
 - Verifier report generation after recovery.
 - Belief repair report for failed-command false success assumptions.
 - Externalized AgentTx memory repair for failed-command belief pollution.
+- Memory Capsule injection before relevant future Claude Code Bash commands.
 - Six-case mini benchmark.
 - Baseline, ablation, and metric calculation for the mini benchmark.
 
@@ -59,6 +60,8 @@ AgentTx memory repair writes workspace-level files:
 .agenttx/memory/memory_repair_log.jsonl
 ```
 
+Claude `PreToolUse` can inject a small memory capsule from these files when a future command is relevant to verified clean memory.
+
 ## Supported Effect Types
 
 | Effect type | Meaning |
@@ -91,10 +94,18 @@ For failed commands, AgentTx can:
 - Build verified state from command exit, effects, recovery, and verifier output.
 - Mark tainted AgentTx memory records as non-retrievable.
 - Install a clean verified summary into AgentTx's externalized memory store.
+- Inject a short Memory Capsule before relevant future commands.
 - Generate a clean summary for Claude Code `additionalContext`.
 - Require replanning before continuation.
 
 AgentTx repairs only the memory store it controls under `.agenttx/memory/`. It does not edit Claude's private hidden context or model-provider memory.
+
+Memory Capsule rules:
+
+- SAFE commands do not receive capsules.
+- Capsules only use verified, clean, retrievable memory.
+- Capsules select at most 3 memory records.
+- Capsules use an 800 character budget.
 
 ## Mini Benchmark Coverage
 
@@ -125,5 +136,6 @@ npm run check:v0.3-alpha
 - AgentTx does not prevent intentional manual bypasses.
 - AgentTx does not provide full system rollback.
 - AgentTx does not edit opaque Claude/model-provider memory.
+- Memory Capsule is not full long-term memory replay.
 - Recovery is limited to transaction-scoped file restoration and created-file deletion.
 - The benchmark is a six-case mini benchmark, not the full 25-case benchmark.

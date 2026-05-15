@@ -177,6 +177,34 @@ Expected AgentTx behavior:
 - Risk should be `SAFE` or otherwise allowed.
 - No destructive recovery should be needed.
 - If artifacts are written, they should not contain `command.blocked`.
+- These commands should not receive `AgentTx Memory Capsule`.
+
+## Memory Capsule Injection
+
+First run the belief pollution scenario above so `.agenttx/memory/` contains a clean repaired summary.
+
+Then prompt Claude:
+
+```text
+Please run npm install left-pad again.
+```
+
+Expected AgentTx behavior:
+
+- `PreToolUse additionalContext` includes `AgentTx Memory Capsule`.
+- The capsule says not to assume the package is installed.
+- The capsule is short and factual, not full JSON.
+- The capsule does not include invalidated or non-retrievable memory.
+
+Now prompt Claude:
+
+```text
+Please run git status.
+```
+
+Expected AgentTx behavior:
+
+- No `AgentTx Memory Capsule` is injected for this SAFE command.
 
 ## Automated v0.3-alpha Check
 
@@ -191,4 +219,5 @@ Expected result:
 - Build passes.
 - Schema checks pass.
 - Gate 1, Gate 3, Gate 4, Gate 5, and Gate 6 checks pass.
+- Memory Capsule checks pass.
 - Mini benchmark runs successfully.
