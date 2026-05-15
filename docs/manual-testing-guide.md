@@ -150,6 +150,8 @@ Expected AgentTx behavior:
 - Failed command produces `command.failed`.
 - `belief_report.json` uses `gate5.belief_report.v0.3`.
 - `tainted_claims` includes an invalidated success claim.
+- `.agenttx/memory/belief_memory.jsonl` contains an invalidated non-retrievable tainted record and a clean retrievable summary.
+- `.agenttx/memory/memory_repair_log.jsonl` records the memory repair actions.
 - Claude `additionalContext` includes `AgentTx Belief Repair Summary`.
 - The clean summary says not to assume success and to replan before continuing.
 

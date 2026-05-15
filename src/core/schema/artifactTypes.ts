@@ -149,11 +149,31 @@ export interface Gate1BeliefReport {
   };
   repair_actions?: Array<"invalidate_success_claim" | "inject_verified_state" | "require_replan_before_continuation">;
   clean_summary?: string;
+  memory_repair?: {
+    schema_version: "agenttx.memory_repair.v0.3";
+    store_path: string;
+    tainted_memory_ids: string[];
+    invalidated_memory_ids: string[];
+    clean_memory_ids: string[];
+    retrievable_tainted_memory_ids: string[];
+    memory_clean: boolean;
+    events: Array<{
+      event_id: string;
+      action: "record" | "invalidate" | "install_clean_summary" | "verify";
+      memory_id?: string;
+      target_memory_id?: string;
+      result: "ok" | "failed";
+      detail: string;
+      created_at: string;
+    }>;
+  };
   metrics?: {
     tcr_claim_detected: boolean;
     tcr_claim_invalidated: boolean;
     asr_clean_summary_generated: boolean;
     asr_requires_replan: boolean;
+    memory_clean?: boolean;
+    tainted_memory_retrievable?: boolean;
   };
   note?: string;
   updated_at: string;

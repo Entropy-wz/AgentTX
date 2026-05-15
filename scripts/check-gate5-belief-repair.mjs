@@ -79,6 +79,8 @@ const additionalContext = post.hookSpecificOutput?.additionalContext ?? "";
 assert(additionalContext.includes("AgentTx Belief Repair Summary"), "Claude additionalContext should use belief repair summary");
 assert(additionalContext.includes("Do not assume the previous command succeeded."), "clean summary should invalidate success assumption");
 assert(additionalContext.includes("Replan before continuing."), "clean summary should require replan");
+assert(additionalContext.includes("Memory repair:"), "clean summary should include memory repair status");
+assert(additionalContext.includes("Do not retrieve or reuse invalidated memory records"), "clean summary should block tainted memory reuse");
 assert(!additionalContext.startsWith("AgentTx Recovery Context:"), "Claude additionalContext should not use the old recovery context as primary output");
 
 const belief = readJson(path.join(txDir(demo, txId), "belief_report.json"));
@@ -94,5 +96,19 @@ assert(belief.metrics.tcr_claim_detected === true, "TCR claim detection should b
 assert(belief.metrics.tcr_claim_invalidated === true, "TCR invalidation should be true");
 assert(belief.metrics.asr_clean_summary_generated === true, "ASR clean summary should be true");
 assert(belief.metrics.asr_requires_replan === true, "ASR replan should be true");
+assert(belief.metrics.memory_clean === true, "memory repair should leave no retrievable tainted memory");
+assert(belief.metrics.tainted_memory_retrievable === false, "tainted memory should not remain retrievable");
+assert(belief.memory_repair?.schema_version === "agenttx.memory_repair.v0.3", "belief report should include memory repair summary");
+assert(belief.memory_repair.invalidated_memory_ids.length >= 1, "memory repair should invalidate tainted memory records");
+assert(belief.memory_repair.clean_memory_ids.length >= 1, "memory repair should install clean memory summary");
+assert(belief.memory_repair.retrievable_tainted_memory_ids.length === 0, "memory repair should have no retrievable tainted memory");
+
+const memoryFile = path.join(demo, ".agenttx", "memory", "belief_memory.jsonl");
+const repairLog = path.join(demo, ".agenttx", "memory", "memory_repair_log.jsonl");
+assert(fs.existsSync(memoryFile), "memory store should be written");
+assert(fs.existsSync(repairLog), "memory repair log should be written");
+const memoryRecords = fs.readFileSync(memoryFile, "utf8").split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line));
+assert(memoryRecords.some((record) => record.truth_status === "invalidated" && record.retrievable === false), "tainted memory should be invalidated and non-retrievable");
+assert(memoryRecords.some((record) => record.type === "task_summary" && record.truth_status === "verified" && record.taint_status === "clean" && record.retrievable === true), "clean verified summary should be retrievable");
 
 process.stdout.write(`Gate 5 belief repair checks passed in ${demo}\n`);

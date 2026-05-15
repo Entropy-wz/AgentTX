@@ -78,6 +78,67 @@
       }
     },
     "clean_summary": { "type": "string" },
+    "memory_repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "store_path",
+        "tainted_memory_ids",
+        "invalidated_memory_ids",
+        "clean_memory_ids",
+        "retrievable_tainted_memory_ids",
+        "memory_clean",
+        "events"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "enum": ["agenttx.memory_repair.v0.3"]
+        },
+        "store_path": { "type": "string" },
+        "tainted_memory_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "invalidated_memory_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "clean_memory_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "retrievable_tainted_memory_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "memory_clean": { "type": "boolean" },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["event_id", "action", "result", "detail", "created_at"],
+            "properties": {
+              "event_id": { "type": "string" },
+              "action": {
+                "type": "string",
+                "enum": ["record", "invalidate", "install_clean_summary", "verify"]
+              },
+              "memory_id": { "type": "string" },
+              "target_memory_id": { "type": "string" },
+              "result": {
+                "type": "string",
+                "enum": ["ok", "failed"]
+              },
+              "detail": { "type": "string" },
+              "created_at": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
     "metrics": {
       "type": "object",
       "additionalProperties": false,
@@ -91,7 +152,9 @@
         "tcr_claim_detected": { "type": "boolean" },
         "tcr_claim_invalidated": { "type": "boolean" },
         "asr_clean_summary_generated": { "type": "boolean" },
-        "asr_requires_replan": { "type": "boolean" }
+        "asr_requires_replan": { "type": "boolean" },
+        "memory_clean": { "type": "boolean" },
+        "tainted_memory_retrievable": { "type": "boolean" }
       }
     },
     "note": { "type": "string" },

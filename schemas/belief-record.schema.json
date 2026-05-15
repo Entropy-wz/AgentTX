@@ -33,6 +33,10 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "depends_on_memory": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
     "truth_status": {
       "type": "string",
       "enum": ["verified", "unverified", "contradicted", "invalidated"]
@@ -40,6 +44,14 @@
     "taint_status": {
       "type": "string",
       "enum": ["clean", "tainted", "repaired"]
-    }
+    },
+    "retrievable": { "type": "boolean" },
+    "repair_action": {
+      "type": "string",
+      "enum": ["none", "invalidate", "install_clean_summary", "mark_unretrievable"]
+    },
+    "repaired_by": { "type": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
   }
 }

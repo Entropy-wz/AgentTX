@@ -22,6 +22,7 @@ v0.3-alpha is a functionality validation phase. It is not a paper-writing phase 
 - Recovery contract generation and restricted file recovery.
 - Verifier report generation after recovery.
 - Belief repair report for failed-command false success assumptions.
+- Externalized AgentTx memory repair for failed-command belief pollution.
 - Six-case mini benchmark.
 - Baseline, ablation, and metric calculation for the mini benchmark.
 
@@ -49,6 +50,13 @@ transaction.json
 risk_report.json
 effect_report.json
 recovery.md
+```
+
+AgentTx memory repair writes workspace-level files:
+
+```text
+.agenttx/memory/belief_memory.jsonl
+.agenttx/memory/memory_repair_log.jsonl
 ```
 
 ## Supported Effect Types
@@ -81,10 +89,12 @@ For failed commands, AgentTx can:
 - Detect a potential false success claim.
 - Mark that claim as invalidated.
 - Build verified state from command exit, effects, recovery, and verifier output.
+- Mark tainted AgentTx memory records as non-retrievable.
+- Install a clean verified summary into AgentTx's externalized memory store.
 - Generate a clean summary for Claude Code `additionalContext`.
 - Require replanning before continuation.
 
-Gate 5 repairs only the current transaction context. It does not modify long-term memory.
+AgentTx repairs only the memory store it controls under `.agenttx/memory/`. It does not edit Claude's private hidden context or model-provider memory.
 
 ## Mini Benchmark Coverage
 
@@ -114,5 +124,6 @@ npm run check:v0.3-alpha
 - AgentTx is not an OS-level sandbox.
 - AgentTx does not prevent intentional manual bypasses.
 - AgentTx does not provide full system rollback.
+- AgentTx does not edit opaque Claude/model-provider memory.
 - Recovery is limited to transaction-scoped file restoration and created-file deletion.
 - The benchmark is a six-case mini benchmark, not the full 25-case benchmark.

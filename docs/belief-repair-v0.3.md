@@ -20,6 +20,8 @@ It writes:
 
 ```text
 belief_report.json
+.agenttx/memory/belief_memory.jsonl
+.agenttx/memory/memory_repair_log.jsonl
 ```
 
 Claude `PostToolUse` receives `clean_summary` as the primary `additionalContext`.
@@ -32,6 +34,7 @@ Claude `PostToolUse` receives `clean_summary` as the primary `additionalContext`
 | `verified_state` | Facts verified from command exit, effects, recovery, and verifier output |
 | `repair_actions` | Required cognitive repair steps |
 | `clean_summary` | Short context injected back into Claude |
+| `memory_repair` | Externalized AgentTx memory records invalidated or installed |
 | `metrics` | Rule-based benchmark fields for TCR and ASR |
 
 ## Repair actions
@@ -56,9 +59,25 @@ Gate 5 uses deterministic metrics:
 | `tcr_claim_invalidated` | The tainted claim is marked `invalidated` |
 | `asr_clean_summary_generated` | A clean summary was produced |
 | `asr_requires_replan` | The summary requires replanning |
+| `memory_clean` | No tainted memory remains retrievable |
+| `tainted_memory_retrievable` | A tainted memory record is still retrievable |
 
 These fields are designed for the later benchmark runner. No model judge is used in Gate 5.
 
+## AgentTx memory repair
+
+AgentTx repairs the memory state it can control: its own externalized memory store under `.agenttx/memory/`.
+
+For a failed transaction, AgentTx:
+
+1. Records the failed command as verified memory.
+2. Records the possible success claim as tainted memory.
+3. Invalidates the tainted memory and marks it non-retrievable.
+4. Installs the clean verified summary as retrievable memory.
+5. Verifies that no tainted memory remains retrievable.
+
+This makes the repair durable across later AgentTx reads without claiming access to opaque model-provider memory.
+
 ## Non-goals
 
-Gate 5 does not repair long-term memory and does not ask an LLM to judge correctness. It only repairs the current transaction context.
+Gate 5 does not edit Claude's private internal state and does not ask an LLM to judge correctness. It repairs AgentTx's externalized memory store and injects the clean summary back into the current Claude context.
