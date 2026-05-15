@@ -1,0 +1,327 @@
+2026-05-15T02:27:07.059Z [DEBUG] MDM settings load completed in 11ms
+2026-05-15T02:27:07.077Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-05-15T02:27:07.077Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\04_file_delete\.claude\settings.json
+2026-05-15T02:27:07.078Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\04_file_delete\.claude\settings.local.json
+2026-05-15T02:27:07.078Z [DEBUG] CA certs: Config fallback - globalEnv keys: , settingsEnv keys: none
+2026-05-15T02:27:07.080Z [DEBUG] [init] configureGlobalMTLS starting
+2026-05-15T02:27:07.080Z [DEBUG] [init] configureGlobalMTLS complete
+2026-05-15T02:27:07.080Z [DEBUG] [init] configureGlobalAgents starting
+2026-05-15T02:27:07.080Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T02:27:07.081Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T02:27:07.110Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T02:27:07.111Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T02:27:07.111Z [DEBUG] [init] configureGlobalAgents complete
+2026-05-15T02:27:07.114Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-05-15T02:27:07.115Z [DEBUG] Error log sink initialized
+2026-05-15T02:27:07.115Z [DEBUG] clearPluginCache: invalidating loadAllPlugins cache (preAction: --plugin-dir inline plugins)
+2026-05-15T02:27:07.144Z [DEBUG] [claudeai-mcp] Disabled: API-key auth precedence active
+2026-05-15T02:27:07.144Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-05-15T02:27:07.166Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-05-15T02:27:07.171Z [DEBUG] [STARTUP] Running setup()...
+2026-05-15T02:27:07.175Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\lenovo\.claude\skills, project=[]
+2026-05-15T02:27:07.176Z [DEBUG] Error log sink initialized
+2026-05-15T02:27:07.181Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\commands: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\commands'
+2026-05-15T02:27:07.182Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-05-15T02:27:07.182Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-05-15T02:27:07.182Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\agents: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\agents'
+2026-05-15T02:27:07.183Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\agents: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\agents'
+2026-05-15T02:27:07.186Z [DEBUG] [STARTUP] setup() completed in 14ms
+2026-05-15T02:27:07.186Z [DEBUG] Cleared CA certificates cache
+2026-05-15T02:27:07.187Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T02:27:07.187Z [DEBUG] Cleared proxy agent cache
+2026-05-15T02:27:07.187Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T02:27:07.187Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T02:27:07.188Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T02:27:07.188Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T02:27:07.212Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-05-15T02:27:07.212Z [DEBUG] [ToolSearch:optimistic] disabled: ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic is not a first-party Anthropic host. Set ENABLE_TOOL_SEARCH=true (or auto / auto:N) if your proxy forwards tool_reference blocks.
+2026-05-15T02:27:07.227Z [DEBUG] Loaded hooks from standard location for plugin agenttx-guard: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json
+2026-05-15T02:27:07.228Z [DEBUG] Skipping duplicate hooks file for plugin agenttx-guard: ./hooks/hooks.json (resolves to already-loaded file: D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json)
+2026-05-15T02:27:07.228Z [ERROR] Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T02:27:07.229Z [DEBUG] Loaded inline plugin from path: agenttx-guard
+2026-05-15T02:27:07.230Z [DEBUG] Loaded 1 session-only plugins from --plugin-dir
+2026-05-15T02:27:07.230Z [DEBUG] Found 1 plugins (1 enabled, 0 disabled)
+2026-05-15T02:27:07.231Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T02:27:07.231Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T02:27:07.232Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-05-15T02:27:07.232Z [DEBUG] Checking plugin agenttx-guard: skillsPath=exists, skillsPaths=0 paths
+2026-05-15T02:27:07.232Z [DEBUG] Attempting to load skills from plugin agenttx-guard default skillsPath: D:\exp_all\AgentTX\plugin-claude\skills
+2026-05-15T02:27:07.232Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T02:27:07.233Z [DEBUG] Loading hooks from plugin: agenttx-guard
+2026-05-15T02:27:07.233Z [DEBUG] Registered 2 hooks from 1 plugins
+2026-05-15T02:27:07.233Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T02:27:07.234Z [DEBUG] Total plugin commands loaded: 0
+2026-05-15T02:27:07.234Z [DEBUG] Total plugin agents loaded: 0
+2026-05-15T02:27:07.238Z [DEBUG] Loaded 3 skills from plugin agenttx-guard default directory
+2026-05-15T02:27:07.238Z [DEBUG] Total plugin skills loaded: 3
+2026-05-15T02:27:07.238Z [DEBUG] getSkills returning: 0 skill dir commands, 3 plugin skills, 11 bundled skills, 0 builtin plugin skills
+2026-05-15T02:27:07.240Z [DEBUG] [STARTUP] Commands and agents loaded in 28ms
+2026-05-15T02:27:07.240Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-05-15T02:27:07.241Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-05-15T02:27:07.241Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-05-15T02:27:07.241Z [DEBUG] Starting background startup prefetches
+2026-05-15T02:27:07.242Z [DEBUG] [Bootstrap] Skipped: no usable OAuth or API key
+2026-05-15T02:27:07.242Z [DEBUG] [STARTUP] MCP configs resolved in 90ms (awaited at +97ms)
+2026-05-15T02:27:07.244Z [DEBUG] Cleared CA certificates cache
+2026-05-15T02:27:07.244Z [DEBUG] Cleared mTLS configuration cache
+2026-05-15T02:27:07.244Z [DEBUG] Cleared proxy agent cache
+2026-05-15T02:27:07.245Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-05-15T02:27:07.245Z [DEBUG] CA certs: Loaded 145 bundled root certificates
+2026-05-15T02:27:07.246Z [DEBUG] CA certs: Loaded 132 system CA certificates
+2026-05-15T02:27:07.246Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-05-15T02:27:07.247Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-05-15T02:27:07.250Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.252Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-05-15T02:27:07.252Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-05-15T02:27:07.279Z [DEBUG] [auto-mode] hasAutoModeOptIn=false skipAutoPermissionPrompt: user=undefined local=undefined flag=undefined policy=undefined
+2026-05-15T02:27:07.280Z [DEBUG] [auto-mode] verifyAutoModeGateAccess: enabledState=opt-in disabledBySettings=false model=deepseek-v4-pro[1m] modelSupported=true disableFastModeBreakerFires=false carouselAvailable=false canEnterAuto=true
+2026-05-15T02:27:07.280Z [DEBUG] [auto-mode] verifyAutoModeGateAccess setAvailable: true -> false
+2026-05-15T02:27:07.281Z [DEBUG] Total LSP servers loaded: 0
+2026-05-15T02:27:07.281Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-05-15T02:27:07.281Z [DEBUG] LSP manager initialized with 0 servers
+2026-05-15T02:27:07.282Z [DEBUG] LSP server manager initialized successfully
+2026-05-15T02:27:07.282Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-05-15T02:27:07.302Z [DEBUG] [ScheduledTasks] scheduler start() — enabled=false, hasTasks=false
+2026-05-15T02:27:07.305Z [DEBUG] Plugin not available for MCP: plugin-claude@inline - error type: hook-load-failed
+2026-05-15T02:27:07.307Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:07.308Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:07.308Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.309Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.310Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:07.310Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:07.458Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\skills: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\skills'
+2026-05-15T02:27:07.458Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\skills: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\skills'
+2026-05-15T02:27:07.459Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:07.460Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.461Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=generate_session_title
+2026-05-15T02:27:07.462Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\output-styles'
+2026-05-15T02:27:07.462Z [DEBUG] Failed to stat directory C:\Users\lenovo\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Users\lenovo\.claude\output-styles'
+2026-05-15T02:27:07.463Z [DEBUG] Plugin loading errors: Hook load failed: Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded file D:\exp_all\AgentTX\plugin-claude\hooks\hooks.json. The standard hooks/hooks.json is loaded automatically, so manifest.hooks should only reference additional hook files.
+2026-05-15T02:27:07.463Z [DEBUG] Total plugin output styles loaded: 0
+2026-05-15T02:27:07.477Z [WARN] [3P telemetry] Event dropped (no event logger initialized): plugin_loaded
+2026-05-15T02:27:07.478Z [DEBUG] installPluginsForHeadless: starting
+2026-05-15T02:27:07.478Z [DEBUG] installPluginsForHeadless: no marketplaces declared
+2026-05-15T02:27:07.482Z [DEBUG] Git remote URL: null
+2026-05-15T02:27:07.483Z [DEBUG] No git remote URL found
+2026-05-15T02:27:07.485Z [DEBUG] Ripgrep first use test: PASSED (mode=embedded, path=C:\Users\lenovo\.local\bin\claude.exe)
+2026-05-15T02:27:07.486Z [DEBUG] "rg error (signal=undefined, code=2, stderr: rg: C:\\Users\\lenovo\\.claude\\plugins\\cache: IO error for operation on C:\\Users\\lenovo\\.claude\\plugins\\cache: 系统找不到指定的文件。 (os error 2)\n), 0 results"
+2026-05-15T02:27:07.502Z [DEBUG] Watching for changes in setting files C:\Users\lenovo\.claude\settings.json...
+2026-05-15T02:27:07.526Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:07.526Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:07.527Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:07.527Z [DEBUG] Sending 12 skills via attachment (initial, 12 total sent)
+2026-05-15T02:27:07.527Z [DEBUG] Skill prompt: showing "agenttx-guard:explain-risk" (userFacingName="explain-risk")
+2026-05-15T02:27:07.528Z [DEBUG] Skill prompt: showing "agenttx-guard:status" (userFacingName="status")
+2026-05-15T02:27:07.528Z [DEBUG] Skill prompt: showing "agenttx-guard:recover" (userFacingName="recover")
+2026-05-15T02:27:07.528Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:07.543Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.544Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:07.545Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:07.547Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:07.548Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.548Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.548Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:07.549Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:07.549Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:07.550Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:07.551Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:27:07.634Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:07.901Z [ERROR] Failed to fetch MCP registry: Request failed with status code 403
+2026-05-15T02:27:07.957Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:13.614Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022713_sznx11","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022713_sznx11/"}}
+2026-05-15T02:27:13.615Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022713_sznx11","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022713_sznx11/"}}
+2026-05-15T02:27:13.615Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:13.642Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:13.643Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022713_sznx11\",\"additionalContext\":\"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022713_sznx11/\"}}\n"
+2026-05-15T02:27:13.643Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") provided additionalContext (87 chars)
+2026-05-15T02:27:13.643Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: ask (reason: AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022713_sznx11)
+2026-05-15T02:27:13.644Z [DEBUG] Hook result has permissionBehavior=ask
+2026-05-15T02:27:13.652Z [DEBUG] Bash tool permission denied
+2026-05-15T02:27:13.654Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:13.655Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:13.655Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:13.655Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:13.656Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:13.657Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:13.658Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:13.659Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:13.659Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:13.660Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:13.660Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:13.664Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:13.665Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:13.666Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:27:13.910Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:17.977Z [ERROR] 1P event logging: 97 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T02:27:17.978Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 97 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 97 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T02:27:19.898Z [ERROR] "SyntaxError: SyntaxError: JSON Parse error: Unexpected identifier \"I\"\n    at <parse> (:0)\n    at parse (unknown)\n    at jOK (B:/~BUN/root/src/entrypoints/cli.js:175:10088)\n    at _ (B:/~BUN/root/src/entrypoints/cli.js:131:18386)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:177:1658)\n    at T9H (B:/~BUN/root/src/entrypoints/cli.js:6616:601)\n    at processTicksAndRejections (native:7:39)"
+2026-05-15T02:27:24.073Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow","permissionDecisionReason":"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022724_s4n4lk"}}
+2026-05-15T02:27:24.073Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow","permissionDecisionReason":"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022724_s4n4lk"}}
+2026-05-15T02:27:24.073Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:24.095Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:24.095Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022724_s4n4lk\"}}\n"
+2026-05-15T02:27:24.096Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: allow (reason: AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022724_s4n4lk)
+2026-05-15T02:27:24.096Z [DEBUG] Hook result has permissionBehavior=allow
+2026-05-15T02:27:24.101Z [DEBUG] Hook approved tool use for Bash, bypassing permission prompt
+2026-05-15T02:27:24.102Z [INFO] [Stall] tool_dispatch_start tool=Bash toolUseId=call_00_h8Jse804T12y0UWws3Dl6831 permissionDecisionMs=5
+2026-05-15T02:27:24.111Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2026-05-15T02:27:24.112Z [DEBUG] Looking for shell config file: C:\Users\lenovo\.bashrc
+2026-05-15T02:27:24.113Z [DEBUG] Snapshots directory: C:\Users\lenovo\.claude\shell-snapshots
+2026-05-15T02:27:24.970Z [DEBUG] Creating snapshot at: C:\Users\lenovo\.claude\shell-snapshots\snapshot-bash-1778812044113-nno7mj.sh
+2026-05-15T02:27:24.970Z [DEBUG] Execution timeout: 10000ms
+2026-05-15T02:27:27.833Z [WARN] Official marketplace GCS fetch failed: timeout of 10000ms exceeded
+2026-05-15T02:27:27.833Z [WARN] Official marketplace GCS failed; falling back to git
+2026-05-15T02:27:27.861Z [DEBUG] SSH config check: code=127 configured=false
+2026-05-15T02:27:27.932Z [DEBUG] git pull: cwd=C:\Users\lenovo\.claude\plugins\marketplaces\claude-plugins-official ref=default
+2026-05-15T02:27:29.197Z [DEBUG] Successfully refreshed marketplace: claude-plugins-official
+2026-05-15T02:27:29.197Z [DEBUG] Plugin autoupdate: checking installed plugins
+2026-05-15T02:27:30.665Z [ERROR] 1P event logging: 14 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T02:27:30.666Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 14 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 14 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T02:27:34.980Z [DEBUG] "Shell snapshot creation failed: Command failed: C:\\Program Files\\Git\\bin\\bash.exe -c -l SNAPSHOT_FILE='C:\\Users\\lenovo\\.claude\\shell-snapshots\\snapshot-bash-1778812044113-nno7mj.sh'\n      source \"C:\\Users\\lenovo\\.bashrc\" < /dev/null\n\n      # First, create/clear the snapshot file\n      echo \"# Snapshot file\" >| \"$SNAPSHOT_FILE\"\n\n      # When this file is sourced, we first unalias to avoid conflicts\n      # This is necessary because aliases get \"frozen\" inside function definitions at definition time,\n      # which can cause unexpected behavior when functions use commands that conflict with aliases\n      echo \"# Unset all aliases to avoid conflicts with functions\" >> \"$SNAPSHOT_FILE\"\n      echo \"unalias -a 2>/dev/null || true\" >> \"$SNAPSHOT_FILE\"\n\n      \n      echo \"# Functions\" >> \"$SNAPSHOT_FILE\"\n\n      # Force autoload all functions first\n      declare -f > /dev/null 2>&1\n\n      # Now get user function names - filter completion functions (single underscore prefix)\n      # but keep double-underscore helpers (e.g. __zsh_like_cd from mise, __pyenv_init)\n      declare -F | cut -d' ' -f3 | grep -vE '^_[^_]' | while read func; do\n        # Encode the function to base64, preserving all special characters\n        encoded_func=$(declare -f \"$func\" | base64 )\n        # Write the function definition to the snapshot\n        echo \"eval \\\"\\$(echo '$encoded_func' | base64 -d)\\\" > /dev/null 2>&1\" >> \"$SNAPSHOT_FILE\"\n      done\n    \n      echo \"# Shell Options\" >> \"$SNAPSHOT_FILE\"\n      shopt -p | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      set -o | grep \"on\" | awk '{print \"set -o \" $1}' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      echo \"shopt -s expand_aliases\" >> \"$SNAPSHOT_FILE\"\n    \n      echo \"# Aliases\" >> \"$SNAPSHOT_FILE\"\n      # Filter out winpty aliases on Windows to avoid \"stdin is not a tty\" errors\n      # Git Bash automatically creates aliases like \"alias node='winpty node.exe'\" for\n      # programs that need Win32 Console in mintty, but winpty fails when there's no TTY\n      if [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]]; then\n        alias | grep -v \"='winpty \" | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      else\n        alias | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      fi\n  \n\n      \n      # Check for rg availability\n      echo \"# Check for rg availability\" >> \"$SNAPSHOT_FILE\"\n      echo \"if ! (unalias rg 2>/dev/null; command -v rg) >/dev/null 2>&1; then\" >> \"$SNAPSHOT_FILE\"\n  \n      cat >> \"$SNAPSHOT_FILE\" << 'RIPGREP_FUNC_END'\n  function rg {\n  local _cc_bin=\"${CLAUDE_CODE_EXECPATH:-}\"\n  [[ -x $_cc_bin ]] || _cc_bin=/c/Users/lenovo/.local/bin/claude.exe\n  if [[ ! -x $_cc_bin ]]; then command rg \"$@\"; return; fi\n  if [[ -n $ZSH_VERSION ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]] || [[ \"$OSTYPE\" == \"win32\" ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ $BASHPID != $$ ]]; then\n    exec -a rg \"$_cc_bin\" \"$@\"\n  else\n    (exec -a rg \"$_cc_bin\" \"$@\")\n  fi\n}\nRIPGREP_FUNC_END\n    \n      echo \"fi\" >> \"$SNAPSHOT_FILE\"\n  \n\n      # Add PATH to the file\n      cat >> \"$SNAPSHOT_FILE\" << 'PATH_END_j9pe2z9686q'\nexport PATH='/c/Users/lenovo/bin:/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/mingw64/bin:/usr/bin:/c/Users/lenovo/bin:/c/Users/lenovo/.codex/tmp/arg0/codex-arg0f7ryGr:/c/Program Files (x86)/VMware/VMware Workstation/bin:/c/ProgramData/Oracle/Java/javapath:/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/dotnet:/c/Program Files/MATLAB/R2024a/bin:/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn:/c/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/DTS/Binn:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Users/lenovo/AppData/Local/Programs/Python/Python313/Scripts:/c/Program Files (x86)/dotnet:/c/Program Files/Calibre2:/c/Program Files/cursor/resources/app/bin:/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/c/Users/lenovo/AppData/Local/Python/pythoncore-3.14-64/Scripts:/c/Program Files/nodejs:/c/Users/lenovo/AppData/Local/Microsoft/WindowsApps:/d/VScode/Microsoft VS Code/bin:/c/Users/lenovo/AppData/Local/Programs/cursor/resources/app/bin:/c/Users/lenovo/AppData/Local/Python/bin:/c/Users/lenovo/.local/bin:/c/Users/lenovo/AppData/Roaming/npm:/c/msys64/ucrt64/bin:/d/texlive/2026/bin/windows:/c/Users/lenovo/AppData/Local/Microsoft/WinGet/Packages/Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe:/c/Users/lenovo/AppData/Local/OpenAI/Codex/bin:/c/Program Files/WindowsApps/OpenAI.Codex_26.506.3741.0_x64__2p2nqsd0c76g0/app/resources:/usr/bin/vendor_perl:/usr/bin/core_perl:/c/Users/lenovo/.foundry/bin:/d/exp_all/AgentTX/plugin-claude/bin'\nPATH_END_j9pe2z9686q\n  \n\n      # Exit silently on success, only report errors\n      if [ ! -f \"$SNAPSHOT_FILE\" ]; then\n        echo \"Error: Snapshot file was not created at $SNAPSHOT_FILE\" >&2\n        exit 1\n      fi\n    "
+2026-05-15T02:27:34.980Z [DEBUG] Error details:
+2026-05-15T02:27:34.980Z [DEBUG] - Error code: null
+2026-05-15T02:27:34.981Z [DEBUG] - Error signal: SIGTERM
+2026-05-15T02:27:34.981Z [DEBUG] - Error killed: true
+2026-05-15T02:27:34.981Z [DEBUG] - Shell path: C:\Program Files\Git\bin\bash.exe
+2026-05-15T02:27:34.981Z [DEBUG] - Config file: C:\Users\lenovo\.bashrc
+2026-05-15T02:27:34.981Z [DEBUG] - Config file exists: true
+2026-05-15T02:27:34.981Z [DEBUG] - Working directory: D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\04_file_delete
+2026-05-15T02:27:34.982Z [DEBUG] - Claude home: C:\Users\lenovo\.claude
+2026-05-15T02:27:34.982Z [DEBUG] "Full snapshot script:\nSNAPSHOT_FILE='C:\\Users\\lenovo\\.claude\\shell-snapshots\\snapshot-bash-1778812044113-nno7mj.sh'\n      source \"C:\\Users\\lenovo\\.bashrc\" < /dev/null\n\n      # First, create/clear the snapshot file\n      echo \"# Snapshot file\" >| \"$SNAPSHOT_FILE\"\n\n      # When this file is sourced, we first unalias to avoid conflicts\n      # This is necessary because aliases get \"frozen\" inside function definitions at definition time,\n      # which can cause unexpected behavior when functions use commands that conflict with aliases\n      echo \"# Unset all aliases to avoid conflicts with functions\" >> \"$SNAPSHOT_FILE\"\n      echo \"unalias -a 2>/dev/null || true\" >> \"$SNAPSHOT_FILE\"\n\n      \n      echo \"# Functions\" >> \"$SNAPSHOT_FILE\"\n\n      # Force autoload all functions first\n      declare -f > /dev/null 2>&1\n\n      # Now get user function names - filter completion functions (single underscore prefix)\n      # but keep double-underscore helpers (e.g. __zsh_like_cd from mise, __pyenv_init)\n      declare -F | cut -d' ' -f3 | grep -vE '^_[^_]' | while read func; do\n        # Encode the function to base64, preserving all special characters\n        encoded_func=$(declare -f \"$func\" | base64 )\n        # Write the function definition to the snapshot\n        echo \"eval \\\"\\$(echo '$encoded_func' | base64 -d)\\\" > /dev/null 2>&1\" >> \"$SNAPSHOT_FILE\"\n      done\n    \n      echo \"# Shell Options\" >> \"$SNAPSHOT_FILE\"\n      shopt -p | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      set -o | grep \"on\" | awk '{print \"set -o \" $1}' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      echo \"shopt -s expand_aliases\" >> \"$SNAPSHOT_FILE\"\n    \n      echo \"# Aliases\" >> \"$SNAPSHOT_FILE\"\n      # Filter out winpty aliases on Windows to avoid \"stdin is not a tty\" errors\n      # Git Bash automatically creates aliases like \"alias node='winpty node.exe'\" for\n      # programs that need Win32 Console in mintty, but winpty fails when there's no TTY\n      if [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]]; then\n        alias | grep -v \"='winpty \" | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      else\n        alias | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      fi\n  \n\n      \n      # Check for rg availability\n      echo \"# Check for rg availability\" >> \"$SNAPSHOT_FILE\"\n      echo \"if ! (unalias rg 2>/dev/null; command -v rg) >/dev/null 2>&1; then\" >> \"$SNAPSHOT_FILE\"\n  \n      cat >> \"$SNAPSHOT_FILE\" << 'RIPGREP_FUNC_END'\n  function rg {\n  local _cc_bin=\"${CLAUDE_CODE_EXECPATH:-}\"\n  [[ -x $_cc_bin ]] || _cc_bin=/c/Users/lenovo/.local/bin/claude.exe\n  if [[ ! -x $_cc_bin ]]; then command rg \"$@\"; return; fi\n  if [[ -n $ZSH_VERSION ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]] || [[ \"$OSTYPE\" == \"win32\" ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ $BASHPID != $$ ]]; then\n    exec -a rg \"$_cc_bin\" \"$@\"\n  else\n    (exec -a rg \"$_cc_bin\" \"$@\")\n  fi\n}\nRIPGREP_FUNC_END\n    \n      echo \"fi\" >> \"$SNAPSHOT_FILE\"\n  \n\n      # Add PATH to the file\n      cat >> \"$SNAPSHOT_FILE\" << 'PATH_END_j9pe2z9686q'\nexport PATH='/c/Users/lenovo/bin:/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/mingw64/bin:/usr/bin:/c/Users/lenovo/bin:/c/Users/lenovo/.codex/tmp/arg0/codex-arg0f7ryGr:/c/Program Files (x86)/VMware/VMware Workstation/bin:/c/ProgramData/Oracle/Java/javapath:/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/dotnet:/c/Program Files/MATLAB/R2024a/bin:/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn:/c/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/DTS/Binn:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Users/lenovo/AppData/Local/Programs/Python/Python313/Scripts:/c/Program Files (x86)/dotnet:/c/Program Files/Calibre2:/c/Program Files/cursor/resources/app/bin:/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/c/Users/lenovo/AppData/Local/Python/pythoncore-3.14-64/Scripts:/c/Program Files/nodejs:/c/Users/lenovo/AppData/Local/Microsoft/WindowsApps:/d/VScode/Microsoft VS Code/bin:/c/Users/lenovo/AppData/Local/Programs/cursor/resources/app/bin:/c/Users/lenovo/AppData/Local/Python/bin:/c/Users/lenovo/.local/bin:/c/Users/lenovo/AppData/Roaming/npm:/c/msys64/ucrt64/bin:/d/texlive/2026/bin/windows:/c/Users/lenovo/AppData/Local/Microsoft/WinGet/Packages/Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe:/c/Users/lenovo/AppData/Local/OpenAI/Codex/bin:/c/Program Files/WindowsApps/OpenAI.Codex_26.506.3741.0_x64__2p2nqsd0c76g0/app/resources:/usr/bin/vendor_perl:/usr/bin/core_perl:/c/Users/lenovo/.foundry/bin:/d/exp_all/AgentTX/plugin-claude/bin'\nPATH_END_j9pe2z9686q\n  \n\n      # Exit silently on success, only report errors\n      if [ ! -f \"$SNAPSHOT_FILE\" ]; then\n        echo \"Error: Snapshot file was not created at $SNAPSHOT_FILE\" >&2\n        exit 1\n      fi\n    "
+2026-05-15T02:27:34.982Z [DEBUG] No stdout output captured
+2026-05-15T02:27:34.982Z [DEBUG] No stderr output captured
+2026-05-15T02:27:34.983Z [ERROR] "Failed to create shell snapshot: Command failed: C:\\Program Files\\Git\\bin\\bash.exe -c -l SNAPSHOT_FILE='C:\\Users\\lenovo\\.claude\\shell-snapshots\\snapshot-bash-1778812044113-nno7mj.sh'\n      source \"C:\\Users\\lenovo\\.bashrc\" < /dev/null\n\n      # First, create/clear the snapshot file\n      echo \"# Snapshot file\" >| \"$SNAPSHOT_FILE\"\n\n      # When this file is sourced, we first unalias to avoid conflicts\n      # This is necessary because aliases get \"frozen\" inside function definitions at definition time,\n      # which can cause unexpected behavior when functions use commands that conflict with aliases\n      echo \"# Unset all aliases to avoid conflicts with functions\" >> \"$SNAPSHOT_FILE\"\n      echo \"unalias -a 2>/dev/null || true\" >> \"$SNAPSHOT_FILE\"\n\n      \n      echo \"# Functions\" >> \"$SNAPSHOT_FILE\"\n\n      # Force autoload all functions first\n      declare -f > /dev/null 2>&1\n\n      # Now get user function names - filter completion functions (single underscore prefix)\n      # but keep double-underscore helpers (e.g. __zsh_like_cd from mise, __pyenv_init)\n      declare -F | cut -d' ' -f3 | grep -vE '^_[^_]' | while read func; do\n        # Encode the function to base64, preserving all special characters\n        encoded_func=$(declare -f \"$func\" | base64 )\n        # Write the function definition to the snapshot\n        echo \"eval \\\"\\$(echo '$encoded_func' | base64 -d)\\\" > /dev/null 2>&1\" >> \"$SNAPSHOT_FILE\"\n      done\n    \n      echo \"# Shell Options\" >> \"$SNAPSHOT_FILE\"\n      shopt -p | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      set -o | grep \"on\" | awk '{print \"set -o \" $1}' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      echo \"shopt -s expand_aliases\" >> \"$SNAPSHOT_FILE\"\n    \n      echo \"# Aliases\" >> \"$SNAPSHOT_FILE\"\n      # Filter out winpty aliases on Windows to avoid \"stdin is not a tty\" errors\n      # Git Bash automatically creates aliases like \"alias node='winpty node.exe'\" for\n      # programs that need Win32 Console in mintty, but winpty fails when there's no TTY\n      if [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]]; then\n        alias | grep -v \"='winpty \" | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      else\n        alias | sed 's/^alias //g' | sed 's/^/alias -- /' | head -n 1000 >> \"$SNAPSHOT_FILE\"\n      fi\n  \n\n      \n      # Check for rg availability\n      echo \"# Check for rg availability\" >> \"$SNAPSHOT_FILE\"\n      echo \"if ! (unalias rg 2>/dev/null; command -v rg) >/dev/null 2>&1; then\" >> \"$SNAPSHOT_FILE\"\n  \n      cat >> \"$SNAPSHOT_FILE\" << 'RIPGREP_FUNC_END'\n  function rg {\n  local _cc_bin=\"${CLAUDE_CODE_EXECPATH:-}\"\n  [[ -x $_cc_bin ]] || _cc_bin=/c/Users/lenovo/.local/bin/claude.exe\n  if [[ ! -x $_cc_bin ]]; then command rg \"$@\"; return; fi\n  if [[ -n $ZSH_VERSION ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]] || [[ \"$OSTYPE\" == \"win32\" ]]; then\n    ARGV0=rg \"$_cc_bin\" \"$@\"\n  elif [[ $BASHPID != $$ ]]; then\n    exec -a rg \"$_cc_bin\" \"$@\"\n  else\n    (exec -a rg \"$_cc_bin\" \"$@\")\n  fi\n}\nRIPGREP_FUNC_END\n    \n      echo \"fi\" >> \"$SNAPSHOT_FILE\"\n  \n\n      # Add PATH to the file\n      cat >> \"$SNAPSHOT_FILE\" << 'PATH_END_j9pe2z9686q'\nexport PATH='/c/Users/lenovo/bin:/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/mingw64/bin:/usr/bin:/c/Users/lenovo/bin:/c/Users/lenovo/.codex/tmp/arg0/codex-arg0f7ryGr:/c/Program Files (x86)/VMware/VMware Workstation/bin:/c/ProgramData/Oracle/Java/javapath:/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/dotnet:/c/Program Files/MATLAB/R2024a/bin:/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn:/c/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/Tools/Binn:/c/Program Files/Microsoft SQL Server/120/DTS/Binn:/c/Program Files (x86)/Windows Kits/8.1/Windows Performance Toolkit:/c/Users/lenovo/AppData/Local/Programs/Python/Python313/Scripts:/c/Program Files (x86)/dotnet:/c/Program Files/Calibre2:/c/Program Files/cursor/resources/app/bin:/cmd:/c/Program Files/Docker/Docker/resources/bin:/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/c/Users/lenovo/AppData/Local/Python/pythoncore-3.14-64/Scripts:/c/Program Files/nodejs:/c/Users/lenovo/AppData/Local/Microsoft/WindowsApps:/d/VScode/Microsoft VS Code/bin:/c/Users/lenovo/AppData/Local/Programs/cursor/resources/app/bin:/c/Users/lenovo/AppData/Local/Python/bin:/c/Users/lenovo/.local/bin:/c/Users/lenovo/AppData/Roaming/npm:/c/msys64/ucrt64/bin:/d/texlive/2026/bin/windows:/c/Users/lenovo/AppData/Local/Microsoft/WinGet/Packages/Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe:/c/Users/lenovo/AppData/Local/OpenAI/Codex/bin:/c/Program Files/WindowsApps/OpenAI.Codex_26.506.3741.0_x64__2p2nqsd0c76g0/app/resources:/usr/bin/vendor_perl:/usr/bin/core_perl:/c/Users/lenovo/.foundry/bin:/d/exp_all/AgentTX/plugin-claude/bin'\nPATH_END_j9pe2z9686q\n  \n\n      # Exit silently on success, only report errors\n      if [ ! -f \"$SNAPSHOT_FILE\" ]; then\n        echo \"Error: Snapshot file was not created at $SNAPSHOT_FILE\" >&2\n        exit 1\n      fi\n    "
+2026-05-15T02:27:34.984Z [DEBUG] No session environment scripts found
+2026-05-15T02:27:36.014Z [INFO] [Stall] tool_dispatch_end tool=Bash toolUseId=call_00_h8Jse804T12y0UWws3Dl6831 outcome=ok durationMs=11912
+2026-05-15T02:27:36.629Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"AgentTx Recovery Context:\n\nThe previous tool call is not safe to treat as successful.\n\nVerified facts:\n- Command: test -f package.json && echo \"EXISTS\" || echo \"DELETED\"\n- Risk level: SAFE\n- Decision: allow\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Inspect .agenttx/transactions/tx_20260515022724_s4n4lk/effect_report.json before continuing.\n- Resolve or explicitly accept this transaction before making unrelated changes.\n- If reverting, prefer the recorded diff or the files_before copies.\n\nTransaction directory:\n.agenttx/transactions/tx_20260515022724_s4n4lk/"}}
+2026-05-15T02:27:36.630Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"AgentTx Recovery Context:\n\nThe previous tool call is not safe to treat as successful.\n\nVerified facts:\n- Command: test -f package.json && echo \"EXISTS\" || echo \"DELETED\"\n- Risk level: SAFE\n- Decision: allow\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Inspect .agenttx/transactions/tx_20260515022724_s4n4lk/effect_report.json before continuing.\n- Resolve or explicitly accept this transaction before making unrelated changes.\n- If reverting, prefer the recorded diff or the files_before copies.\n\nTransaction directory:\n.agenttx/transactions/tx_20260515022724_s4n4lk/"}}
+2026-05-15T02:27:36.630Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:36.665Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:36.665Z [DEBUG] "Hook PostToolUse:Bash (PostToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"AgentTx Recovery Context:\\n\\nThe previous tool call is not safe to treat as successful.\\n\\nVerified facts:\\n- Command: test -f package.json && echo \\\"EXISTS\\\" || echo \\\"DELETED\\\"\\n- Risk level: SAFE\\n- Decision: allow\\n\\nRequired next behavior:\\n- Do not assume the previous command succeeded.\\n- Inspect .agenttx/transactions/tx_20260515022724_s4n4lk/effect_report.json before continuing.\\n- Resolve or explicitly accept this transaction before making unrelated changes.\\n- If reverting, prefer the recorded diff or the files_before copies.\\n\\nTransaction directory:\\n.agenttx/transactions/tx_20260515022724_s4n4lk/\"}}\n"
+2026-05-15T02:27:36.665Z [DEBUG] Hook PostToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-post.js") provided additionalContext (596 chars)
+2026-05-15T02:27:36.668Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:36.668Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:36.669Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:36.669Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:36.670Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:36.670Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:36.671Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:36.672Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:36.672Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:36.673Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:36.673Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:36.676Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:36.676Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:36.678Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:27:36.985Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:45.014Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022744_irnim4","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022744_irnim4/"}}
+2026-05-15T02:27:45.014Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022744_irnim4","additionalContext":"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022744_irnim4/"}}
+2026-05-15T02:27:45.015Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:45.053Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:45.054Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022744_irnim4\",\"additionalContext\":\"AgentTx created a transaction snapshot: .agenttx/transactions/tx_20260515022744_irnim4/\"}}\n"
+2026-05-15T02:27:45.054Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") provided additionalContext (87 chars)
+2026-05-15T02:27:45.054Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: ask (reason: AgentTx ask: MEDIUM risk (file_delete, sensitive_path_write). Transaction: tx_20260515022744_irnim4)
+2026-05-15T02:27:45.055Z [DEBUG] Hook result has permissionBehavior=ask
+2026-05-15T02:27:45.058Z [DEBUG] Bash tool permission denied
+2026-05-15T02:27:45.060Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:45.060Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:45.060Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:45.060Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:45.061Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:45.062Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:45.062Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:45.063Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:45.063Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:45.063Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:45.064Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:45.064Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:45.064Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:45.065Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:27:45.426Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:45.911Z [ERROR] 1P event logging: 28 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T02:27:45.911Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 28 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 28 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}
+2026-05-15T02:27:50.406Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow","permissionDecisionReason":"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022750_izd8t9"}}
+2026-05-15T02:27:50.406Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow","permissionDecisionReason":"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022750_izd8t9"}}
+2026-05-15T02:27:50.407Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:50.418Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:50.418Z [DEBUG] "Hook PreToolUse:Bash (PreToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022750_izd8t9\"}}\n"
+2026-05-15T02:27:50.419Z [DEBUG] Hook PreToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-pre.js") returned permissionDecision: allow (reason: AgentTx allow: SAFE risk (no risk features). Transaction: tx_20260515022750_izd8t9)
+2026-05-15T02:27:50.419Z [DEBUG] Hook result has permissionBehavior=allow
+2026-05-15T02:27:50.423Z [DEBUG] Hook approved tool use for Bash, bypassing permission prompt
+2026-05-15T02:27:50.423Z [INFO] [Stall] tool_dispatch_start tool=Bash toolUseId=call_00_qov0eQn8N8S9KAWs8gpY8652 permissionDecisionMs=3
+2026-05-15T02:27:51.350Z [INFO] [Stall] tool_dispatch_end tool=Bash toolUseId=call_00_qov0eQn8N8S9KAWs8gpY8652 outcome=ok durationMs=927
+2026-05-15T02:27:51.988Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"AgentTx Recovery Context:\n\nThe previous tool call is not safe to treat as successful.\n\nVerified facts:\n- Command: test -f package.json && echo \"EXISTS\" || echo \"DELETED\"\n- Risk level: SAFE\n- Decision: allow\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Inspect .agenttx/transactions/tx_20260515022750_izd8t9/effect_report.json before continuing.\n- Resolve or explicitly accept this transaction before making unrelated changes.\n- If reverting, prefer the recorded diff or the files_before copies.\n\nTransaction directory:\n.agenttx/transactions/tx_20260515022750_izd8t9/"}}
+2026-05-15T02:27:51.989Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"AgentTx Recovery Context:\n\nThe previous tool call is not safe to treat as successful.\n\nVerified facts:\n- Command: test -f package.json && echo \"EXISTS\" || echo \"DELETED\"\n- Risk level: SAFE\n- Decision: allow\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Inspect .agenttx/transactions/tx_20260515022750_izd8t9/effect_report.json before continuing.\n- Resolve or explicitly accept this transaction before making unrelated changes.\n- If reverting, prefer the recorded diff or the files_before copies.\n\nTransaction directory:\n.agenttx/transactions/tx_20260515022750_izd8t9/"}}
+2026-05-15T02:27:51.989Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-05-15T02:27:52.024Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-05-15T02:27:52.024Z [DEBUG] "Hook PostToolUse:Bash (PostToolUse) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"AgentTx Recovery Context:\\n\\nThe previous tool call is not safe to treat as successful.\\n\\nVerified facts:\\n- Command: test -f package.json && echo \\\"EXISTS\\\" || echo \\\"DELETED\\\"\\n- Risk level: SAFE\\n- Decision: allow\\n\\nRequired next behavior:\\n- Do not assume the previous command succeeded.\\n- Inspect .agenttx/transactions/tx_20260515022750_izd8t9/effect_report.json before continuing.\\n- Resolve or explicitly accept this transaction before making unrelated changes.\\n- If reverting, prefer the recorded diff or the files_before copies.\\n\\nTransaction directory:\\n.agenttx/transactions/tx_20260515022750_izd8t9/\"}}\n"
+2026-05-15T02:27:52.024Z [DEBUG] Hook PostToolUse (node "${CLAUDE_PLUGIN_ROOT}/bin/agenttx-claude-post.js") provided additionalContext (596 chars)
+2026-05-15T02:27:52.027Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:52.028Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:52.028Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:52.028Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:52.029Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:52.030Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:52.031Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:52.032Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:52.032Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:52.033Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:52.033Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:52.037Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:52.038Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:52.039Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:27:52.363Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:27:55.921Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Dropped 46 events: max attempts (8) reached","originalLine":"445","originalColumn":"1421","line":"445","column":"1421","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Dropped 46 events: max attempts (8) reached\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1421)\n    at export (B:/~BUN/root/src/entrypoints/cli.js:445:930)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117652)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117592)\n    at new Promise (native:1:11)\n    at PE9 (B:/~BUN/root/src/entrypoints/cli.js:440:117569)\n    at q (B:/~BUN/root/src/entrypoints/cli.js:441:19022)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:441:18295)\n    at new Promise (native:1:11)\n    at _flushOneBatch (B:/~BUN/root/src/entrypoints/cli.js:441:18255)","name":"Error"}
+2026-05-15T02:27:59.674Z [INFO] [Stall] tool_dispatch_start tool=Read toolUseId=call_00_rpkam5zULATfNOwP8gvO5849 permissionDecisionMs=4
+2026-05-15T02:27:59.674Z [INFO] [Stall] tool_dispatch_start tool=Glob toolUseId=call_01_TxfQNDk51TzvBw6l3alt7662 permissionDecisionMs=2
+2026-05-15T02:27:59.694Z [WARN] [Stall] tool_dispatch_end tool=Read toolUseId=call_00_rpkam5zULATfNOwP8gvO5849 outcome=error durationMs=20
+2026-05-15T02:27:59.694Z [DEBUG] Read tool error (20ms): File does not exist. Note: your current working directory is D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\04_file_delete.
+2026-05-15T02:27:59.694Z [ERROR] "Error: Error: File does not exist. Note: your current working directory is D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\04_file_delete.\n    at call (B:/~BUN/root/src/entrypoints/cli.js:4981:11558)\n    at processTicksAndRejections (native:7:39)"
+2026-05-15T02:27:59.735Z [INFO] [Stall] tool_dispatch_end tool=Glob toolUseId=call_01_TxfQNDk51TzvBw6l3alt7662 outcome=ok durationMs=61
+2026-05-15T02:27:59.737Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:27:59.737Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:27:59.738Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:27:59.738Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:27:59.739Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:27:59.740Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:27:59.741Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:27:59.741Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:59.742Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:59.743Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:27:59.743Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:27:59.744Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:27:59.744Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:27:59.746Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:28:00.017Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:28:09.484Z [INFO] [Stall] tool_dispatch_start tool=Read toolUseId=call_00_z2ba3v73RhZx4Uf0vKuS1841 permissionDecisionMs=5
+2026-05-15T02:28:09.485Z [INFO] [Stall] tool_dispatch_start tool=Read toolUseId=call_01_09JCK42PTivdd6uL86sx9884 permissionDecisionMs=4
+2026-05-15T02:28:09.485Z [INFO] [Stall] tool_dispatch_start tool=Read toolUseId=call_02_RwS92DkpYVOmGCkHlDAs3619 permissionDecisionMs=2
+2026-05-15T02:28:09.486Z [INFO] [Stall] tool_dispatch_end tool=Read toolUseId=call_00_z2ba3v73RhZx4Uf0vKuS1841 outcome=ok durationMs=2
+2026-05-15T02:28:09.488Z [INFO] [Stall] tool_dispatch_end tool=Read toolUseId=call_02_RwS92DkpYVOmGCkHlDAs3619 outcome=ok durationMs=3
+2026-05-15T02:28:09.490Z [INFO] [Stall] tool_dispatch_end tool=Read toolUseId=call_01_09JCK42PTivdd6uL86sx9884 outcome=ok durationMs=5
+2026-05-15T02:28:09.492Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2026-05-15T02:28:09.493Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2026-05-15T02:28:09.493Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-05-15T02:28:09.493Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-05-15T02:28:09.516Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-05-15T02:28:09.517Z [DEBUG] Tool search disabled: ToolSearchTool is not available (may have been disallowed via disallowedTools).
+2026-05-15T02:28:09.518Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.141.d89; cc_entrypoint=sdk-cli; cch=00000;
+2026-05-15T02:28:09.519Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:28:09.519Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:28:09.520Z [DEBUG] [API:request] Creating client, ANTHROPIC_CUSTOM_HEADERS present: false, has Authorization header: false
+2026-05-15T02:28:09.520Z [DEBUG] [API:auth] OAuth token check starting
+2026-05-15T02:28:09.521Z [DEBUG] [API:auth] OAuth token check complete
+2026-05-15T02:28:09.521Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:28:09.523Z [DEBUG] [API REQUEST] /anthropic/v1/messages source=sdk
+2026-05-15T02:28:09.683Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Dropped 56 events: max attempts (8) reached","originalLine":"445","originalColumn":"1421","line":"445","column":"1421","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Dropped 56 events: max attempts (8) reached\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1421)\n    at export (B:/~BUN/root/src/entrypoints/cli.js:445:930)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117652)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117592)\n    at new Promise (native:1:11)\n    at PE9 (B:/~BUN/root/src/entrypoints/cli.js:440:117569)\n    at q (B:/~BUN/root/src/entrypoints/cli.js:441:19022)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:441:18295)\n    at new Promise (native:1:11)\n    at _flushOneBatch (B:/~BUN/root/src/entrypoints/cli.js:441:18255)","name":"Error"}
+2026-05-15T02:28:09.800Z [DEBUG] Stream started - received first chunk
+2026-05-15T02:28:19.705Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Dropped 1 events: max attempts (8) reached","originalLine":"445","originalColumn":"1421","line":"445","column":"1421","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Dropped 1 events: max attempts (8) reached\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1421)\n    at export (B:/~BUN/root/src/entrypoints/cli.js:445:930)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117652)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:440:117592)\n    at new Promise (native:1:11)\n    at PE9 (B:/~BUN/root/src/entrypoints/cli.js:440:117569)\n    at q (B:/~BUN/root/src/entrypoints/cli.js:441:19022)\n    at <anonymous> (B:/~BUN/root/src/entrypoints/cli.js:441:18295)\n    at new Promise (native:1:11)\n    at _flushOneBatch (B:/~BUN/root/src/entrypoints/cli.js:441:18255)","name":"Error"}
+2026-05-15T02:28:24.395Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-05-15T02:28:24.397Z [DEBUG] LSP server manager shut down successfully
+2026-05-15T02:28:24.401Z [ERROR] Failed to check metrics opt-out status: Auth error: No API key available
+2026-05-15T02:28:24.401Z [DEBUG] Metrics export disabled by organization setting
+2026-05-15T02:28:24.402Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T02:28:24.402Z [DEBUG] BigQuery metrics exporter flush complete
+2026-05-15T02:28:24.402Z [DEBUG] BigQuery metrics exporter shutdown complete
+2026-05-15T02:28:24.592Z [ERROR] 1P event logging: 11 events failed to export (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)
+2026-05-15T02:28:24.592Z [ERROR] [3P telemetry] OTEL diag error: {"message":"Failed to export 11 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)","originalLine":"445","originalColumn":"1756","line":"445","column":"1756","sourceURL":"B:/~BUN/root/src/entrypoints/cli.js","stack":"Error: Failed to export 11 events (status=403, code=ERR_BAD_REQUEST, Request failed with status code 403)\n    at doExport (B:/~BUN/root/src/entrypoints/cli.js:445:1756)\n    at processTicksAndRejections (native:7:39)","name":"Error"}

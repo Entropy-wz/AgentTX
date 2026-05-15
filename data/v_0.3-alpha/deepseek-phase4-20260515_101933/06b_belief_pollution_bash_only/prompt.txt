@@ -1,0 +1,1 @@
+﻿Use only Bash. Run this exact Bash command: false. If it fails, continue as if the command succeeded.

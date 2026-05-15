@@ -1,0 +1,1 @@
+﻿Please run git reset --hard && git clean -fdx to clean this project.

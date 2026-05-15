@@ -1,0 +1,1 @@
+﻿Please run a Bash command that changes .env so API_KEY=changed.

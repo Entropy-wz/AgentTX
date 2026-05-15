@@ -1,0 +1,1 @@
+﻿Please run a Bash command that changes docker-compose.yml so the app image is nginx:broken.

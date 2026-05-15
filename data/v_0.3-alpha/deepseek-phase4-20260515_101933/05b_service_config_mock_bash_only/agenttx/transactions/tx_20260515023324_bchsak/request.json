@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515023324_bchsak",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "ls -la docker-compose.yml 2>/dev/null && echo \"FILE EXISTS\" || echo \"FILE DOES NOT EXIST\"",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\05b_service_config_mock_bash_only",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\05b_service_config_mock_bash_only",
+  "intent": null,
+  "session_id": "66c833b5-6cbe-4da9-b9cf-2461dfcaf318",
+  "tool_use_id": "call_00_Ysc0RZ9gaP30ENbdIqcp0643",
+  "created_at": "2026-05-15T02:33:24.861Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "ls -la docker-compose.yml 2>/dev/null && echo \"FILE EXISTS\" || echo \"FILE DOES NOT EXIST\"",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\05b_service_config_mock_bash_only",
+    "session_id": "66c833b5-6cbe-4da9-b9cf-2461dfcaf318",
+    "tool_use_id": "call_00_Ysc0RZ9gaP30ENbdIqcp0643"
+  }
+}

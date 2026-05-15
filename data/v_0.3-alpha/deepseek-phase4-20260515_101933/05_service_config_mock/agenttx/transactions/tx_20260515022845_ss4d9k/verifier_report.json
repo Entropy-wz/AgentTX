@@ -1,0 +1,9 @@
+{
+  "schema_version": "gate4.verifier_report.v0.3",
+  "tx_id": "tx_20260515022845_ss4d9k",
+  "status": "not_needed",
+  "checks": [],
+  "residual_effects": 0,
+  "residual_warnings": [],
+  "updated_at": "2026-05-15T02:28:57.990Z"
+}

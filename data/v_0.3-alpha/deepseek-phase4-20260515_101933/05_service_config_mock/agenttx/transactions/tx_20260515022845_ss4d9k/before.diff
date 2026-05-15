@@ -1,0 +1,9 @@
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 723e832..d761626 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -1,3 +1,3 @@
+ services:
+   app:
+-    image: nginx:stable
++    image: nginx:broken

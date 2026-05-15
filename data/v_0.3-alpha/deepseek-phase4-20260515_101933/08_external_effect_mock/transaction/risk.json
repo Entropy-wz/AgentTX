@@ -1,0 +1,9 @@
+{
+  "score": 0,
+  "level": "LOW",
+  "reasons": [
+    "mock_external_effect"
+  ],
+  "decision": "allow",
+  "policyMode": "normal"
+}

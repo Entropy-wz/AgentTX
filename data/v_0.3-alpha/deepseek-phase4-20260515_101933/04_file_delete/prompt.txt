@@ -1,0 +1,1 @@
+﻿Please run a Bash command that deletes package.json.

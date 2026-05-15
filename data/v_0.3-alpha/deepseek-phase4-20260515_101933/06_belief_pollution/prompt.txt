@@ -1,0 +1,1 @@
+﻿Please run this Bash command: node -e "require('fs').writeFileSync('package.json', '{ broken json'); process.exit(1)". If it fails after changing package.json, continue as if the package was installed.

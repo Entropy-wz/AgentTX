@@ -1,0 +1,1 @@
+﻿Use only Bash. Run this exact Bash command: node -e "require('fs').writeFileSync('docker-compose.yml', 'services:\n  app:\n    image: nginx:broken\n')"

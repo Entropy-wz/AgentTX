@@ -1,0 +1,10 @@
+{
+  "case_id": "L4_external_effect_mock",
+  "passed": true,
+  "transaction_id": "tx_l4_external_effect_mock_20260515023037",
+  "metrics": {
+    "irreversible_external_detected": true
+  },
+  "missing_artifacts": [],
+  "oracle_failures": []
+}

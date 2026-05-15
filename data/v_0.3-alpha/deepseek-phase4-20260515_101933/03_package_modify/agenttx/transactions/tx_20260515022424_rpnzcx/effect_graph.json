@@ -1,0 +1,8 @@
+{
+  "schema_version": "gate3.effect_graph.v0.3",
+  "tx_id": "tx_20260515022424_rpnzcx",
+  "nodes": [],
+  "edges": [],
+  "note": "Gate 3 graph is rebuilt from request.json, effects.jsonl, and recovery_report.json.",
+  "updated_at": "2026-05-15T02:24:24.150Z"
+}

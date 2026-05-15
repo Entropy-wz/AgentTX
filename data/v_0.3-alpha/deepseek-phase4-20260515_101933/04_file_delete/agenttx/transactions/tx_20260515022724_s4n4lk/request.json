@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515022724_s4n4lk",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "test -f package.json && echo \"EXISTS\" || echo \"DELETED\"",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\04_file_delete",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\04_file_delete",
+  "intent": null,
+  "session_id": "4394ea06-54d9-4bda-aa5d-52135c977128",
+  "tool_use_id": "call_00_h8Jse804T12y0UWws3Dl6831",
+  "created_at": "2026-05-15T02:27:24.057Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "test -f package.json && echo \"EXISTS\" || echo \"DELETED\"",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\04_file_delete",
+    "session_id": "4394ea06-54d9-4bda-aa5d-52135c977128",
+    "tool_use_id": "call_00_h8Jse804T12y0UWws3Dl6831"
+  }
+}

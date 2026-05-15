@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515022612_b3d3ds",
+  "command_exit": {
+    "code": null,
+    "stdout_tail": "{\n  \"schema_version\": \"gate1.verifier_report.v0.3\",\n  \"tx_id\": \"tx_20260515022352_8gwwze\",\n  \"result\": \"not_run\",\n  \"state_verification\": {},\n  \"effect_verification\": {},\n  \"belief_verification\": {},\n  \"residual_risks\": [],\n  \"note\": \"Gate 1 defines verifier report shape. Verifier execution starts in a later gate.\",\n  \"updated_at\": \"2026-05-15T02:23:52.246Z\"\n}"
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:26:14.560Z"
+}

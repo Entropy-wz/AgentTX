@@ -1,0 +1,17 @@
+[
+  {
+    "contract_id": "tx_l4_external_effect_mock_20260515023037_rc_001",
+    "tx_id": "tx_l4_external_effect_mock_20260515023037",
+    "effect_id": "tx_l4_external_effect_mock_20260515023037_effect_external_001",
+    "target": "https://example.test/api",
+    "updated_at": "2026-05-15T02:30:43.095Z",
+    "required_action": "residual_warning",
+    "blocking": true,
+    "reversible": false,
+    "verification": {
+      "type": "unrecoverable_external"
+    },
+    "status": "residual",
+    "residual_warning": "External effect cannot be reverted by AgentTx: https://example.test/api."
+  }
+]

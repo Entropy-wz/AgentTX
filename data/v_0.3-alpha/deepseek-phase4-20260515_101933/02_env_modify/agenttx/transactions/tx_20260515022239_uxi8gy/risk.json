@@ -1,0 +1,9 @@
+{
+  "score": 30,
+  "level": "MEDIUM",
+  "reasons": [
+    "sensitive_path_write"
+  ],
+  "decision": "ask",
+  "policyMode": "normal"
+}

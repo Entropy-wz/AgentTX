@@ -1,0 +1,11 @@
+{
+  "tx_id": "tx_20260515023238_8rz9hy",
+  "command_exit": {
+    "code": null
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:32:51.381Z"
+}

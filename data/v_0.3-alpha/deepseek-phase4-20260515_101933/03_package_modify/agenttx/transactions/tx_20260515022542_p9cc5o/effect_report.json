@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515022542_p9cc5o",
+  "command_exit": {
+    "code": null,
+    "stdout_tail": "before.diff\nbelief_report.json\neffect_graph.json\neffects.jsonl\nfiles_before\nrecovery_contracts.json\nrecovery_report.json\nrequest.json\nrisk.json\nrisk_report.json\nsnapshot_before.json\ntransaction.json\nverifier_report.json"
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:25:44.609Z"
+}

@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515022124_mhl651",
+  "command_exit": {
+    "code": null,
+    "stdout_tail": "total 23\ndrwxr-xr-x 1 lenovo 197121    0  5月 15 10:21 .\ndrwxr-xr-x 1 lenovo 197121    0  5月 15 10:21 ..\n-rw-r--r-- 1 lenovo 197121    0  5月 15 10:21 before.diff\n-rw-r--r-- 1 lenovo 197121  213  5月 15 10:21 belief_report.json\n-rw-r--r-- 1 lenovo 197121  260  5月 15 10:21 effect_graph.json\n-rw-r--r-- 1 lenovo 197121    0  5月 15 10:21 effects.jsonl\ndrwxr-xr-x 1 lenovo 197121    0  5月 15 10:21 files_before\n-rw-r--r-- 1 lenovo 197121    3  5月 15 10:21 recovery_contracts.json\n-rw-r--r-- 1 lenovo 197121  222  5月 15 10:21 recovery_report.json\n-rw-r--r-- 1 lenovo 197121  955  5月 15 10:21 request.json\n-rw-r--r-- 1 lenovo 197121  133  5月 15 10:21 risk.json\n-rw-r--r-- 1 lenovo 197121  133  5月 15 10:21 risk_report.json\n-rw-r--r-- 1 lenovo 197121 1667  5月 15 10:21 snapshot_before.json\n-rw-r--r-- 1 lenovo 197121  869  5月 15 10:21 transaction.json\n-rw-r--r-- 1 lenovo 197121  363  5月 15 10:21 verifier_report.json"
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:21:25.881Z"
+}

@@ -1,0 +1,10 @@
+{
+  "score": 55,
+  "level": "MEDIUM",
+  "reasons": [
+    "file_delete",
+    "sensitive_path_write"
+  ],
+  "decision": "ask",
+  "policyMode": "normal"
+}

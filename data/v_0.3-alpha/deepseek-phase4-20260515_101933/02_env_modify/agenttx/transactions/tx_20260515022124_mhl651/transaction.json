@@ -1,0 +1,24 @@
+{
+  "tx_id": "tx_20260515022124_mhl651",
+  "session_id": "c4db172e-4238-40b4-9082-b4370fea2c9d",
+  "tool_use_id": "call_00_3tcjCbFslJ67NDeZ2aUZ8559",
+  "agent": "claude-code",
+  "tool_name": "Bash",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\02_env_modify",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\02_env_modify",
+  "command": "ls -la .agenttx/transactions/tx_20260515022113_y6jp72/ 2>/dev/null || echo \"DIR_NOT_FOUND\"",
+  "risk": {
+    "score": 0,
+    "level": "SAFE",
+    "reasons": [],
+    "decision": "allow",
+    "policyMode": "normal"
+  },
+  "snapshot_before": "snapshot_before.json",
+  "snapshot_after": "snapshot_after.json",
+  "effect_report": "effect_report.json",
+  "recovery_report": "recovery.md",
+  "status": "completed",
+  "created_at": "2026-05-15T02:21:24.217Z",
+  "updated_at": "2026-05-15T02:21:25.885Z"
+}

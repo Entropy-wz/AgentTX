@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515023302_k3d5di",
+  "command_exit": {
+    "code": null,
+    "stdout_tail": "{\n  \"tx_id\": \"tx_20260515023238_8rz9hy\",\n  \"command_exit\": {\n    \"code\": null\n  },\n  \"git_changed\": false,\n  \"file_effects\": [],\n  \"unexpected_effects\": [],\n  \"needs_recovery_context\": true,\n  \"created_at\": \"2026-05-15T02:32:51.381Z\"\n}"
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:33:03.914Z"
+}

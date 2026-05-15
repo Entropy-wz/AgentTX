@@ -1,0 +1,20 @@
+{
+  "schema_version": "gate4.verifier_report.v0.3",
+  "tx_id": "tx_l4_external_effect_mock_20260515023037",
+  "status": "unrecoverable",
+  "checks": [
+    {
+      "contract_id": "tx_l4_external_effect_mock_20260515023037_rc_001",
+      "effect_id": "tx_l4_external_effect_mock_20260515023037_effect_external_001",
+      "target": "https://example.test/api",
+      "verification_type": "unrecoverable_external",
+      "passed": false,
+      "reason": "External effect cannot be reverted by AgentTx: https://example.test/api."
+    }
+  ],
+  "residual_effects": 1,
+  "residual_warnings": [
+    "External effect cannot be reverted by AgentTx: https://example.test/api."
+  ],
+  "updated_at": "2026-05-15T02:30:43.095Z"
+}

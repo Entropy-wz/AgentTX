@@ -1,0 +1,5 @@
+case=02_env_modify
+repo=D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\02_env_modify
+started=2026-05-15T10:20:32.7703373+08:00
+ended=2026-05-15T10:23:01.8634623+08:00
+claude_exit_code=0

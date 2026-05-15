@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515022025_w05wr4",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "cd \"D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\01_git_clean_block\" && git reset --hard && git clean -fdx",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\01_git_clean_block",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\01_git_clean_block",
+  "intent": null,
+  "session_id": "f8e7c821-cff7-4062-9132-6cbeff87aab0",
+  "tool_use_id": "call_00_gS40Zy0MvMi7Hp0Qzogi5230",
+  "created_at": "2026-05-15T02:20:25.630Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "cd \"D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\01_git_clean_block\" && git reset --hard && git clean -fdx",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\01_git_clean_block",
+    "session_id": "f8e7c821-cff7-4062-9132-6cbeff87aab0",
+    "tool_use_id": "call_00_gS40Zy0MvMi7Hp0Qzogi5230"
+  }
+}

@@ -1,0 +1,1 @@
+{"effect_id":"tx_l4_external_effect_mock_20260515023037_effect_external_001","tx_id":"tx_l4_external_effect_mock_20260515023037","type":"external.network","target":"https://example.test/api","status":"observed","recoverability":"unknown","sensitive":false,"expected":false,"evidence":{"source":"agent-chaos-linux-mini"},"observed_at":"2026-05-15T02:30:43.091Z"}

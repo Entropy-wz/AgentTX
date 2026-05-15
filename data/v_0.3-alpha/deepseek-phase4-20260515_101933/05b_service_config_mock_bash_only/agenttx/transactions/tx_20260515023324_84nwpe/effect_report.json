@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515023324_84nwpe",
+  "command_exit": {
+    "code": null,
+    "stdout_tail": "tx_20260515023238_8rz9hy\ntx_20260515023302_k3d5di\ntx_20260515023314_keypmj\ntx_20260515023324_84nwpe\ntx_20260515023324_bchsak"
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T02:33:26.598Z"
+}

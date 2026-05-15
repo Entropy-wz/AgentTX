@@ -1,0 +1,46 @@
+{
+  "schema_version": "gate3.effect_graph.v0.3",
+  "tx_id": "tx_l4_external_effect_mock_20260515023037",
+  "nodes": [
+    {
+      "id": "cmd_tx_l4_external_effect_mock_20260515023037",
+      "type": "command.executed",
+      "target": "curl https://example.test/api",
+      "status": "completed",
+      "evidence": {
+        "source": "request.json",
+        "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\agenttx-L4_external_effect_mock-o3jZgW",
+        "tool_name": "Bash",
+        "host": "benchmark"
+      }
+    },
+    {
+      "id": "tx_l4_external_effect_mock_20260515023037_effect_external_001",
+      "type": "external.network",
+      "target": "https://example.test/api",
+      "status": "observed",
+      "evidence": {
+        "source": "effects.jsonl",
+        "recoverability": "unknown",
+        "sensitive": false,
+        "expected": false,
+        "effect_evidence": {
+          "source": "agent-chaos-linux-mini"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmd_tx_l4_external_effect_mock_20260515023037",
+      "to": "tx_l4_external_effect_mock_20260515023037_effect_external_001",
+      "relation": "caused",
+      "evidence": {
+        "source": "effects.jsonl",
+        "command": "curl https://example.test/api"
+      }
+    }
+  ],
+  "note": "Gate 3 builds causal, dependency, belief-taint, and recovery-requirement edges from typed effects.",
+  "updated_at": "2026-05-15T02:30:43.094Z"
+}

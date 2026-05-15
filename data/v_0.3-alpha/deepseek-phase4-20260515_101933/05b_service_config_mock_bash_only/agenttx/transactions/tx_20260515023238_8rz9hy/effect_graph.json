@@ -1,0 +1,21 @@
+{
+  "schema_version": "gate3.effect_graph.v0.3",
+  "tx_id": "tx_20260515023238_8rz9hy",
+  "nodes": [
+    {
+      "id": "cmd_tx_20260515023238_8rz9hy",
+      "type": "command.executed",
+      "target": "node -e \"require('fs').writeFileSync('docker-compose.yml', '')\"",
+      "status": "completed",
+      "evidence": {
+        "source": "request.json",
+        "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-phase4-20260515_101933\\workspaces\\05b_service_config_mock_bash_only",
+        "tool_name": "Bash",
+        "host": "claude-code"
+      }
+    }
+  ],
+  "edges": [],
+  "note": "Gate 3 builds causal, dependency, belief-taint, and recovery-requirement edges from typed effects.",
+  "updated_at": "2026-05-15T02:32:51.391Z"
+}

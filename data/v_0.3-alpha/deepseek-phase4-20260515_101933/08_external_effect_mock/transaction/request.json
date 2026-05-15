@@ -1,0 +1,18 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_l4_external_effect_mock_20260515023037",
+  "agent": "benchmark",
+  "host": "benchmark",
+  "tool_name": "Bash",
+  "command": "curl https://example.test/api",
+  "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\agenttx-L4_external_effect_mock-o3jZgW",
+  "git_root": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\agenttx-L4_external_effect_mock-o3jZgW",
+  "intent": "mock external network effect",
+  "created_at": "2026-05-15T02:30:43.091Z",
+  "raw_request": {
+    "agent": "unknown",
+    "tool_name": "Bash",
+    "command": "curl https://example.test/api",
+    "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\agenttx-L4_external_effect_mock-o3jZgW"
+  }
+}

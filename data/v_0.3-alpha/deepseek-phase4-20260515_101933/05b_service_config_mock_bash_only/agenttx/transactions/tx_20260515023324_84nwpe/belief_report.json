@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate5.belief_report.v0.3",
+  "tx_id": "tx_20260515023324_84nwpe",
+  "tainted_claims": [],
+  "verified_state": {
+    "command_exit": "unknown",
+    "recovery_status": "not_needed",
+    "changed_files": [],
+    "restored_files": [],
+    "residual_warnings": []
+  },
+  "repair_actions": [],
+  "clean_summary": "",
+  "metrics": {
+    "tcr_claim_detected": false,
+    "tcr_claim_invalidated": false,
+    "asr_clean_summary_generated": false,
+    "asr_requires_replan": false
+  },
+  "note": "Gate 5 repairs only the current transaction context. It does not update long-term memory.",
+  "updated_at": "2026-05-15T02:33:26.611Z"
+}

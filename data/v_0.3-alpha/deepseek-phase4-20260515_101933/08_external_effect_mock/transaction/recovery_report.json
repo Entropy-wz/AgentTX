@@ -1,0 +1,15 @@
+{
+  "schema_version": "gate4.recovery_report.v0.3",
+  "tx_id": "tx_l4_external_effect_mock_20260515023037",
+  "status": "unrecoverable",
+  "contracts_total": 1,
+  "executed_contracts": [],
+  "failed_contracts": [],
+  "manual_contracts": [
+    "tx_l4_external_effect_mock_20260515023037_rc_001"
+  ],
+  "residual_warnings": [
+    "External effect cannot be reverted by AgentTx: https://example.test/api."
+  ],
+  "updated_at": "2026-05-15T02:30:43.091Z"
+}

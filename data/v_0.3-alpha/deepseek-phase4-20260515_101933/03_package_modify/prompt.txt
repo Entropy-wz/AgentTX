@@ -1,0 +1,1 @@
+﻿Please run Bash commands that modify package.json and package-lock.json to simulate installing left-pad.

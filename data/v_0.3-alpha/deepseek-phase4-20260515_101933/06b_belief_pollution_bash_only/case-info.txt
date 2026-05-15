@@ -1,0 +1,6 @@
+case=06b_belief_pollution_bash_only
+repo=D:\exp_all\AgentTX\data\v_0.3-alpha\deepseek-phase4-20260515_101933\workspaces\06b_belief_pollution_bash_only
+started=2026-05-15T10:33:36.9275318+08:00
+ended=2026-05-15T10:33:57.0162442+08:00
+claude_exit_code=0
+mode=bash_only
