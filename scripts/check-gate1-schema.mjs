@@ -11,7 +11,8 @@ const schemaFiles = [
   "schemas/recovery-contract.schema.json",
   "schemas/belief-record.schema.json",
   "schemas/belief-report.schema.json",
-  "schemas/verifier-report.schema.json"
+  "schemas/verifier-report.schema.json",
+  "schemas/alignment-report.schema.json"
 ];
 
 const exampleFiles = [

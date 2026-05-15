@@ -7,12 +7,14 @@ import {
   Gate1TypedEffect,
   Gate4RecoveryContract,
   Gate4VerifierReport,
-  Gate1VerifierReport
+  Gate1VerifierReport,
+  AlignmentReport
 } from "./schema/artifactTypes.js";
 import { TransactionStore as LegacyTransactionStore } from "../store/transactionStore.js";
 import { buildEffectGraph } from "../effects/effectGraphBuilder.js";
 import { runRecoveryContracts } from "../recovery/recoveryContracts.js";
 import { buildBeliefRepairReport } from "../belief/beliefRepair.js";
+import { buildAlignmentReport } from "../alignment/alignmentVerifier.js";
 
 export class StandardTransactionStore {
   constructor(private readonly legacyStore: LegacyTransactionStore) {}
@@ -30,6 +32,7 @@ export class StandardTransactionStore {
     this.writeJson(txId, "recovery_report.json", emptyRecoveryReport(txId));
     this.writeJson(txId, "belief_report.json", emptyBeliefReport(txId));
     this.writeJson(txId, "verifier_report.json", emptyVerifierReport(txId));
+    this.writeJson(txId, "alignment_report.json", emptyAlignmentReport(txId));
   }
 
   writeRequest(txId: string, request: unknown): void {
@@ -107,6 +110,12 @@ export class StandardTransactionStore {
     const report = buildBeliefRepairReport(this.txDir(txId), txId);
     this.writeJson(txId, "belief_report.json", report);
     return report.clean_summary || null;
+  }
+
+  writeAlignment(txId: string): AlignmentReport {
+    const report = buildAlignmentReport(this.txDir(txId), txId);
+    this.writeJson(txId, "alignment_report.json", report);
+    return report;
   }
 
   private ensureJsonl(txId: string): void {
@@ -217,6 +226,48 @@ function emptyVerifierReport(txId: string): Gate1VerifierReport {
     belief_verification: {},
     residual_risks: [],
     note: "Gate 1 defines verifier report shape. Verifier execution starts in a later gate.",
+    updated_at: new Date().toISOString()
+  };
+}
+
+function emptyAlignmentReport(txId: string): AlignmentReport {
+  return {
+    schema_version: "agenttx.alignment_report.v0.3",
+    tx_id: txId,
+    status: "unknown",
+    os_state: {
+      verifier_status: "not_run",
+      residual_effects: 0,
+      residual_warnings: [],
+      failed_checks: []
+    },
+    memory_state: {
+      memory_store_present: false,
+      retrievable_tainted_memory_ids: [],
+      invalidated_claim_present: false,
+      clean_memory_installed: false,
+      memory_clean: true
+    },
+    summary_consistency: {
+      checked: false,
+      consistent: true,
+      issues: []
+    },
+    continuation_risk: {
+      invalidated_claims: [],
+      source_command: null,
+      related_effect_targets: [],
+      warning_required: false,
+      warning: null
+    },
+    metrics: {
+      aos_aligned: false,
+      aos_score: 0,
+      memory_clean: true,
+      summary_consistent: true,
+      residual_count: 0
+    },
+    note: "Alignment verifier has not run yet.",
     updated_at: new Date().toISOString()
   };
 }

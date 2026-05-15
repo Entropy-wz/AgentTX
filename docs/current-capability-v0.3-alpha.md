@@ -24,6 +24,7 @@ v0.3-alpha is a functionality validation phase. It is not a paper-writing phase 
 - Belief repair report for failed-command false success assumptions.
 - Externalized AgentTx memory repair for failed-command belief pollution.
 - Memory Capsule injection before relevant future Claude Code Bash commands.
+- Belief-OS alignment report over observable workspace state and AgentTx externalized memory.
 - Six-case mini benchmark.
 - Baseline, ablation, and metric calculation for the mini benchmark.
 
@@ -42,6 +43,7 @@ recovery_contracts.json
 recovery_report.json
 verifier_report.json
 belief_report.json
+alignment_report.json
 ```
 
 Legacy compatibility files can also appear:
@@ -61,6 +63,14 @@ AgentTx memory repair writes workspace-level files:
 ```
 
 Claude `PreToolUse` can inject a small memory capsule from these files when a future command is relevant to verified clean memory.
+
+Alignment verification writes:
+
+```text
+.agenttx/transactions/<tx_id>/alignment_report.json
+```
+
+It reports `aligned`, `aligned_with_warnings`, `misaligned`, or `unknown`.
 
 ## Supported Effect Types
 
@@ -107,6 +117,13 @@ Memory Capsule rules:
 - Capsules select at most 3 memory records.
 - Capsules use an 800 character budget.
 
+Alignment behavior:
+
+- `aligned` means observable verifier state, AgentTx memory, and clean summary agree.
+- `aligned_with_warnings` preserves residual effects and partial recovery warnings.
+- `misaligned` means memory pollution or verifier/summary contradiction remains.
+- `unknown` means required evidence is missing.
+
 ## Mini Benchmark Coverage
 
 The current mini benchmark covers:
@@ -137,5 +154,6 @@ npm run check:v0.3-alpha
 - AgentTx does not provide full system rollback.
 - AgentTx does not edit opaque Claude/model-provider memory.
 - Memory Capsule is not full long-term memory replay.
+- Alignment verifier is observable-state alignment, not full OS or Claude-internal alignment.
 - Recovery is limited to transaction-scoped file restoration and created-file deletion.
 - The benchmark is a six-case mini benchmark, not the full 25-case benchmark.

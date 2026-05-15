@@ -8,6 +8,7 @@ import { PostToolRequest, PreToolRequest, Transaction } from "../types.js";
 import { TransactionStore } from "../store/transactionStore.js";
 import { StandardTransactionStore } from "./transaction-store.js";
 import { AgentMemoryStore } from "../belief/memoryStore.js";
+import { buildContinuationWarning } from "../alignment/continuationGuard.js";
 import {
   blockedCommandEffect,
   failedCommandEffect,
@@ -64,7 +65,8 @@ export class AgentTxCore {
     }
     const snapshotContext = tx.snapshot_before ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/` : null;
     const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, risk);
-    const additionalContext = [snapshotContext, capsule?.text].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
+    const alignmentWarning = buildContinuationWarning(gitRoot, request.command, risk);
+    const additionalContext = [snapshotContext, capsule?.text, alignmentWarning].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
 
     return {
       tx,
@@ -126,6 +128,7 @@ export class AgentTxCore {
     standardStore.writeRecovery(tx.tx_id, reportContext);
     standardStore.runRecovery(tx.tx_id, tx.git_root);
     reportContext = standardStore.writeBeliefRepair(tx.tx_id) ?? reportContext;
+    standardStore.writeAlignment(tx.tx_id);
 
     store.save(tx);
     return { tx, reportContext };

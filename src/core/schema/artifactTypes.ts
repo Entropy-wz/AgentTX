@@ -191,6 +191,51 @@ export interface Gate1VerifierReport {
   updated_at: string;
 }
 
+export interface AlignmentReport {
+  schema_version: "agenttx.alignment_report.v0.3";
+  tx_id: string;
+  status: "aligned" | "aligned_with_warnings" | "misaligned" | "unknown";
+  os_state: {
+    verifier_status: Gate4VerifierReport["status"] | "not_run" | "missing";
+    residual_effects: number;
+    residual_warnings: string[];
+    failed_checks: Array<{
+      contract_id: string;
+      effect_id: string;
+      target: string;
+      reason?: string;
+    }>;
+  };
+  memory_state: {
+    memory_store_present: boolean;
+    retrievable_tainted_memory_ids: string[];
+    invalidated_claim_present: boolean;
+    clean_memory_installed: boolean;
+    memory_clean: boolean;
+  };
+  summary_consistency: {
+    checked: boolean;
+    consistent: boolean;
+    issues: string[];
+  };
+  continuation_risk: {
+    invalidated_claims: string[];
+    source_command: string | null;
+    related_effect_targets: string[];
+    warning_required: boolean;
+    warning: string | null;
+  };
+  metrics: {
+    aos_aligned: boolean;
+    aos_score: number;
+    memory_clean: boolean;
+    summary_consistent: boolean;
+    residual_count: number;
+  };
+  note: string;
+  updated_at: string;
+}
+
 export function toRequestArtifact(tx: Transaction, request: PreToolRequest): Gate1RequestArtifact {
   return {
     schema_version: "gate1.request.v0.3",

@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/alignment-report.schema.json",
+  "title": "AgentTx Belief-OS Alignment Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tx_id",
+    "status",
+    "os_state",
+    "memory_state",
+    "summary_consistency",
+    "continuation_risk",
+    "metrics",
+    "note",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["agenttx.alignment_report.v0.3"]
+    },
+    "tx_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["aligned", "aligned_with_warnings", "misaligned", "unknown"]
+    },
+    "os_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verifier_status", "residual_effects", "residual_warnings", "failed_checks"],
+      "properties": {
+        "verifier_status": {
+          "type": "string",
+          "enum": ["recovered", "partially_recovered", "unrecoverable", "not_needed", "not_run", "missing"]
+        },
+        "residual_effects": { "type": "number" },
+        "residual_warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "failed_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["contract_id", "effect_id", "target"],
+            "properties": {
+              "contract_id": { "type": "string" },
+              "effect_id": { "type": "string" },
+              "target": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "memory_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "memory_store_present",
+        "retrievable_tainted_memory_ids",
+        "invalidated_claim_present",
+        "clean_memory_installed",
+        "memory_clean"
+      ],
+      "properties": {
+        "memory_store_present": { "type": "boolean" },
+        "retrievable_tainted_memory_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "invalidated_claim_present": { "type": "boolean" },
+        "clean_memory_installed": { "type": "boolean" },
+        "memory_clean": { "type": "boolean" }
+      }
+    },
+    "summary_consistency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checked", "consistent", "issues"],
+      "properties": {
+        "checked": { "type": "boolean" },
+        "consistent": { "type": "boolean" },
+        "issues": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "continuation_risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invalidated_claims",
+        "source_command",
+        "related_effect_targets",
+        "warning_required",
+        "warning"
+      ],
+      "properties": {
+        "invalidated_claims": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "source_command": {
+          "type": ["string", "null"]
+        },
+        "related_effect_targets": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "warning_required": { "type": "boolean" },
+        "warning": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aos_aligned", "aos_score", "memory_clean", "summary_consistent", "residual_count"],
+      "properties": {
+        "aos_aligned": { "type": "boolean" },
+        "aos_score": { "type": "number" },
+        "memory_clean": { "type": "boolean" },
+        "summary_consistent": { "type": "boolean" },
+        "residual_count": { "type": "number" }
+      }
+    },
+    "note": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

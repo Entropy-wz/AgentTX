@@ -8,6 +8,7 @@ const commands = [
   "npm run check:gate4",
   "npm run check:gate5",
   "npm run check:memory-capsule",
+  "npm run check:alignment",
   "npm run check:gate6",
   "npm run benchmark:mini"
 ];

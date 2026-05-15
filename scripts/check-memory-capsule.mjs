@@ -97,7 +97,7 @@ assert(context.includes("Do not assume the package is installed."), "capsule sho
 assert(context.includes("Re-check verified state before continuing."), "capsule should require verified-state check");
 assert(context.length <= 1000, "combined additional context should stay small");
 
-const capsule = context.slice(context.indexOf("AgentTx Memory Capsule:"));
+const capsule = context.slice(context.indexOf("AgentTx Memory Capsule:")).split("\n\nAgentTx Alignment Warning:")[0];
 assert(capsule.length <= 800, "memory capsule should respect 800 character budget");
 assert(!capsule.includes("npm package was installed successfully"), "raw invalidated claim should not be injected");
 

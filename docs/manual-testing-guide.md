@@ -149,6 +149,8 @@ Expected AgentTx behavior:
 
 - Failed command produces `command.failed`.
 - `belief_report.json` uses `gate5.belief_report.v0.3`.
+- `alignment_report.json` uses `agenttx.alignment_report.v0.3`.
+- If file recovery and memory repair both succeed, `alignment_report.json` should show `aligned`.
 - `tainted_claims` includes an invalidated success claim.
 - `.agenttx/memory/belief_memory.jsonl` contains an invalidated non-retrievable tainted record and a clean retrievable summary.
 - `.agenttx/memory/memory_repair_log.jsonl` records the memory repair actions.
@@ -192,6 +194,7 @@ Please run npm install left-pad again.
 Expected AgentTx behavior:
 
 - `PreToolUse additionalContext` includes `AgentTx Memory Capsule`.
+- If the previous transaction invalidated a related success claim, it also includes `AgentTx Alignment Warning`.
 - The capsule says not to assume the package is installed.
 - The capsule is short and factual, not full JSON.
 - The capsule does not include invalidated or non-retrievable memory.
@@ -205,6 +208,35 @@ Please run git status.
 Expected AgentTx behavior:
 
 - No `AgentTx Memory Capsule` is injected for this SAFE command.
+- No `AgentTx Alignment Warning` is injected for this SAFE command.
+
+## Belief-OS Alignment Verifier
+
+After running the belief pollution scenario, inspect:
+
+```text
+.agenttx/transactions/<tx_id>/alignment_report.json
+```
+
+Expected AgentTx behavior:
+
+- `status` is `aligned` if the file was restored and memory is clean.
+- `memory_state.memory_clean` is `true`.
+- `summary_consistency.consistent` is `true`.
+- `metrics.aos_aligned` is `true`.
+
+Run:
+
+```bash
+npm run check:alignment
+```
+
+Expected result:
+
+- recovered package failure reports `aligned`;
+- mock external residual reports `aligned_with_warnings`;
+- conflicting summary/verifier data reports `misaligned`;
+- related follow-up command receives `AgentTx Alignment Warning`.
 
 ## Automated v0.3-alpha Check
 
@@ -220,4 +252,5 @@ Expected result:
 - Schema checks pass.
 - Gate 1, Gate 3, Gate 4, Gate 5, and Gate 6 checks pass.
 - Memory Capsule checks pass.
+- Alignment checks pass.
 - Mini benchmark runs successfully.
