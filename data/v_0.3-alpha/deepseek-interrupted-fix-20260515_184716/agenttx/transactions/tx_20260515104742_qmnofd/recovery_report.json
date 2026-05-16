@@ -1,0 +1,8 @@
+{
+  "schema_version": "gate1.recovery_report.v0.3",
+  "tx_id": "tx_20260515104742_qmnofd",
+  "status": "not_required",
+  "recovery_context": null,
+  "legacy_recovery_md": null,
+  "updated_at": "2026-05-15T10:47:42.734Z"
+}

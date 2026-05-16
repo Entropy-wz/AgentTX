@@ -10,3 +10,4 @@ dist-benchmark/
 benchmarks/**/runs/*
 !benchmarks/**/runs/README.md
 benchmarks/results/
+validation/

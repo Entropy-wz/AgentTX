@@ -28,6 +28,10 @@ observed_at
 | `filesystem.create` | file effect | A file appeared after the command |
 | `filesystem.modify` | file effect | A tracked or important file changed |
 | `filesystem.delete` | file effect | A file was removed |
+| `package.modify` | derived file effect | Package metadata or lockfile changed |
+| `env.modify` | derived file effect | Environment configuration changed |
+| `credential.modify` | derived file effect | Credential-adjacent file changed |
+| `service.config.modify` | derived file effect | Service configuration file changed |
 | `config.modify` | derived file effect | Sensitive or agent configuration changed |
 | `external.network` | mock/future external effect | External network-side effect that AgentTx cannot automatically revert |
 
@@ -41,4 +45,6 @@ observed_at
 
 ## Non-goals
 
-Gate 3 consumes this stream to build `effect_graph.json`. Gate 4 consumes it to build recovery contracts and verifier reports. External effects are represented as residual warnings rather than fake rollbacks.
+Semantic effects are derived from observable file changes. They do not claim real package manager, service, process, or network state capture.
+
+Gate 3 consumes this stream to build `effect_graph.json`. Gate 4 consumes it to build graph recovery plans, recovery contracts, and verifier reports. External effects are represented as residual warnings rather than fake rollbacks.

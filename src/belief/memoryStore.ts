@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { RiskReport } from "../types.js";
+import { propagateTaint, TaintPropagationSummary } from "./taintPropagation.js";
 
 export type MemoryRecordType =
   | "tool_observation"
@@ -14,6 +15,13 @@ export type MemoryTruthStatus = "verified" | "unverified" | "contradicted" | "in
 
 export type MemoryTaintStatus = "clean" | "tainted" | "repaired";
 
+export type MemoryRepairAction =
+  | "none"
+  | "invalidate"
+  | "install_clean_summary"
+  | "mark_unretrievable"
+  | "taint_dependent_memory";
+
 export interface AgentMemoryRecord {
   memory_id: string;
   tx_id: string;
@@ -25,7 +33,7 @@ export interface AgentMemoryRecord {
   retrievable: boolean;
   depends_on_effects: string[];
   depends_on_memory: string[];
-  repair_action?: "none" | "invalidate" | "install_clean_summary" | "mark_unretrievable";
+  repair_action?: MemoryRepairAction;
   repaired_by?: string;
   created_at: string;
   updated_at: string;
@@ -34,7 +42,7 @@ export interface AgentMemoryRecord {
 export interface MemoryRepairEvent {
   event_id: string;
   tx_id: string;
-  action: "record" | "invalidate" | "install_clean_summary" | "verify";
+  action: "record" | "propagate_taint" | "invalidate" | "install_clean_summary" | "verify";
   memory_id?: string;
   target_memory_id?: string;
   result: "ok" | "failed";
@@ -51,6 +59,7 @@ export interface MemoryRepairSummary {
   clean_memory_ids: string[];
   retrievable_tainted_memory_ids: string[];
   memory_clean: boolean;
+  taint_propagation?: TaintPropagationSummary;
   events: MemoryRepairEvent[];
   updated_at: string;
 }
@@ -147,7 +156,7 @@ export class AgentMemoryStore {
     const now = new Date().toISOString();
     const records = this.load().filter((record) =>
       record.tx_id !== input.txId
-      || !["command.failed", "failed_command", "belief_report.clean_summary"].includes(record.source)
+      || !["command.failed", "failed_command", "tainted_summary_candidate", "tainted_planner_candidate", "tainted_memory_write_candidate", "belief_report.clean_summary"].includes(record.source)
     );
     const events: MemoryRepairEvent[] = [];
 
@@ -178,20 +187,50 @@ export class AgentMemoryStore {
     records.push(claim);
     events.push(event(input.txId, "record", "ok", `Recorded tainted claim from evidence: ${input.evidence.join(", ")}`, claim.memory_id));
 
-    const tainted = records.filter((record) =>
-      record.tx_id === input.txId
-      && (record.taint_status === "tainted" || record.truth_status === "contradicted")
-      && record.retrievable
-    );
-    for (const record of tainted) {
-      record.truth_status = "invalidated";
-      record.taint_status = "repaired";
-      record.retrievable = false;
-      record.repair_action = "invalidate";
-      record.repaired_by = input.txId;
-      record.updated_at = now;
-      events.push(event(input.txId, "invalidate", "ok", "Marked tainted memory as invalidated and non-retrievable.", record.memory_id));
-    }
+    const taintedSummary = this.createRecord({
+      txId: input.txId,
+      type: "task_summary",
+      content: `Potentially tainted summary candidate: ${input.invalidatedClaim}`,
+      source: "tainted_summary_candidate",
+      truthStatus: "unverified",
+      taintStatus: "tainted",
+      retrievable: true,
+      dependsOnEffects: input.effectIds,
+      dependsOnMemory: [claim.memory_id],
+      repairAction: "taint_dependent_memory"
+    });
+    records.push(taintedSummary);
+    events.push(event(input.txId, "record", "ok", "Recorded tainted task summary candidate dependent on invalidated claim.", taintedSummary.memory_id));
+
+    const taintedPlanner = this.createRecord({
+      txId: input.txId,
+      type: "planner_update",
+      content: `Potentially tainted planner update: continue after ${input.command}`,
+      source: "tainted_planner_candidate",
+      truthStatus: "unverified",
+      taintStatus: "tainted",
+      retrievable: true,
+      dependsOnEffects: input.effectIds,
+      dependsOnMemory: [taintedSummary.memory_id],
+      repairAction: "taint_dependent_memory"
+    });
+    records.push(taintedPlanner);
+    events.push(event(input.txId, "record", "ok", "Recorded tainted planner update candidate dependent on tainted summary.", taintedPlanner.memory_id));
+
+    const taintedMemoryWrite = this.createRecord({
+      txId: input.txId,
+      type: "memory_write",
+      content: `Potentially tainted memory write candidate: ${input.invalidatedClaim}`,
+      source: "tainted_memory_write_candidate",
+      truthStatus: "unverified",
+      taintStatus: "tainted",
+      retrievable: true,
+      dependsOnEffects: input.effectIds,
+      dependsOnMemory: [taintedPlanner.memory_id],
+      repairAction: "taint_dependent_memory"
+    });
+    records.push(taintedMemoryWrite);
+    events.push(event(input.txId, "record", "ok", "Recorded tainted memory write candidate dependent on tainted planner update.", taintedMemoryWrite.memory_id));
 
     const cleanMemory = this.createRecord({
       txId: input.txId,
@@ -202,13 +241,31 @@ export class AgentMemoryStore {
       taintStatus: "clean",
       retrievable: true,
       dependsOnEffects: input.effectIds,
-      dependsOnMemory: [observation.memory_id, ...tainted.map((record) => record.memory_id)],
+      dependsOnMemory: [observation.memory_id, claim.memory_id, taintedSummary.memory_id, taintedPlanner.memory_id, taintedMemoryWrite.memory_id],
       repairAction: "install_clean_summary"
     });
     records.push(cleanMemory);
+    const propagation = propagateTaint({
+      txDir: this.txDir,
+      txId: input.txId,
+      records,
+      taintRootIds: [claim.memory_id],
+      cleanReplacementIds: [cleanMemory.memory_id]
+    });
+    events.push(event(
+      input.txId,
+      "propagate_taint",
+      "ok",
+      `Propagated taint to ${propagation.summary.invalidated_descendant_ids.length} dependent memory records.`,
+      claim.memory_id
+    ));
+    for (const memoryId of propagation.summary.invalidated_descendant_ids) {
+      events.push(event(input.txId, "invalidate", "ok", "Marked tainted dependent memory as invalidated and non-retrievable.", memoryId));
+    }
     events.push(event(input.txId, "install_clean_summary", "ok", "Installed verified clean summary memory.", cleanMemory.memory_id));
 
-    const retrievableTainted = records.filter((record) => record.retrievable && record.taint_status === "tainted");
+    const finalRecords = propagation.records;
+    const retrievableTainted = finalRecords.filter((record) => record.retrievable && record.taint_status === "tainted");
     events.push(event(
       input.txId,
       "verify",
@@ -218,18 +275,19 @@ export class AgentMemoryStore {
         : `${retrievableTainted.length} retrievable tainted memory records remain.`
     ));
 
-    this.writeAll(records);
+    this.writeAll(finalRecords);
     this.appendEvents(events);
 
     return {
       schema_version: "agenttx.memory_repair.v0.3",
       tx_id: input.txId,
       store_path: path.relative(path.resolve(this.txDir, "..", ".."), this.memoryFile).replace(/\\/g, "/"),
-      tainted_memory_ids: tainted.map((record) => record.memory_id),
-      invalidated_memory_ids: tainted.map((record) => record.memory_id),
+      tainted_memory_ids: [claim.memory_id, taintedSummary.memory_id, taintedPlanner.memory_id, taintedMemoryWrite.memory_id],
+      invalidated_memory_ids: propagation.summary.invalidated_descendant_ids,
       clean_memory_ids: [cleanMemory.memory_id],
       retrievable_tainted_memory_ids: retrievableTainted.map((record) => record.memory_id),
       memory_clean: retrievableTainted.length === 0,
+      taint_propagation: propagation.summary,
       events,
       updated_at: new Date().toISOString()
     };

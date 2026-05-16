@@ -1,0 +1,12 @@
+{
+  "tx_id": "tx_20260515104742_qmnofd",
+  "command_exit": {
+    "code": 1,
+    "stderr_tail": "AgentTx inferred an interrupted command because Claude Code did not deliver PostToolUse before the next tool call."
+  },
+  "git_changed": false,
+  "file_effects": [],
+  "unexpected_effects": [],
+  "needs_recovery_context": true,
+  "created_at": "2026-05-15T10:47:48.477Z"
+}

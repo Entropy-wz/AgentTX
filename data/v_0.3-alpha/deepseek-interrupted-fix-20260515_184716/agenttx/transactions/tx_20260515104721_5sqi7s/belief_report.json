@@ -1,0 +1,108 @@
+{
+  "schema_version": "gate5.belief_report.v0.3",
+  "tx_id": "tx_20260515104721_5sqi7s",
+  "tainted_claims": [
+    {
+      "claim": "previous command completed successfully",
+      "source": "failed_command",
+      "status": "invalidated",
+      "evidence": [
+        "command.failed",
+        "exit_code:1",
+        "filesystem.modify:package.json"
+      ]
+    }
+  ],
+  "verified_state": {
+    "command_exit": "failed",
+    "recovery_status": "recovered",
+    "changed_files": [
+      "package.json"
+    ],
+    "restored_files": [
+      "package.json"
+    ],
+    "residual_warnings": []
+  },
+  "repair_actions": [
+    "invalidate_success_claim",
+    "inject_verified_state",
+    "require_replan_before_continuation"
+  ],
+  "clean_summary": "AgentTx Belief Repair Summary:\n\nTransaction: tx_20260515104721_5sqi7s\nCommand: node break-package.js\nInvalidated claim: previous command completed successfully\nThe previous tool call is not safe to treat as successful.\n\nVerified state:\n- command_exit: failed\n- recovery_status: recovered\n- changed_files: package.json\n- restored_files: package.json\n- residual_warnings: none\n\nRequired next behavior:\n- Do not assume the previous command succeeded.\n- Use the verified state above as the source of truth.\n- Replan before continuing.\n\nMemory repair:\n- invalidated_memory_records: 1\n- clean_memory_records: 1\n- retrievable_tainted_memory_records: 0\n- Do not retrieve or reuse invalidated memory records from this transaction.",
+  "memory_repair": {
+    "schema_version": "agenttx.memory_repair.v0.3",
+    "store_path": "memory/belief_memory.jsonl",
+    "tainted_memory_ids": [
+      "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully"
+    ],
+    "invalidated_memory_ids": [
+      "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully"
+    ],
+    "clean_memory_ids": [
+      "tx_20260515104721_5sqi7s_mem_task_summary_belief_report_clean_summary_AgentTx_Belief_Repair_Summary_T"
+    ],
+    "retrievable_tainted_memory_ids": [],
+    "memory_clean": true,
+    "events": [
+      {
+        "event_id": "tx_20260515104721_5sqi7s_memory_event_1778842062717_8qyh73",
+        "tx_id": "tx_20260515104721_5sqi7s",
+        "action": "record",
+        "memory_id": "tx_20260515104721_5sqi7s_mem_tool_observation_command_failed_Command_failed_node_break_package_js",
+        "target_memory_id": "tx_20260515104721_5sqi7s_mem_tool_observation_command_failed_Command_failed_node_break_package_js",
+        "result": "ok",
+        "detail": "Recorded verified failed-command observation.",
+        "created_at": "2026-05-15T10:47:42.717Z"
+      },
+      {
+        "event_id": "tx_20260515104721_5sqi7s_memory_event_1778842062717_7uryo7",
+        "tx_id": "tx_20260515104721_5sqi7s",
+        "action": "record",
+        "memory_id": "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully",
+        "target_memory_id": "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully",
+        "result": "ok",
+        "detail": "Recorded tainted claim from evidence: command.failed, exit_code:1, filesystem.modify:package.json",
+        "created_at": "2026-05-15T10:47:42.717Z"
+      },
+      {
+        "event_id": "tx_20260515104721_5sqi7s_memory_event_1778842062717_xogzvu",
+        "tx_id": "tx_20260515104721_5sqi7s",
+        "action": "invalidate",
+        "memory_id": "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully",
+        "target_memory_id": "tx_20260515104721_5sqi7s_mem_agent_claim_failed_command_previous_command_completed_successfully",
+        "result": "ok",
+        "detail": "Marked tainted memory as invalidated and non-retrievable.",
+        "created_at": "2026-05-15T10:47:42.717Z"
+      },
+      {
+        "event_id": "tx_20260515104721_5sqi7s_memory_event_1778842062717_a7nyqn",
+        "tx_id": "tx_20260515104721_5sqi7s",
+        "action": "install_clean_summary",
+        "memory_id": "tx_20260515104721_5sqi7s_mem_task_summary_belief_report_clean_summary_AgentTx_Belief_Repair_Summary_T",
+        "target_memory_id": "tx_20260515104721_5sqi7s_mem_task_summary_belief_report_clean_summary_AgentTx_Belief_Repair_Summary_T",
+        "result": "ok",
+        "detail": "Installed verified clean summary memory.",
+        "created_at": "2026-05-15T10:47:42.717Z"
+      },
+      {
+        "event_id": "tx_20260515104721_5sqi7s_memory_event_1778842062717_ba4lub",
+        "tx_id": "tx_20260515104721_5sqi7s",
+        "action": "verify",
+        "result": "ok",
+        "detail": "No retrievable tainted memory remains.",
+        "created_at": "2026-05-15T10:47:42.717Z"
+      }
+    ]
+  },
+  "metrics": {
+    "tcr_claim_detected": true,
+    "tcr_claim_invalidated": true,
+    "asr_clean_summary_generated": true,
+    "asr_requires_replan": true,
+    "memory_clean": true,
+    "tainted_memory_retrievable": false
+  },
+  "note": "AgentTx repairs its own externalized memory store. It cannot edit opaque model-provider memory.",
+  "updated_at": "2026-05-15T10:47:42.719Z"
+}

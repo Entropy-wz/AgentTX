@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/graph-recovery-plan.schema.json",
+  "title": "AgentTx Graph Recovery Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tx_id",
+    "mode",
+    "fallback_reason",
+    "ordered_effect_ids",
+    "candidates",
+    "deduplicated_effect_ids",
+    "residual_effect_ids",
+    "graph_edges_used",
+    "note",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "agenttx.graph_recovery_plan.v0.3" },
+    "tx_id": { "type": "string" },
+    "mode": { "enum": ["graph", "fallback"] },
+    "fallback_reason": { "type": ["string", "null"] },
+    "ordered_effect_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "order",
+          "effect_id",
+          "type",
+          "target",
+          "required_action",
+          "blocking",
+          "reversible",
+          "verification",
+          "residual_warning",
+          "reason",
+          "source_node_id",
+          "depends_on_effect_ids",
+          "merged_from_effect_ids"
+        ],
+        "properties": {
+          "order": { "type": "number" },
+          "effect_id": { "type": "string" },
+          "type": {
+            "enum": [
+              "filesystem.create",
+              "filesystem.modify",
+              "filesystem.delete",
+              "package.modify",
+              "env.modify",
+              "credential.modify",
+              "service.config.modify",
+              "config.modify",
+              "external.network",
+              "command.blocked",
+              "command.failed"
+            ]
+          },
+          "target": { "type": "string" },
+          "required_action": {
+            "enum": ["restore_file", "delete_created_file", "manual_review", "residual_warning"]
+          },
+          "blocking": { "type": "boolean" },
+          "reversible": { "type": "boolean" },
+          "verification": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {
+                "enum": ["hash_match", "file_absent", "manual_required", "unrecoverable_external"]
+              },
+              "expected_hash": { "type": ["string", "null"] }
+            },
+            "additionalProperties": false
+          },
+          "residual_warning": { "type": ["string", "null"] },
+          "reason": { "type": "string" },
+          "source_node_id": { "type": "string" },
+          "depends_on_effect_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "merged_from_effect_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "deduplicated_effect_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "residual_effect_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "graph_edges_used": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "relation"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": {
+            "enum": ["caused", "dependency", "may_taint", "requires_recovery", "derived_from"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "note": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

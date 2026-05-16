@@ -48,7 +48,7 @@
     "retrievable": { "type": "boolean" },
     "repair_action": {
       "type": "string",
-      "enum": ["none", "invalidate", "install_clean_summary", "mark_unretrievable"]
+      "enum": ["none", "invalidate", "install_clean_summary", "mark_unretrievable", "taint_dependent_memory"]
     },
     "repaired_by": { "type": "string" },
     "created_at": { "type": "string" },

@@ -74,7 +74,14 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["invalidate_success_claim", "inject_verified_state", "require_replan_before_continuation"]
+        "enum": [
+          "invalidate_success_claim",
+          "inject_verified_state",
+          "require_replan_before_continuation",
+          "taint_dependent_memory",
+          "invalidate_tainted_descendants",
+          "install_clean_summary"
+        ]
       }
     },
     "clean_summary": { "type": "string" },
@@ -114,6 +121,53 @@
           "items": { "type": "string" }
         },
         "memory_clean": { "type": "boolean" },
+        "taint_propagation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "graph_path",
+            "taint_roots",
+            "propagated_memory_ids",
+            "invalidated_descendant_ids",
+            "clean_replacement_memory_ids",
+            "propagation_depth",
+            "graph_path_summary",
+            "retrievable_tainted_memory_ids"
+          ],
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "enum": ["agenttx.taint_propagation.v0.3"]
+            },
+            "graph_path": { "type": "string" },
+            "taint_roots": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "propagated_memory_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "invalidated_descendant_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "clean_replacement_memory_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "propagation_depth": { "type": "number" },
+            "graph_path_summary": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "retrievable_tainted_memory_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
         "events": {
           "type": "array",
           "items": {
@@ -124,7 +178,7 @@
               "event_id": { "type": "string" },
               "action": {
                 "type": "string",
-                "enum": ["record", "invalidate", "install_clean_summary", "verify"]
+                "enum": ["record", "propagate_taint", "invalidate", "install_clean_summary", "verify"]
               },
               "memory_id": { "type": "string" },
               "target_memory_id": { "type": "string" },

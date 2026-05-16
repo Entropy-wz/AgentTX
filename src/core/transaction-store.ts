@@ -175,12 +175,19 @@ function recoveryReportFrom(
   txDir: string,
   contracts: Gate4RecoveryContract[],
   verifier: Gate4VerifierReport,
-  execution: {
-    executed: string[];
-    failed: string[];
-    manual: string[];
-    residualWarnings: string[];
-  }
+    execution: {
+      executed: string[];
+      failed: string[];
+      manual: string[];
+      residualWarnings: string[];
+      graphPlan?: {
+        mode: "graph" | "fallback";
+        fallback_reason: string | null;
+        ordered_effect_ids: string[];
+        deduplicated_effect_ids: string[];
+        residual_effect_ids: string[];
+      };
+    }
 ): Gate1RecoveryReport {
   return {
     schema_version: "gate4.recovery_report.v0.3",
@@ -192,6 +199,16 @@ function recoveryReportFrom(
     failed_contracts: execution.failed,
     manual_contracts: execution.manual,
     residual_warnings: verifier.residual_warnings,
+    graph_recovery: execution.graphPlan
+      ? {
+          plan_path: "graph_recovery_plan.json",
+          mode: execution.graphPlan.mode,
+          ordered_effect_ids: execution.graphPlan.ordered_effect_ids,
+          deduplicated_effect_ids: execution.graphPlan.deduplicated_effect_ids,
+          residual_effect_ids: execution.graphPlan.residual_effect_ids,
+          fallback_reason: execution.graphPlan.fallback_reason
+        }
+      : undefined,
     updated_at: new Date().toISOString()
   };
 }

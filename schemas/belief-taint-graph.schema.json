@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.dev/schemas/belief-taint-graph.schema.json",
+  "title": "AgentTx Belief Taint Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tx_id",
+    "nodes",
+    "edges",
+    "taint_roots",
+    "propagated_memory_ids",
+    "invalidated_memory_ids",
+    "clean_replacement_memory_ids",
+    "propagation_depth",
+    "path_summary",
+    "note",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "agenttx.belief_taint_graph.v0.3" },
+    "tx_id": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "memory_id", "tx_id", "type", "truth_status", "taint_status", "retrievable", "content"],
+        "properties": {
+          "id": { "type": "string" },
+          "memory_id": { "type": "string" },
+          "tx_id": { "type": "string" },
+          "type": {
+            "enum": ["tool_observation", "agent_claim", "task_summary", "recovery_context", "memory_write", "planner_update"]
+          },
+          "truth_status": { "enum": ["verified", "unverified", "contradicted", "invalidated"] },
+          "taint_status": { "enum": ["clean", "tainted", "repaired"] },
+          "retrievable": { "type": "boolean" },
+          "content": { "type": "string" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "relation", "evidence"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": {
+            "enum": ["observed_by", "may_generate", "depends_on", "taints", "repaired_by"]
+          },
+          "evidence": { "type": "object" }
+        }
+      }
+    },
+    "taint_roots": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "propagated_memory_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "invalidated_memory_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "clean_replacement_memory_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "propagation_depth": { "type": "number" },
+    "path_summary": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "note": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}

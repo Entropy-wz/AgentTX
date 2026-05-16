@@ -83,19 +83,19 @@ function effectNode(effect: Gate1TypedEffect): EffectGraphNode {
 }
 
 function addDerivedConfigEdges(effects: Gate1TypedEffect[], edges: Map<string, EffectGraphEdge>): void {
-  for (const configEffect of effects.filter((effect) => effect.type === "config.modify")) {
-    const derivedFrom = typeof configEffect.evidence.derived_from === "string"
-      ? configEffect.evidence.derived_from
-      : effects.find((effect) => effect.target === configEffect.target && effect.effect_id !== configEffect.effect_id)?.effect_id;
+  for (const semanticEffect of effects.filter(isSemanticEffect)) {
+    const derivedFrom = typeof semanticEffect.evidence.derived_from === "string"
+      ? semanticEffect.evidence.derived_from
+      : effects.find((effect) => effect.target === semanticEffect.target && effect.effect_id !== semanticEffect.effect_id)?.effect_id;
 
     if (derivedFrom) {
       addEdge(edges, {
         from: derivedFrom,
-        to: configEffect.effect_id,
+        to: semanticEffect.effect_id,
         relation: "derived_from",
         evidence: {
-          source: "config.modify",
-          target: configEffect.target
+          source: semanticEffect.type,
+          target: semanticEffect.target
         }
       });
     }
@@ -103,8 +103,8 @@ function addDerivedConfigEdges(effects: Gate1TypedEffect[], edges: Map<string, E
 }
 
 function addPackageDependencyEdges(effects: Gate1TypedEffect[], edges: Map<string, EffectGraphEdge>): void {
-  const packageJsonEffects = effects.filter((effect) => normalizeTarget(effect.target) === "package.json");
-  const lockfileEffects = effects.filter((effect) => LOCKFILES.has(normalizeTarget(effect.target)));
+  const packageJsonEffects = effects.filter((effect) => effect.type !== "package.modify" && normalizeTarget(effect.target) === "package.json");
+  const lockfileEffects = effects.filter((effect) => effect.type !== "package.modify" && LOCKFILES.has(normalizeTarget(effect.target)));
 
   for (const packageEffect of packageJsonEffects) {
     for (const lockfileEffect of lockfileEffects) {
@@ -162,7 +162,13 @@ function addRecoveryRequirements(
   nodes: Map<string, EffectGraphNode>,
   edges: Map<string, EffectGraphEdge>
 ): void {
-  for (const effect of effects.filter((candidate) => candidate.type === "config.modify" || isCredentialTarget(candidate.target))) {
+  for (const effect of effects.filter((candidate) =>
+    candidate.type === "config.modify"
+    || candidate.type === "credential.modify"
+    || candidate.type === "env.modify"
+    || candidate.type === "service.config.modify"
+    || isCredentialTarget(candidate.target)
+  )) {
     const recoveryNodeId = `recovery_${stableId(effect.target)}`;
     addNode(nodes, {
       id: recoveryNodeId,
@@ -186,6 +192,14 @@ function addRecoveryRequirements(
       }
     });
   }
+}
+
+function isSemanticEffect(effect: Gate1TypedEffect): boolean {
+  return effect.type === "config.modify"
+    || effect.type === "package.modify"
+    || effect.type === "env.modify"
+    || effect.type === "credential.modify"
+    || effect.type === "service.config.modify";
 }
 
 function addNode(nodes: Map<string, EffectGraphNode>, node: EffectGraphNode): void {

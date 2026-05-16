@@ -20,6 +20,12 @@ The output is:
 effect_graph.json
 ```
 
+Gate 4 recovery now consumes this graph through:
+
+```text
+graph_recovery_plan.json
+```
+
 ## Node types
 
 | Node type | Meaning |
@@ -58,4 +64,4 @@ Every line in `effects.jsonl` must have a node in `effect_graph.json`.
 
 ## Non-goals
 
-Gate 3 does not execute recovery, prove causal necessity, or perform full belief repair. It builds a readable graph that later verifier and recovery gates can consume.
+Gate 3 itself does not execute recovery, prove causal necessity, or perform full belief repair. Gate 4 consumes the graph to order recovery, deduplicate semantic effects, and preserve residual warnings.

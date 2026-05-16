@@ -24,13 +24,11 @@
         "filesystem.modify",
         "filesystem.delete",
         "package.modify",
+        "env.modify",
+        "credential.modify",
+        "service.config.modify",
         "config.modify",
         "external.network",
-        "process.spawn",
-        "network.listen",
-        "service.reload",
-        "credential.touch",
-        "belief.write",
         "command.blocked",
         "command.failed"
       ]

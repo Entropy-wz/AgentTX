@@ -10,6 +10,11 @@ import { StandardTransactionStore } from "./transaction-store.js";
 import { AgentMemoryStore } from "../belief/memoryStore.js";
 import { buildContinuationWarning } from "../alignment/continuationGuard.js";
 import { recoverInterruptedTransactions } from "./interruptedTransactionRecovery.js";
+import { enforceRuntimeContracts } from "../belief/runtimeContractEnforcer.js";
+import {
+  createRuntimeContractsForBeliefReport,
+  updateRuntimeContractsAfterCommand
+} from "../belief/runtimeContractVerifier.js";
 import {
   blockedCommandEffect,
   failedCommandEffect,
@@ -29,6 +34,16 @@ export class AgentTxCore {
     const store = new TransactionStore(gitRoot);
     const interruptedRecoveries = recoverInterruptedTransactions(store);
     const risk = classifyCommand(request.command, { cwd, gitRoot, policyMode: request.policyMode });
+    const runtimeContract = enforceRuntimeContracts(gitRoot, request.command, risk);
+    const effectiveRisk = runtimeContract.decision === "ask"
+      ? {
+          ...risk,
+          score: Math.max(risk.score, 55),
+          level: risk.level === "SAFE" || risk.level === "LOW" ? "MEDIUM" as const : risk.level,
+          decision: "ask" as const,
+          reasons: [...new Set([...risk.reasons, "belief_runtime_contract_open"])]
+        }
+      : risk;
     const now = new Date().toISOString();
     const tx: Transaction = {
       tx_id: createTxId(),
@@ -39,12 +54,12 @@ export class AgentTxCore {
       cwd,
       git_root: gitRoot,
       command: request.command,
-      risk,
+      risk: effectiveRisk,
       snapshot_before: null,
       snapshot_after: null,
       effect_report: null,
       recovery_report: null,
-      status: risk.decision === "deny" ? "blocked" : "pending",
+      status: effectiveRisk.decision === "deny" ? "blocked" : "pending",
       created_at: now,
       updated_at: now
     };
@@ -55,23 +70,29 @@ export class AgentTxCore {
     standardStore.writeRequest(tx.tx_id, toRequestArtifact(tx, request));
     standardStore.writeRisk(tx.tx_id, toRiskArtifact(risk));
 
-    if (risk.decision === "deny") {
+    if (effectiveRisk.decision === "deny") {
       standardStore.appendEffect(blockedCommandEffect(tx));
     }
 
-    if (risk.decision !== "deny" && shouldCreateSnapshot(request.tool_name, risk.score, request.command)) {
+    if (effectiveRisk.decision !== "deny" && shouldCreateSnapshot(request.tool_name, effectiveRisk.score, request.command)) {
       createSnapshot(store, tx, "before");
       tx.snapshot_before = "snapshot_before.json";
       tx.updated_at = new Date().toISOString();
       store.save(tx);
     }
-    const snapshotContext = tx.snapshot_before && shouldMentionSnapshot(risk.score, request.command)
+    const snapshotContext = tx.snapshot_before && shouldMentionSnapshot(effectiveRisk.score, request.command)
       ? `AgentTx created a transaction snapshot: .agenttx/transactions/${tx.tx_id}/`
       : null;
-    const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, risk);
-    const alignmentWarning = buildContinuationWarning(gitRoot, request.command, risk);
-    const interruptedContext = risk.decision === "deny" ? null : interruptedRecoveries.map((item) => item.context).join("\n\n");
-    const additionalContext = [interruptedContext, snapshotContext, capsule?.text, alignmentWarning].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
+    const capsule = new AgentMemoryStore(standardStore.txDir(tx.tx_id)).queryCapsule(request.command, effectiveRisk);
+    const alignmentWarning = buildContinuationWarning(gitRoot, request.command, effectiveRisk);
+    const interruptedContext = effectiveRisk.decision === "deny" ? null : interruptedRecoveries.map((item) => item.context).join("\n\n");
+    const additionalContext = [
+      runtimeContract.additionalContext,
+      interruptedContext,
+      snapshotContext,
+      capsule?.text,
+      alignmentWarning
+    ].filter((item): item is string => Boolean(item)).join("\n\n") || undefined;
 
     return {
       tx,
@@ -133,6 +154,8 @@ export class AgentTxCore {
     standardStore.writeRecovery(tx.tx_id, reportContext);
     standardStore.runRecovery(tx.tx_id, tx.git_root);
     reportContext = standardStore.writeBeliefRepair(tx.tx_id) ?? reportContext;
+    createRuntimeContractsForBeliefReport(tx.git_root, tx, standardStore.txDir(tx.tx_id));
+    updateRuntimeContractsAfterCommand(tx.git_root, tx, request);
     standardStore.writeAlignment(tx.tx_id);
 
     store.save(tx);

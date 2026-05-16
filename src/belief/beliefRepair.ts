@@ -50,7 +50,14 @@ export function buildBeliefRepairReport(txDir: string, txId: string): Gate1Belie
   };
 
   const repairActions: NonNullable<Gate1BeliefReport["repair_actions"]> = taintedClaims.length > 0
-    ? ["invalidate_success_claim", "inject_verified_state", "require_replan_before_continuation"]
+    ? [
+        "invalidate_success_claim",
+        "taint_dependent_memory",
+        "invalidate_tainted_descendants",
+        "install_clean_summary",
+        "inject_verified_state",
+        "require_replan_before_continuation"
+      ]
     : [];
   const cleanSummary = repairActions.length > 0
     ? buildCleanSummary(txId, request?.command ?? "<unknown>", taintedClaims[0].claim, verifiedState)
@@ -85,6 +92,7 @@ export function buildBeliefRepairReport(txDir: string, txId: string): Gate1Belie
           clean_memory_ids: memoryRepair.clean_memory_ids,
           retrievable_tainted_memory_ids: memoryRepair.retrievable_tainted_memory_ids,
           memory_clean: memoryRepair.memory_clean,
+          taint_propagation: memoryRepair.taint_propagation,
           events: memoryRepair.events
         }
       : undefined,

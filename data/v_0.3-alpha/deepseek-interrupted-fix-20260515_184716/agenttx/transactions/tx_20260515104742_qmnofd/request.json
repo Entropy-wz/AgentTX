@@ -1,0 +1,22 @@
+{
+  "schema_version": "gate1.request.v0.3",
+  "tx_id": "tx_20260515104742_qmnofd",
+  "agent": "claude-code",
+  "host": "claude-code",
+  "tool_name": "Bash",
+  "command": "npm install left-pad",
+  "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-interrupted-fix-20260515_184716\\workspace",
+  "git_root": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-interrupted-fix-20260515_184716\\workspace",
+  "intent": null,
+  "session_id": "fca54ab3-7448-4239-af01-91b9b49052ed",
+  "tool_use_id": "call_00_KW03vWXz1y0VE9gG2N0T7566",
+  "created_at": "2026-05-15T10:47:42.728Z",
+  "raw_request": {
+    "agent": "claude-code",
+    "tool_name": "Bash",
+    "command": "npm install left-pad",
+    "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-interrupted-fix-20260515_184716\\workspace",
+    "session_id": "fca54ab3-7448-4239-af01-91b9b49052ed",
+    "tool_use_id": "call_00_KW03vWXz1y0VE9gG2N0T7566"
+  }
+}

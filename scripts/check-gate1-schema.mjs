@@ -8,11 +8,14 @@ const schemaFiles = [
   "schemas/transaction-artifact.schema.json",
   "schemas/typed-effect.schema.json",
   "schemas/effect-graph.schema.json",
+  "schemas/graph-recovery-plan.schema.json",
   "schemas/recovery-contract.schema.json",
   "schemas/belief-record.schema.json",
   "schemas/belief-report.schema.json",
+  "schemas/belief-taint-graph.schema.json",
   "schemas/verifier-report.schema.json",
-  "schemas/alignment-report.schema.json"
+  "schemas/alignment-report.schema.json",
+  "schemas/belief-runtime-contract.schema.json"
 ];
 
 const exampleFiles = [

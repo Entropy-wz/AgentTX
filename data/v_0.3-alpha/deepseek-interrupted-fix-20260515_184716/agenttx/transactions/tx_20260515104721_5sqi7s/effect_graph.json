@@ -1,0 +1,97 @@
+{
+  "schema_version": "gate3.effect_graph.v0.3",
+  "tx_id": "tx_20260515104721_5sqi7s",
+  "nodes": [
+    {
+      "id": "cmd_tx_20260515104721_5sqi7s",
+      "type": "command.failed",
+      "target": "node break-package.js",
+      "status": "failed",
+      "evidence": {
+        "source": "request.json",
+        "cwd": "D:\\exp_all\\AgentTX\\data\\v_0.3-alpha\\deepseek-interrupted-fix-20260515_184716\\workspace",
+        "tool_name": "Bash",
+        "host": "claude-code"
+      }
+    },
+    {
+      "id": "tx_20260515104721_5sqi7s_effect_file_001",
+      "type": "filesystem.modify",
+      "target": "package.json",
+      "status": "observed",
+      "evidence": {
+        "source": "effects.jsonl",
+        "recoverability": "R1",
+        "sensitive": true,
+        "expected": false,
+        "effect_evidence": {
+          "source": "effect_report.json",
+          "legacy_file_effect": {
+            "type": "modified",
+            "path": "package.json",
+            "sensitive": true
+          }
+        }
+      }
+    },
+    {
+      "id": "tx_20260515104721_5sqi7s_effect_command_failed",
+      "type": "command.failed",
+      "target": "node break-package.js",
+      "status": "observed",
+      "evidence": {
+        "source": "effects.jsonl",
+        "recoverability": "R1",
+        "sensitive": false,
+        "expected": false,
+        "effect_evidence": {
+          "source": "effect_report.json",
+          "exit_code": 1,
+          "stderr_tail": "AgentTx inferred an interrupted command because Claude Code did not deliver PostToolUse before the next tool call."
+        }
+      }
+    },
+    {
+      "id": "belief_tx_20260515104721_5sqi7s_tainted_success_claim",
+      "type": "belief.claim",
+      "target": "agent_command_outcome",
+      "status": "tainted",
+      "content": "The failed command may have been incorrectly treated as successful by the agent.",
+      "evidence": {
+        "source": "command.failed",
+        "command": "node break-package.js"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cmd_tx_20260515104721_5sqi7s",
+      "to": "tx_20260515104721_5sqi7s_effect_file_001",
+      "relation": "caused",
+      "evidence": {
+        "source": "effects.jsonl",
+        "command": "node break-package.js"
+      }
+    },
+    {
+      "from": "cmd_tx_20260515104721_5sqi7s",
+      "to": "tx_20260515104721_5sqi7s_effect_command_failed",
+      "relation": "caused",
+      "evidence": {
+        "source": "effects.jsonl",
+        "command": "node break-package.js"
+      }
+    },
+    {
+      "from": "cmd_tx_20260515104721_5sqi7s",
+      "to": "belief_tx_20260515104721_5sqi7s_tainted_success_claim",
+      "relation": "may_taint",
+      "evidence": {
+        "source": "command.failed",
+        "reason": "non_zero_exit_code"
+      }
+    }
+  ],
+  "note": "Gate 3 builds causal, dependency, belief-taint, and recovery-requirement edges from typed effects.",
+  "updated_at": "2026-05-15T10:47:42.713Z"
+}

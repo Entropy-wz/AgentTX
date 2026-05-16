@@ -4,6 +4,12 @@ import path from "node:path";
 import { Gate1TypedEffect, Gate4RecoveryContract, Gate4VerifierReport } from "../core/schema/artifactTypes.js";
 import { Snapshot } from "../types.js";
 import { safeFileName } from "../utils/paths.js";
+import {
+  buildGraphRecoveryPlan,
+  GraphRecoveryCandidate,
+  GraphRecoveryPlan,
+  writeGraphRecoveryPlan
+} from "./graphRecoveryPlanner.js";
 
 interface RecoveryInput {
   txDir: string;
@@ -16,6 +22,7 @@ interface ExecutionResult {
   failed: string[];
   manual: string[];
   residualWarnings: string[];
+  graphPlan?: GraphRecoveryPlan;
 }
 
 export function runRecoveryContracts(input: RecoveryInput): {
@@ -25,91 +32,47 @@ export function runRecoveryContracts(input: RecoveryInput): {
 } {
   const effects = readEffects(path.join(input.txDir, "effects.jsonl"));
   const before = readJsonIfExists<Snapshot>(path.join(input.txDir, "snapshot_before.json"));
-  const contracts = buildRecoveryContracts(input, effects, before);
+  const plan = buildGraphRecoveryPlan(input, effects, before);
+  writeGraphRecoveryPlan(input.txDir, plan);
+  const contracts = buildRecoveryContractsFromPlan(input, plan);
   const execution = executeContracts(input, contracts);
+  execution.graphPlan = plan;
   const verifier = verifyContracts(input, contracts);
   return { contracts, verifier, execution };
 }
 
 export function buildRecoveryContracts(input: RecoveryInput, effects: Gate1TypedEffect[], before: Snapshot | null): Gate4RecoveryContract[] {
-  const contracts: Gate4RecoveryContract[] = [];
-  let index = 1;
-  for (const effect of effects) {
-    const contract = contractForEffect(input, effect, before, index);
-    if (contract) {
-      contracts.push(contract);
-      index += 1;
-    }
-  }
-  return contracts;
+  const plan = buildGraphRecoveryPlan(input, effects, before);
+  return buildRecoveryContractsFromPlan(input, plan);
 }
 
-function contractForEffect(
+function buildRecoveryContractsFromPlan(input: RecoveryInput, plan: GraphRecoveryPlan): Gate4RecoveryContract[] {
+  return plan.candidates.map((candidate, index) => contractForCandidate(input, candidate, index + 1));
+}
+
+function contractForCandidate(
   input: RecoveryInput,
-  effect: Gate1TypedEffect,
-  before: Snapshot | null,
+  candidate: GraphRecoveryCandidate,
   index: number
-): Gate4RecoveryContract | null {
-  const expectedHash = before?.files[effect.target] ?? null;
+): Gate4RecoveryContract {
   const contractId = `${input.txId}_rc_${String(index).padStart(3, "0")}`;
-  const common = {
+  return {
     contract_id: contractId,
     tx_id: input.txId,
-    effect_id: effect.effect_id,
-    target: effect.target,
+    effect_id: candidate.effect_id,
+    target: candidate.target,
+    required_action: candidate.required_action,
+    blocking: candidate.blocking,
+    reversible: candidate.reversible,
+    verification: candidate.verification,
+    status: candidate.required_action === "manual_review"
+      ? "manual_required"
+      : candidate.required_action === "residual_warning"
+        ? "residual"
+        : "planned",
+    residual_warning: candidate.residual_warning,
     updated_at: new Date().toISOString()
   };
-
-  if (effect.type === "filesystem.create") {
-    return {
-      ...common,
-      required_action: "delete_created_file",
-      blocking: false,
-      reversible: true,
-      verification: { type: "file_absent" },
-      status: "planned",
-      residual_warning: null
-    };
-  }
-
-  if (effect.type === "filesystem.modify" || effect.type === "filesystem.delete" || effect.type === "config.modify") {
-    const blocking = effect.type === "config.modify" || effect.sensitive;
-    const backupExists = expectedHash !== null && fs.existsSync(path.join(input.txDir, "files_before", safeFileName(effect.target)));
-    if (backupExists) {
-      return {
-        ...common,
-        required_action: "restore_file",
-        blocking,
-        reversible: true,
-        verification: { type: "hash_match", expected_hash: expectedHash },
-        status: "planned",
-        residual_warning: null
-      };
-    }
-    return {
-      ...common,
-      required_action: "manual_review",
-      blocking,
-      reversible: false,
-      verification: { type: "manual_required", expected_hash: expectedHash },
-      status: "manual_required",
-      residual_warning: `No before-snapshot backup is available for ${effect.target}.`
-    };
-  }
-
-  if (effect.type === "external.network") {
-    return {
-      ...common,
-      required_action: "residual_warning",
-      blocking: true,
-      reversible: false,
-      verification: { type: "unrecoverable_external" },
-      status: "residual",
-      residual_warning: `External effect cannot be reverted by AgentTx: ${effect.target}.`
-    };
-  }
-
-  return null;
 }
 
 function executeContracts(input: RecoveryInput, contracts: Gate4RecoveryContract[]): ExecutionResult {

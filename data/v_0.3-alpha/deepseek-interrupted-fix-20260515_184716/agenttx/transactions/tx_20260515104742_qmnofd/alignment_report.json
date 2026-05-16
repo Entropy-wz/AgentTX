@@ -1,0 +1,39 @@
+{
+  "schema_version": "agenttx.alignment_report.v0.3",
+  "tx_id": "tx_20260515104742_qmnofd",
+  "status": "unknown",
+  "os_state": {
+    "verifier_status": "not_run",
+    "residual_effects": 0,
+    "residual_warnings": [],
+    "failed_checks": []
+  },
+  "memory_state": {
+    "memory_store_present": false,
+    "retrievable_tainted_memory_ids": [],
+    "invalidated_claim_present": false,
+    "clean_memory_installed": false,
+    "memory_clean": true
+  },
+  "summary_consistency": {
+    "checked": false,
+    "consistent": true,
+    "issues": []
+  },
+  "continuation_risk": {
+    "invalidated_claims": [],
+    "source_command": null,
+    "related_effect_targets": [],
+    "warning_required": false,
+    "warning": null
+  },
+  "metrics": {
+    "aos_aligned": false,
+    "aos_score": 0,
+    "memory_clean": true,
+    "summary_consistent": true,
+    "residual_count": 0
+  },
+  "note": "Alignment verifier has not run yet.",
+  "updated_at": "2026-05-15T10:47:42.736Z"
+}

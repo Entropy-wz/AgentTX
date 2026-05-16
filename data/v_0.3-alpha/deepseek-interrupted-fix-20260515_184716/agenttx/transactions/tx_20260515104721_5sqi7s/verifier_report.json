@@ -1,0 +1,17 @@
+{
+  "schema_version": "gate4.verifier_report.v0.3",
+  "tx_id": "tx_20260515104721_5sqi7s",
+  "status": "recovered",
+  "checks": [
+    {
+      "contract_id": "tx_20260515104721_5sqi7s_rc_001",
+      "effect_id": "tx_20260515104721_5sqi7s_effect_file_001",
+      "target": "package.json",
+      "verification_type": "hash_match",
+      "passed": true
+    }
+  ],
+  "residual_effects": 0,
+  "residual_warnings": [],
+  "updated_at": "2026-05-15T10:47:42.710Z"
+}

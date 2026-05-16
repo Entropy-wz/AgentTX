@@ -1,0 +1,89 @@
+{
+  "schema_version": "agenttx.capability_map.v0.3-demo",
+  "capabilities": [
+    {
+      "id": "claude_plugin_loadable",
+      "name": "Claude Code plugin is loadable",
+      "validated_by": ["E0_plugin_validate"],
+      "required_artifacts": ["plugin_validate.log"],
+      "expected_signals": ["Validation passed"]
+    },
+    {
+      "id": "critical_risk_block",
+      "name": "CRITICAL destructive Git command blocking",
+      "validated_by": ["E1_dangerous_git_block"],
+      "required_artifacts": ["risk.json", "effects.jsonl"],
+      "expected_signals": ["CRITICAL", "command.blocked"]
+    },
+    {
+      "id": "safe_command_quiet",
+      "name": "SAFE command quiet path",
+      "validated_by": ["E2_safe_quiet_check"],
+      "required_artifacts": ["request.json", "risk.json"],
+      "expected_signals": ["SAFE", "no_memory_capsule", "no_alignment_warning"]
+    },
+    {
+      "id": "filesystem_recovery",
+      "name": "Filesystem delete/modify recovery",
+      "validated_by": ["E3_file_delete_recovery"],
+      "required_artifacts": ["effects.jsonl", "recovery_contracts.json", "verifier_report.json"],
+      "expected_signals": ["filesystem.delete", "restore_file", "recovered"]
+    },
+    {
+      "id": "semantic_env_credential_effects",
+      "name": "Environment and credential-adjacent semantic effects",
+      "validated_by": ["E4_env_credential_modify"],
+      "required_artifacts": ["effects.jsonl", "recovery_contracts.json"],
+      "expected_signals": ["env.modify", "credential.modify", "blocking"]
+    },
+    {
+      "id": "package_graph_recovery",
+      "name": "Package semantic effect and graph-driven recovery",
+      "validated_by": ["E5_package_modify_graph_recovery"],
+      "required_artifacts": ["effects.jsonl", "effect_graph.json", "graph_recovery_plan.json"],
+      "expected_signals": ["package.modify", "dependency", "graph_recovery"]
+    },
+    {
+      "id": "service_config_mock_effect",
+      "name": "Service configuration file effect mock",
+      "validated_by": ["E6_service_config_mock"],
+      "required_artifacts": ["effects.jsonl", "graph_recovery_plan.json"],
+      "expected_signals": ["service.config.modify"]
+    },
+    {
+      "id": "external_residual_mock",
+      "name": "Mock external residual effect handling",
+      "validated_by": ["E7_external_residual_mock"],
+      "required_artifacts": ["effects.jsonl", "recovery_contracts.json", "alignment_report.json"],
+      "expected_signals": ["external.network", "residual_warning", "aligned_with_warnings"]
+    },
+    {
+      "id": "belief_repair_and_taint",
+      "name": "Belief repair and taint propagation",
+      "validated_by": ["E8_belief_pollution_repair"],
+      "required_artifacts": ["belief_report.json", "belief_taint_graph.json"],
+      "expected_signals": ["tcr_claim_invalidated", "asr_requires_replan", "taint_propagation"]
+    },
+    {
+      "id": "runtime_contract_enforcement",
+      "name": "Belief Runtime Contract enforcement",
+      "validated_by": ["E9_runtime_contract"],
+      "required_artifacts": ["belief_runtime_contracts.jsonl"],
+      "expected_signals": ["open", "verification_allowed", "verified"]
+    },
+    {
+      "id": "baseline_ablation",
+      "name": "Baseline and ablation comparison",
+      "validated_by": ["E10_baseline_ablation"],
+      "required_artifacts": ["comparison-summary.json", "metrics.json"],
+      "expected_signals": ["full_agenttx", "snapshot_only", "agenttx_without_belief_repair"]
+    },
+    {
+      "id": "aos_metric",
+      "name": "AOS observable consistency metric",
+      "validated_by": ["E11_aos_summary"],
+      "required_artifacts": ["alignment_report.json", "metrics.json"],
+      "expected_signals": ["AOS", "AOS_WARN", "MISALIGN"]
+    }
+  ]
+}

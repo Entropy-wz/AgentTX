@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenttx.local/schemas/belief-runtime-contract.schema.json",
+  "title": "AgentTx Belief Runtime Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "contract_id",
+    "type",
+    "source_tx_id",
+    "claim",
+    "scope",
+    "required_verification",
+    "related_keywords",
+    "status",
+    "enforcement",
+    "evidence",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "agenttx.belief_runtime_contract.v0.3" },
+    "contract_id": { "type": "string", "minLength": 1 },
+    "type": { "enum": ["package_install_verification"] },
+    "source_tx_id": { "type": "string", "minLength": 1 },
+    "claim": { "type": "string", "minLength": 1 },
+    "scope": {
+      "type": "object",
+      "required": ["kind", "package_name", "command"],
+      "properties": {
+        "kind": { "const": "package" },
+        "package_name": { "type": "string", "minLength": 1 },
+        "command": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "required_verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "commands"],
+        "properties": {
+          "type": {
+            "enum": [
+              "package_manager_list",
+              "package_manifest_inspection",
+              "git_state_inspection"
+            ]
+          },
+          "commands": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "related_keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": { "enum": ["open", "verified", "expired", "dismissed"] },
+    "enforcement": { "enum": ["ask_before_related_action"] },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["command", "result", "detail", "observed_at"],
+        "properties": {
+          "tx_id": { "type": "string" },
+          "command": { "type": "string" },
+          "exit_code": { "type": ["integer", "null"] },
+          "result": {
+            "enum": [
+              "created",
+              "related_action_guarded",
+              "verification_allowed",
+              "verification_passed",
+              "verification_failed"
+            ]
+          },
+          "detail": { "type": "string" },
+          "observed_at": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,9 +1,14 @@
 import { EffectReport, FileEffect, PostToolRequest, PreToolRequest, RiskReport, Transaction } from "../../types.js";
+import { classifySemanticEffects, semanticEffectFrom } from "../../effects/semanticEffectClassifier.js";
 
 export type TypedEffectType =
   | "filesystem.create"
   | "filesystem.modify"
   | "filesystem.delete"
+  | "package.modify"
+  | "env.modify"
+  | "credential.modify"
+  | "service.config.modify"
   | "config.modify"
   | "external.network"
   | "command.blocked"
@@ -81,6 +86,14 @@ export interface Gate1RecoveryReport {
   failed_contracts?: string[];
   manual_contracts?: string[];
   residual_warnings?: string[];
+  graph_recovery?: {
+    plan_path: string;
+    mode: "graph" | "fallback";
+    ordered_effect_ids: string[];
+    deduplicated_effect_ids: string[];
+    residual_effect_ids: string[];
+    fallback_reason: string | null;
+  };
   updated_at: string;
 }
 
@@ -147,7 +160,14 @@ export interface Gate1BeliefReport {
     restored_files: string[];
     residual_warnings: string[];
   };
-  repair_actions?: Array<"invalidate_success_claim" | "inject_verified_state" | "require_replan_before_continuation">;
+  repair_actions?: Array<
+    | "invalidate_success_claim"
+    | "inject_verified_state"
+    | "require_replan_before_continuation"
+    | "taint_dependent_memory"
+    | "invalidate_tainted_descendants"
+    | "install_clean_summary"
+  >;
   clean_summary?: string;
   memory_repair?: {
     schema_version: "agenttx.memory_repair.v0.3";
@@ -157,9 +177,20 @@ export interface Gate1BeliefReport {
     clean_memory_ids: string[];
     retrievable_tainted_memory_ids: string[];
     memory_clean: boolean;
+    taint_propagation?: {
+      schema_version: "agenttx.taint_propagation.v0.3";
+      graph_path: string;
+      taint_roots: string[];
+      propagated_memory_ids: string[];
+      invalidated_descendant_ids: string[];
+      clean_replacement_memory_ids: string[];
+      propagation_depth: number;
+      graph_path_summary: string[];
+      retrievable_tainted_memory_ids: string[];
+    };
     events: Array<{
       event_id: string;
-      action: "record" | "invalidate" | "install_clean_summary" | "verify";
+      action: "record" | "propagate_taint" | "invalidate" | "install_clean_summary" | "verify";
       memory_id?: string;
       target_memory_id?: string;
       result: "ok" | "failed";
@@ -319,22 +350,24 @@ export function fileEffectToTypedEffect(tx: Transaction, effect: FileEffect, ind
     observed_at: new Date().toISOString()
   };
 
+  const semanticEffects = classifySemanticEffects(effect, tx.command)
+    .map((candidate, semanticIndex) => semanticEffectFrom(typed, candidate, semanticIndex, tx.command));
+
   if (isConfigPath(effect.path)) {
-    return [
-      typed,
-      {
-        ...typed,
-        effect_id: `${typed.effect_id}_config`,
-        type: "config.modify",
-        evidence: {
-          ...typed.evidence,
-          derived_from: typed.effect_id
-        }
+    semanticEffects.push({
+      ...typed,
+      effect_id: `${typed.effect_id}_config`,
+      type: "config.modify",
+      evidence: {
+        ...typed.evidence,
+        derived_from: typed.effect_id,
+        semantic_reason: "sensitive or agent configuration file changed",
+        source_path: typed.target
       }
-    ];
+    });
   }
 
-  return [typed];
+  return [typed, ...semanticEffects];
 }
 
 function isConfigPath(filePath: string): boolean {

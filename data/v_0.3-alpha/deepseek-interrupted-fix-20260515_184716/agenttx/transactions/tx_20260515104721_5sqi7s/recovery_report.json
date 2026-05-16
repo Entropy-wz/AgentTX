@@ -1,0 +1,14 @@
+{
+  "schema_version": "gate4.recovery_report.v0.3",
+  "tx_id": "tx_20260515104721_5sqi7s",
+  "status": "recovered",
+  "legacy_recovery_md": "recovery.md",
+  "contracts_total": 1,
+  "executed_contracts": [
+    "tx_20260515104721_5sqi7s_rc_001"
+  ],
+  "failed_contracts": [],
+  "manual_contracts": [],
+  "residual_warnings": [],
+  "updated_at": "2026-05-15T10:47:42.712Z"
+}
